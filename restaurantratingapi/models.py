@@ -76,7 +76,7 @@ class Meal(models.Model):
         db_table = 'meal'
 
 class RestaurantMeal(models.Model):
-    meal = models.OneToOneField(Meal, on_delete=models.PROTECT, primary_key=True)
+    meal = models.OneToOneField(Meal, on_delete=models.PROTECT)
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
     created_on = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(User, on_delete=models.DO_NOTHING, db_column='created_by', related_name='restaurant_meal_created_by')
@@ -105,7 +105,7 @@ class Dish(models.Model):
         db_table = 'dish'
 
 class RestaurantDish(models.Model):
-    dish = models.ForeignKey('dish', on_delete=models.PROTECT, db_column='dish_id', related_name='restaurant_dish_dish', primary_key=True)
+    dish = models.ForeignKey('dish', on_delete=models.PROTECT, db_column='dish_id', related_name='restaurant_dish_dish')
     restaurant = models.ForeignKey('restaurant', on_delete=models.CASCADE, db_column='restaurant_id', related_name='restaurant_dish_restaurant')
     added_by = models.ForeignKey(User, on_delete=models.SET_NULL, db_column='added_by', related_name='restaurant_dish_added_by', null=True)
     status = models.PositiveIntegerField()
@@ -154,7 +154,7 @@ class EditComponent(models.Model):
         db_table = 'edit_component'        
 
 class UserEditHistoryComponent(models.Model):
-    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, db_column='user_id',related_name='user_edit_history_component_user', primary_key=True)
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, db_column='user_id',related_name='user_edit_history_component_user')
     history = models.ForeignKey(EditHistory, on_delete=models.CASCADE, db_column='history_id', related_name='user_edit_history_component_history')
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE, db_column='restaurant_id', related_name='user_edit_history_component_restaurant')
     component = models.ForeignKey(EditComponent, on_delete=models.CASCADE, db_column='component_id', related_name='user_edit_history_component_component')
