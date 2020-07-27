@@ -1,21 +1,31 @@
+from .ValidationService import ValidationService
+from .SystemService import SystemService
+from ..enums.RestaurantEnums import ClaimStatus
+from ..models import Restaurant
+from django.contrib.auth.models import User
+
 class RestaurantService:
 
-	def register_restaurant():
-		
+    def __init__(self):
+        self.data = []
 
-	def de_register_restaurant():
+    def register_restaurant(self, data):
+        pass
+        
+    def de_register_restaurant():
+        pass    
+        
+    def get_restaurant():
+        pass
 
+    def get_restaurant_list():
+        pass
 
-	def get_restaurant():
+    def request_edit():
+        pass
 
+    def approve_edit():
+        pass
 
-	def get_restaurant_list():
-
-
-	def request_edit():
-
-
-	def approve_edit():
-
-
-	def claim_restaurant():
+    def claim_restaurant():
+        pass
