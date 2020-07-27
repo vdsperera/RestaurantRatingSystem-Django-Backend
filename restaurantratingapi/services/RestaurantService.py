@@ -10,7 +10,45 @@ class RestaurantService:
         self.data = []
 
     def register_restaurant(self, data):
-        pass
+        rest_name = data['name'] #restaurant name #required
+        rest_address = data['address'] #restaurant address
+        rest_pnumber = data['phone_number'] #restaurant phone number
+        rest_added_by = data['user'] #restaurant is added by #required
+        rest_owner = data['owner'] #owner of the restaurant
+        rest_longitude = data['longitude'] #restaurant GEO location-longitude #required
+        rest_latitude = data['latitude'] #restaurant GEO location-latitude #required
+        rest_code = 'djhfd4343'
+
+        if(not ValidationService.isset(value=rest_name)):
+            raise Exception("Restaurant name is empty")
+
+        if(not ValidationService.isset(value=rest_added_by)):
+            raise Exception("User is empty")
+
+        if(not ValidationService.isset(value=rest_longitude)):
+            raise Exception("Logitude is empty")    
+
+        if(not ValidationService.isset(value=rest_latitude)):
+            raise Exception("Latitude is empty")    
+
+        user = User.objects.get(username='vidumini')   
+
+        rest = Restaurant(
+            name=rest_name,
+            address=rest_address,
+            phone_number=rest_pnumber,
+            created_by=user,
+            claimed=ClaimStatus.Unclaimed.value,
+            claimed_by=rest_owner,
+            longitude=rest_longitude,
+            latitude=rest_latitude,
+            code=SystemService.generate_restaurant_code())      
+         
+        rest.save()
+        # rest = Restaurant.objects.get(restaurant_id=1)
+        # print(rest)
+
+        return data['name']  	
         
     def de_register_restaurant():
         pass    
