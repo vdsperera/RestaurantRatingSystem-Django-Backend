@@ -154,3 +154,9 @@ LOGGING = {
         }
     }
 }
+
+REST_FRAMEWORK = {
+    'EXCEPTION_HANDLER': 'restaurantratingapi.utils.ExceptionHandler.custom_exception_hander'
+}
+
+CORS_ORIGIN_ALLOW_ALL = True
