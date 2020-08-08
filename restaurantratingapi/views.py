@@ -8,6 +8,11 @@ from .models import Restaurant
 from rest_framework.response import Response
 import logging
 from .services.RestaurantService import RestaurantService
+from django.forms.models import model_to_dict
+from django.http import JsonResponse
+from django.core import serializers
+from rest_framework.authentication import BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 logger = logging.getLogger(__name__)
 # logger.info("VDS")
@@ -17,22 +22,34 @@ class UserRoleViewSet(viewsets.ModelViewSet):
 	serializer_class = UserRoleSerializer
 
 class RestaurantViewSet(viewsets.ViewSet):
-	queryset = Restaurant.objects.all().order_by('restaurant_id')
-	serializer_class = RestaurantSerializer
-	def create(self, request):
-		data = request.data['data']['mdata']
-		# print(data)
-		#logger.info(request.data)
-		rs = RestaurantService()
-		print(rs.register_restaurant(data))
-		return Response({'status':'successful'})
+    
+    # authentication_classes = (BasicAuthentication,)
+    # permission_classes = (IsAuthenticated,)
+    
+    queryset = Restaurant.objects.all().order_by('restaurant_id')
+    serializer_class = RestaurantSerializer
+    def create(self, request):
+        data = request.data['data']['mdata']
+        # print(data)
+        #logger.info(request.data)
+        rs = RestaurantService()
+        qry = rs.register_restaurant(data)
+		# print(qry)
+		# serializer = RestaurantSerializer(qry)
+		# serialized_obj = serializers.serialize('python', [qry,], ensure_ascii=False)
+		# print(serialized_obj)
+		# return Response(serialized_obj)
+		# return Response(RestaurantSerializer(instance=serialized_obj).data)
+		# return JsonResponse(serializer, safe=False)
+		# return Response({'status':'successful'})
+        return Response(qry)
 
-	def list(self, request):
-		queryset = Restaurant.objects.all()
+    def list(self, request):
+	    queryset = Restaurant.objects.all()
 		#logger.info("ccccccvvvvvvv")
 		
-		serializer = RestaurantSerializer(queryset, many=True)
-		return Response(serializer.data)
+	    serializer = RestaurantSerializer(queryset, many=True, context={'request':request})
+	    return Response(serializer.data)
 
 # class RestaurantViewSet(APIView):
 
