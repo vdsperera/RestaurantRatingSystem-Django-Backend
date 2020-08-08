@@ -40,9 +40,11 @@ INSTALLED_APPS = [
     'restaurantratingapi.apps.RestaurantratingapiConfig',
     'rest_framework',
     'django.contrib.gis',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
