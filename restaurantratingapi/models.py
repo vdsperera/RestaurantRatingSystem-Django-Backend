@@ -66,6 +66,9 @@ class Restaurant(models.Model):
     class Meta:
         managed = True
         db_table = 'restaurant'
+        constraints = [
+            models.UniqueConstraint(fields=['name'], name='unique_restaurant_name')
+        ]
 
 class Meal(models.Model):
     meal_id = models.AutoField(primary_key=True)
