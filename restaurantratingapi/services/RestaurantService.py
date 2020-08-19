@@ -130,10 +130,10 @@ class RestaurantService:
             code=rest_code,
             created_by=user)      
          
-        # try: 
-        #     rest.save()
-        # except IntegrityError as e:
-        #     raise APIException(e)
+        try: 
+            rest.save()
+        except IntegrityError as e:
+            raise APIException(e)
         
         print(rest_owner.id if rest_owner != None else None)
         # print(type(rest))
