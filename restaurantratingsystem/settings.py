@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'restaurantratingapi.apps.RestaurantratingapiConfig',
     'rest_framework',
-    'django.contrib.gis',
     'corsheaders'
 ]
 
