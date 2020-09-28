@@ -58,3 +58,10 @@ class RestaurantViewSet(viewsets.ViewSet):
 #         rs = RestaurantService()
 #         print(rs.register_restaurant(data))
 #         return Response({'status': 'successful'})
+
+class RatingViewSet(viewsets.ViewSet):
+	def create(self, request):
+		data = reqest.data['data']['mdata']
+		rating_service = RatingService()
+		qry = rating_service.add_rating(request)
+		return Response(qry)
