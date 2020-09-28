@@ -6,6 +6,7 @@ from . import views
 router = routers.DefaultRouter()
 router.register(r'roles', views.UserRoleViewSet)
 router.register(r'restaurants', views.RestaurantViewSet, basename='RestaurantView')
+router.register(r'rating', views.RatingViewSet, basename='RatingView')
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
