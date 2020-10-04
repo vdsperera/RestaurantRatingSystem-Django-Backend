@@ -3,11 +3,13 @@ from rest_framework import viewsets
 from rest_framework.views import APIView
 from .serializers import UserRoleSerializer
 from .serializers import RestaurantSerializer
+from .serializers import RatingSerializer
 from .models import UserRole
 from .models import Restaurant
 from rest_framework.response import Response
 import logging
 from .services.RestaurantService import RestaurantService
+from .services.RatingService import RatingService
 from django.forms.models import model_to_dict
 from django.http import JsonResponse
 from django.core import serializers
@@ -60,8 +62,11 @@ class RestaurantViewSet(viewsets.ViewSet):
 #         return Response({'status': 'successful'})
 
 class RatingViewSet(viewsets.ViewSet):
-	def create(self, request):
-		data = reqest.data['data']['mdata']
-		rating_service = RatingService()
-		qry = rating_service.add_rating(request)
-		return Response(qry)
+
+    serializer_class = RestaurantSerializer
+
+    def create(self, request):
+        data = request.data['data']['mdata']
+        rating_service = RatingService()
+        qry = rating_service.add_rating(data)
+        return Response(qry)
