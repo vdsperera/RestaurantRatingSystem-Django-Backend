@@ -1,5 +1,6 @@
 from .models import UserRole
 from .models import Restaurant
+from .models import Rating
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from .serializers import *
@@ -19,3 +20,8 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 	class Meta:
 		model = User
 		fields = ['id', 'username']
+
+class RatingSerializer(serializers.HyperlinkedModelSerializer):
+	class Meta:
+		model = Rating
+		fields = ['rating_id', 'dish_rating', 'price_rating', 'service_rating', 'verified', 'created_on', 'updated_on']
