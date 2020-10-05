@@ -172,5 +172,10 @@ class RatingService:
 
         return resp  
 
+    def get_rating(self, data):
+        pass
+
     def delete_rating(self, data):
+        # rest_id = data['restaurant_id']
+        # ratings = Rating.objects.raw()
         pass;
