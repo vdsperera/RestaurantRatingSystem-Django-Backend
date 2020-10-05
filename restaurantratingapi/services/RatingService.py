@@ -9,6 +9,8 @@ from rest_framework.exceptions import NotFound
 from django.core.exceptions import ObjectDoesNotExist
 from .ValidationService import ValidationService
 from django.db import IntegrityError
+from ..enums.RatingEnums import VerifiedStatus
+from .ValidationService import ValidationService
 
 class RatingService:
 
@@ -54,12 +56,18 @@ class RatingService:
 
         # dish rating integer validation
         # dish rating range validation
+        if(not ValidationService.is_valid_rating(dish_rating)):
+            raise APIException("Invalid dish rating")
 
         # price rating integer validation
         # price rating range validation
+        if(not ValidationService.is_valid_rating(price_rating)):
+            raise APIException("Invalid price rating")        
 
         # service rating integer valiation
         # service rating range validation
+        if(not ValidationService.is_valid_rating(service_rating)):
+            raise APIException("Invalid service rating")        
 
         # check user exists
         # check whether the username exists
@@ -113,10 +121,10 @@ class RatingService:
         # validate rating categories
 
         if(token == None):
-            verified = 0
+            verified = VerifiedStatus.Unverified.value
         else:
             # validate token number
-            verified = 1
+            verified = VerifiedStatus.Verified.value
 
         rating = Rating(
           dish_rating = dish_rating,
