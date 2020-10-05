@@ -152,9 +152,10 @@ class RatingService:
             "code": 200,
             "message": "success AddRating",
             "data": {
-                # "restaurant_id": rating.restaurant_id,
-                # "rated_by": rest.created_by.id,
-                "verified": rating.verified,
+                "rated_by": user.username,
+                "verified": VerifiedStatus(rating.verified).value,
+                "restaurant_id": restaurant.restaurant_id,
+                "dish_id": dish.dish_id if dish_id != None else None,
                 "dish_rating": rating.dish_rating,
                 "price_rating": rating.price_rating,
                 "service_rating": rating.service_rating
