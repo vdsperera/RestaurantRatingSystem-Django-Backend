@@ -29,3 +29,26 @@ class ValidationService:
             return True
         else:
             False
+
+    @staticmethod
+    def is_valid_token(value):
+        pass
+
+    @staticmethod
+    def is_valid_rating(value):
+        pass
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
