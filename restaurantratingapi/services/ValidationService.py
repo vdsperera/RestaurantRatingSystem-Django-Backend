@@ -32,11 +32,11 @@ class ValidationService:
 
     @staticmethod
     def is_valid_token(value):
-        pass
+        return True
 
     @staticmethod
     def is_valid_rating(value):
-        pass
+        return True
 
 
 
