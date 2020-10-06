@@ -20,20 +20,14 @@ class RatingService:
     def add_rating(self, data):
         # retrieve request data
         try:
-            # print(data)
-            # print('vdssssssssdata')
             username = data['user']
             token_number = data['token_number'] #token number 
             rest_id = data['restaurant_id'] #restaurant id #required
-            # rating = data['rating'];
             dish_id = data['dish_id'] #dish id
             dish_rating = data['dish_rating'] #dish rating #required
             price_rating = data['price_rating'] #price rating #required
             service_rating = data['service_rating'] #service rating #required
             review = data['review'] #review #required
-            # rest_longitude = data['longitude'] #restaurant GEO location-longitude #required
-            # rest_latitude = data['latitude'] #restaurant GEO location-latitude #required
-            # selected_role = data['role'] #user's requested role for the restaurant
         except KeyError as e:
             raise APIException(f"Key {e} not exists in the request")
 
