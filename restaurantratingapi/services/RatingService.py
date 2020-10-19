@@ -5,6 +5,7 @@ from ..models import Dish
 from ..models import Restaurant
 from ..models import User
 from ..models import Token
+from ..models import AddedRating
 from rest_framework.exceptions import NotFound
 from django.core.exceptions import ObjectDoesNotExist
 from .ValidationService import ValidationService
@@ -141,8 +142,8 @@ class RatingService:
             token_number = token)
 
         try: 
-            pass
-            # rating.save()
+            # pass
+            added_dish_rating.save()
         except IntegrityError as e:
             raise APIException(e)   
 
