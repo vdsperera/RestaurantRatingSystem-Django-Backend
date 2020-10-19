@@ -36,6 +36,10 @@ class ValidationService:
 
     @staticmethod
     def is_valid_rating(value):
+        if(not isinstance(value, int)):
+            return False
+        if(5<value):
+            return False
         return True
 
 
