@@ -108,10 +108,16 @@ class RatingService:
         #     raise APIException(f"Token number '{token_number}' not exists")
 
         try:
+            token = Token.objects.get(token_number=token_number)
+        except ObjectDoesNotExist as e:
+            token = None
+            raise APIException(f"Token number '{token_number}' not exists")
+
+        try:
             token = Token.objects.get(token_number=token_number, restaurant=restaurant)
         except ObjectDoesNotExist as e:
             token = None
-            # raise APIException(f"Token number '{token_number}' not exists")
+            raise APIException(f"Token number '{token_number}' not exists for the restaurant")
 
         # validate rating categories
 
@@ -173,4 +179,6 @@ class RatingService:
     def delete_rating(self, data):
         # rest_id = data['restaurant_id']
         # ratings = Rating.objects.raw()
+        # rating_id = 2
+        # ratings = AddedRating.objects.raw('SELECT * FROM added_rating INNER JOIN rating ON added_rating.rating=rating.rating_id WHERE rating.rating_id=rating_id')
         pass;
