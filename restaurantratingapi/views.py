@@ -70,3 +70,6 @@ class RatingViewSet(viewsets.ViewSet):
         rating_service = RatingService()
         qry = rating_service.add_rating(data)
         return Response(qry)
+
+    def retrieve(self, request, pk=None):
+        pass

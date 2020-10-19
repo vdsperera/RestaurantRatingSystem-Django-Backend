@@ -174,6 +174,9 @@ class RatingService:
         return resp  
 
     def get_rating(self, data):
+        rest_id = 1;
+        added_ratings = AddedRating.objects.get(restaurant_id=rest_id);
+        added_dish_ratings = AddedDishRating.objects.get(restaurant_id=rest_id);
         pass
 
     def delete_rating(self, data):
