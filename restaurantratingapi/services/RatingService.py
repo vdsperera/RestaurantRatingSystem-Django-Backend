@@ -1,6 +1,7 @@
 from rest_framework.exceptions import APIException
 from ..models import Rating
 from ..models import AddedDishRating
+from ..models import AddedRating
 from ..models import Dish
 from ..models import Restaurant
 from ..models import User
@@ -137,7 +138,7 @@ class RatingService:
         try: 
             rating.save()
         except IntegrityError as e:
-            raise APIException(e)  
+            raise APIException(e)   
 
         if(dish_id != None):
             added_dish_rating = AddedDishRating(
@@ -146,12 +147,23 @@ class RatingService:
             dish = dish,
             user = user,
             token_number = token)
+            try: 
+                # pass
+                added_dish_rating.save()
+            except IntegrityError as e:
+                raise APIException(e)
+        else:
+            added_rating = AddedRating(
+                rating = rating,
+                restaurant = restaurant,
+                user = user,
+                token_number = token
+                )
 
-        try: 
-            # pass
-            added_dish_rating.save()
-        except IntegrityError as e:
-            raise APIException(e)   
+            try: 
+                added_rating.save()
+            except IntegrityError as e:
+                raise APIException(e)    
 
         # add contribution points to the user
 
@@ -174,9 +186,45 @@ class RatingService:
         return resp  
 
     def get_rating(self, data):
-        rest_id = 1;
-        added_ratings = AddedRating.objects.get(restaurant_id=rest_id);
-        added_dish_ratings = AddedDishRating.objects.get(restaurant_id=rest_id);
+        # rest_id = 1;
+        # added_ratings = AddedRating.objects.get(restaurant_id=rest_id);
+        # added_dish_ratings = AddedDishRating.objects.get(restaurant_id=rest_id);
+        pass
+
+    def get_ratings_for_restaurant(rest_id):
+        added_ratings = AddedRating.objects.raw('SELECT * FROM added_rating INNER JOIN rating ON added_rating.rating_id=rating.rating_id WHERE restaurant_id=23');
+        # added_dish_ratings = AddedDishRating.objects.raw('SELECT * FROM added_dish_rating WHERE restaurant_id=rest_id');
+        
+        dish_rating = 0
+        price_rating = 0
+        service_rating = 0
+        total_no_of_ratings = 0;
+        for rating in added_ratings:
+            total_no_of_ratings = total_no_of_ratings+1
+            dish_rating = dish_rating + rating.dish_rating
+            price_rating = price_rating + rating.price_rating
+            service_rating = service_rating + rating.service_rating
+
+        dish_rating = dish_rating/total_no_of_ratings
+        price_rating = price_rating/total_no_of_ratings
+        service_rating = service_rating/total_no_of_ratings
+
+        overall_rating = (dish_rating+price_rating+service_rating)/3
+
+        resp={
+            "success": True,
+            "code": 200,
+            "message": "success GetRating",
+            "data": {
+                "restaurant_id": rest_id,
+                "dish_rating": dish_rating,
+                "price_rating": price_rating,
+                "service_rating": service_rating,
+                "overall_rating": overall_rating
+            }
+        }
+
+        return resp;
         pass
 
     def delete_rating(self, data):
