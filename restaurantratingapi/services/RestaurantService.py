@@ -8,6 +8,7 @@ from rest_framework.exceptions import NotFound
 from django.db import IntegrityError
 from django.core.validators import RegexValidator
 import re
+from .RatingService import RatingService
 
 class RestaurantService:
 
@@ -165,7 +166,10 @@ class RestaurantService:
     def de_register_restaurant():
         pass    
         
-    def get_restaurant():
+    def get_restaurant(self, data):
+        rating_svc = RatingService
+        data = rating_svc.get_ratings_for_restaurant(23)
+        return data;
         pass
 
     def get_restaurant_list():
