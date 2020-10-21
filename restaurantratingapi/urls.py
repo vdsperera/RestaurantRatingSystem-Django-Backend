@@ -12,7 +12,7 @@ router.register(r'ratings', views.RatingViewSet, basename='RatingView')
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     path('', include(router.urls)),
-    # path('restaurants/', views.RestaurantViewSet.as_view(), name='RestaurantView'),
+    path('restaurants/<int:rest_id>/', views.RestaurantViewSet.as_view({'get':'retrieve'}), name='RestaurantView'),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
 
