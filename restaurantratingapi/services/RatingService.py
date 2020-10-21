@@ -97,11 +97,11 @@ class RatingService:
 
         # if(not dish):
         #     raise APIException(f"Dish id '{dish_id}' not exists")
-
-        try:
-            dish = Dish.objects.get(dish_id=dish_id)
-        except ObjectDoesNotExist as e:
-            raise APIException(f"Dish id '{dish_id}' not exists")
+        if(dish_id != None):            
+            try:
+                dish = Dish.objects.get(dish_id=dish_id)
+            except ObjectDoesNotExist as e:
+                raise APIException(f"Dish id '{dish_id}' not exists")
 
         # token = Token.objects.get(token_number=token_number, restaurant=restaurant)
 
