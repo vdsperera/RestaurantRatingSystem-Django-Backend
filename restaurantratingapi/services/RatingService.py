@@ -192,24 +192,32 @@ class RatingService:
         pass
 
     def get_ratings_for_restaurant(rest_id):
-        added_ratings = AddedRating.objects.raw('SELECT * FROM added_rating INNER JOIN rating ON added_rating.rating_id=rating.rating_id WHERE restaurant_id=23');
-        # added_dish_ratings = AddedDishRating.objects.raw('SELECT * FROM added_dish_rating WHERE restaurant_id=rest_id');
-        
+        added_ratings = AddedRating.objects.raw('SELECT added_rating.rating_id, dish_rating, price_rating, service_rating FROM added_rating INNER JOIN rating ON added_rating.rating_id=rating.rating_id WHERE restaurant_id=23');
+        added_dish_ratings = AddedDishRating.objects.raw('SELECT added_dish_rating.rating_id, dish_rating, price_rating, service_rating FROM added_dish_rating INNER JOIN rating ON added_dish_rating.rating_id=rating.rating_id WHERE restaurant_id=23');
+        # print(added_dish_ratings)
+        print(added_ratings)
         dish_rating = 0
         price_rating = 0
         service_rating = 0
         total_no_of_ratings = 0;
+        overall_rating = 0
         for rating in added_ratings:
             total_no_of_ratings = total_no_of_ratings+1
             dish_rating = dish_rating + rating.dish_rating
             price_rating = price_rating + rating.price_rating
             service_rating = service_rating + rating.service_rating
 
-        dish_rating = dish_rating/total_no_of_ratings
-        price_rating = price_rating/total_no_of_ratings
-        service_rating = service_rating/total_no_of_ratings
+        for rating in added_dish_ratings:
+            total_no_of_ratings = total_no_of_ratings+1
+            dish_rating = dish_rating + rating.dish_rating
+            price_rating = price_rating + rating.price_rating
+            service_rating = service_rating + rating.service_rating
 
-        overall_rating = (dish_rating+price_rating+service_rating)/3
+        if(total_no_of_ratings!=0):
+            dish_rating = dish_rating/total_no_of_ratings
+            price_rating = price_rating/total_no_of_ratings
+            service_rating = service_rating/total_no_of_ratings
+            overall_rating = (dish_rating+price_rating+service_rating)/3
 
         resp={
             "success": True,
@@ -217,6 +225,7 @@ class RatingService:
             "message": "success GetRating",
             "data": {
                 "restaurant_id": rest_id,
+                "total_no_of_ratings": total_no_of_ratings,
                 "dish_rating": dish_rating,
                 "price_rating": price_rating,
                 "service_rating": service_rating,
