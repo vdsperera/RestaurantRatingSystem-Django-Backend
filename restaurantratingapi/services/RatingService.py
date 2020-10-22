@@ -236,6 +236,58 @@ class RatingService:
         return resp;
         pass
 
+    def get_ratings_for_restaurant_dish(rest_id, dish_id):
+        rest_id = 23
+        dish_id = 2
+        # added_ratings = AddedRating.objects.raw('SELECT added_rating.rating_id, dish_rating, price_rating, service_rating FROM added_rating INNER JOIN rating ON added_rating.rating_id=rating.rating_id WHERE restaurant_id=%s', [rest_id]);
+        added_dish_ratings = AddedDishRating.objects.raw('SELECT added_dish_rating.rating_id, dish_rating, price_rating, service_rating FROM added_dish_rating INNER JOIN rating ON added_dish_rating.rating_id=rating.rating_id WHERE restaurant_id=%s AND dish_id=%s', [rest_id, dish_id]);
+        # print(added_dish_ratings)
+        print(added_ratings)
+        dish_rating = 0
+        price_rating = 0
+        service_rating = 0
+        total_no_of_ratings = 0;
+        overall_rating = 0
+        # for rating in added_ratings:
+        #     total_no_of_ratings = total_no_of_ratings+1
+        #     dish_rating = dish_rating + rating.dish_rating
+        #     price_rating = price_rating + rating.price_rating
+        #     service_rating = service_rating + rating.service_rating
+
+        for rating in added_dish_ratings:
+            total_no_of_ratings = total_no_of_ratings+1
+            dish_rating = dish_rating + rating.dish_rating
+            price_rating = price_rating + rating.price_rating
+            service_rating = service_rating + rating.service_rating
+
+        if(total_no_of_ratings!=0):
+            dish_rating = dish_rating/total_no_of_ratings
+            price_rating = price_rating/total_no_of_ratings
+            service_rating = service_rating/total_no_of_ratings
+            overall_rating = (dish_rating+price_rating+service_rating)/3
+
+        resp={
+            "success": True,
+            "code": 200,
+            "message": "success GetDishRating",
+            "data": {
+                "restaurant_id": rest_id,
+                "dish_id": dish_id,
+                "total_no_of_ratings": total_no_of_ratings,
+                "dish_rating": dish_rating,
+                "price_rating": price_rating,
+                "service_rating": service_rating,
+                "overall_rating": overall_dish_rating
+            }
+        }
+
+        return resp;
+        pass
+
+    def get_ratings_for_dish(dish_id):
+        added_dish_ratings = AddedDishRating.objects.raw('SELECT added_dish_rating.rating_id, dish_rating, price_rating, service_rating FROM added_dish_rating INNER JOIN rating ON added_dish_rating.rating_id=rating.rating_id WHERE dish_id=%s', [dish_id]);
+        pass
+
     def delete_rating(self, data):
         # rest_id = data['restaurant_id']
         # ratings = Rating.objects.raw()
