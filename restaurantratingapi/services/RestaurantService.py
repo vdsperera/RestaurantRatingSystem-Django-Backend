@@ -167,10 +167,38 @@ class RestaurantService:
         pass    
         
     def get_restaurant(self, data):
+
+        rest = Restaurant.objects.get(restaurant_id=data)
         rating_svc = RatingService
-        data = rating_svc.get_ratings_for_restaurant(23)
-        return data;
-        pass
+        rating_resp = rating_svc.get_ratings_for_restaurant(data)
+        print(rating_resp['data'])
+        # return rest.restaurant_id
+
+        resp={
+            "success": True,
+            "code": 200,
+            "message": "success GetRestaurant",
+            "data": {
+                "restaurant_id": rest.restaurant_id,
+                "restaurant_name": rest.name,
+                "address": rest.address,
+                "logitude": rest.longitude,
+                "latitude": rest.latitude,        
+                "phone_number": rest.phone_number,
+                "added_by": rest.created_by.id,
+                "claimed_by": rest.claimed_by,
+                "code": rest.code,
+                "claimed_status": ClaimStatus(rest.claimed).name,
+                "created_on": rest.created_on,
+                "total_no_of_ratings": rating_resp['data']['total_no_of_ratings'],
+                "dish_rating": rating_resp['data']['dish_rating'],
+                "price_rating": rating_resp['data']['price_rating'],
+                "service_rating": rating_resp['data']['service_rating'],
+                "overall_rating": rating_resp['data']['overall_rating']
+            }
+        }
+
+        return resp;
 
     def get_restaurant_list():
         pass
