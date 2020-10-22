@@ -54,6 +54,11 @@ class RestaurantViewSet(viewsets.ViewSet):
 	    serializer = RestaurantSerializer(queryset, many=True, context={'request':request})
 	    return Response(serializer.data)
 
+    def retrieve(self, request, pk=None):
+        rs = RestaurantService()
+        qry = rs.get_restaurant(pk)
+        return Response(qry)
+
 # class RestaurantViewSet(APIView):
 
 #     def post(self, request):
