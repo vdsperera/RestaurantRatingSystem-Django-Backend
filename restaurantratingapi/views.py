@@ -78,4 +78,6 @@ class RatingViewSet(viewsets.ViewSet):
         return Response(qry)
 
     def retrieve(self, request, pk=None):
-        pass
+        rs = RatingService()
+        qry = rs.get_ratings_for_dish(pk)
+        return Response(qry)
