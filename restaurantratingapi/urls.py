@@ -13,6 +13,7 @@ router.register(r'ratings', views.RatingViewSet, basename='RatingView')
 urlpatterns = [
     path('', include(router.urls)),
     path('restaurants/<int:rest_id>/', views.RestaurantViewSet.as_view({'get':'retrieve'}), name='RestaurantView'),
+    path('ratings/<int:dish_id>/', views.RatingViewSet.as_view({'get':'retrieve'}), name='RatingView'),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
 
