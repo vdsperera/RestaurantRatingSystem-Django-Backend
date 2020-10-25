@@ -13,6 +13,8 @@ from .ValidationService import ValidationService
 from django.db import IntegrityError
 from ..enums.RatingEnums import VerifiedStatus
 from .ValidationService import ValidationService
+from django.db.models import Count
+from django.db.models import Avg
 
 class RatingService:
 
@@ -281,46 +283,68 @@ class RatingService:
             }
         }
 
-        return resp;
+        return resp
         pass
 
     def get_ratings_for_dish(self, dish_id):
-        added_dish_ratings = AddedDishRating.objects.raw('SELECT added_dish_rating.rating_id, dish_rating, price_rating, service_rating FROM added_dish_rating INNER JOIN rating ON added_dish_rating.rating_id=rating.rating_id WHERE dish_id=%s', [dish_id]);
+        # added_dish_ratings = AddedDishRating.objects.raw("""
+        #     SELECT added_dish_rating.rating_id, restaurant_id
+        #     dish_rating, price_rating,service_rating
+        #     FROM added_dish_rating INNER JOIN rating
+        #     ON added_dish_rating.rating_id=rating.rating_id
+        #     WHERE dish_id=%s
+        #     """, [dish_id])
+
+        # rsl = AddedDishRating.objects.values('restaurant_id').annotate(Count('restaurant_id'))
+        rsl = AddedDishRating.objects.select_related('rating').annotate(Count('restaurant_id'))
+        print(rsl.query)
+        print(rsl)
+
+        for on in rsl:
+            print(on.dish_id)
+
+
+        # for on in rsl:
+        #     print('dish_id '+ 'on.dish_id'+ 'dish rating'+ on.rating.dish_rating)
+        
+        
+        # return rsl
+
         ratings = []
         dish_rating = 0
         price_rating = 0
         service_rating = 0
-        total_no_of_ratings = 0;
+        total_no_of_ratings = 0
         overall_rating = 0
-        for rating in added_dish_ratings:
-            res = {
-                "restaurant_id": rating.restaurant_id,
-                "dish_rating": rating.dish_rating,
-                "price_rating": rating.price_rating,
-                "service_rating": rating.service_rating              
-            }
-            ratings.append(res)
+        # for rating in added_dish_ratings:
+        #     res = {
+        #         "restaurant_id": rating.restaurant_id,
+        #         "dish_rating": rating.dish_rating,
+        #         "price_rating": rating.price_rating,
+        #         "service_rating": rating.service_rating
+        #     }
+        #     ratings.append(res)
             # total_no_of_ratings = total_no_of_ratings+1
             # dish_rating = dish_rating + rating.dish_rating
             # price_rating = price_rating + rating.price_rating
             # service_rating = service_rating + rating.service_rating
         # print(ratings)
 
-        resp={
-            "success": True,
-            "code": 200,
-            "message": "success GetDishRatings",
-            "data": {
-                "dish_id": dish_id,
-                "ratings": ratings
-            }
-        }
+        # resp = {
+        #     "success": True,
+        #     "code": 200,
+        #     "message": "success GetDishRatings",
+        #     "data": {
+        #         "dish_id": dish_id,
+        #         "ratings": ratings
+        #     }
+        # }
 
-        return resp
+        # return resp
 
     def delete_rating(self, data):
         # rest_id = data['restaurant_id']
         # ratings = Rating.objects.raw()
         # rating_id = 2
         # ratings = AddedRating.objects.raw('SELECT * FROM added_rating INNER JOIN rating ON added_rating.rating=rating.rating_id WHERE rating.rating_id=rating_id')
-        pass;
+        pass
