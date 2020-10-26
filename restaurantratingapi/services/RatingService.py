@@ -287,21 +287,62 @@ class RatingService:
         pass
 
     def get_ratings_for_dish(self, dish_id):
-        # added_dish_ratings = AddedDishRating.objects.raw("""
-        #     SELECT added_dish_rating.rating_id, restaurant_id
-        #     dish_rating, price_rating,service_rating
-        #     FROM added_dish_rating INNER JOIN rating
-        #     ON added_dish_rating.rating_id=rating.rating_id
-        #     WHERE dish_id=%s
-        #     """, [dish_id])
+        # using raw query
+        added_dish_ratings = AddedDishRating.objects.raw("""
+            SELECT added_dish_rating.rating_id, restaurant_id
+            dish_rating, price_rating,service_rating,
+            AVG(dish_rating) as avg_dish,
+            AVG(price_rating) as avg_price,
+            AVG(service_rating) as avg_service,
+            (AVG(dish_rating)+AVG(price_rating)+AVG(service_rating))/3 as avg_total
+            FROM added_dish_rating INNER JOIN rating
+            ON added_dish_rating.rating_id=rating.rating_id
+            WHERE dish_id=%s
+            GROUP BY restaurant_id
+            ORDER BY avg_dish DESC
+            """, [dish_id])
+
+        # for on in added_dish_ratings:
+        #     print('restaurant id: '+str(on.restaurant_id))
+        #     # print('dish id: '+str(on.dish_id))
+        #     # print('dish rating: '+str(on.rating.dish_rating))
+        #     # print('price rating: '+str(on.rating.price_rating))
+        #     # print('service rating: '+str(on.rating.service_rating))
+        #     print('average dish rating: '+str(on.avg_dish))
+        #     print('average price rating: '+str(on.avg_price))
+        #     print('average service rating: '+str(on.avg_service))
+        #     print('average total rating: '+str(on.avg_total))
+        #     print('')
+        #     print('')
+        #     print('')
+
+        # using ORM
 
         # rsl = AddedDishRating.objects.values('restaurant_id').annotate(Count('restaurant_id'))
-        rsl = AddedDishRating.objects.select_related('rating').annotate(Count('restaurant_id'))
-        print(rsl.query)
-        print(rsl)
+        
+        # rsl = AddedDishRating.objects.select_related('rating').annotate(Count('restaurant_id')).filter(dish_id=2)
+        # print(rsl.query)
+        # print(rsl)
 
-        for on in rsl:
-            print(on.dish_id)
+        # for on in rsl:
+        #     print('restaurant id: '+str(on.restaurant_id))
+        #     print('dish id: '+str(on.dish_id))
+        #     print('dish rating: '+str(on.rating.dish_rating))
+        #     print('price rating: '+str(on.rating.price_rating))
+        #     print('service rating: '+str(on.rating.service_rating))
+        #     print('')
+        #     print('')
+        #     print('')
+
+        # rsl = AddedDishRating.objects.values('restaurant_id').annotate(Count('restaurant_id')).order_by()
+        # rsl = AddedDishRating.objects.aggregate(Avg('restaurant_id'))
+        # print(rsl.query)
+        # print('\n\n')
+        # print(rsl)
+        # print('\n\n')
+        # for on in rsl:
+        #     print('restaurant id: '+str(on.restaurant_id))
+            # print('restaurant id__count: '+str(on.restaurant_id__count)+'\n')         
 
 
         # for on in rsl:
@@ -311,36 +352,39 @@ class RatingService:
         # return rsl
 
         ratings = []
-        dish_rating = 0
-        price_rating = 0
-        service_rating = 0
-        total_no_of_ratings = 0
-        overall_rating = 0
-        # for rating in added_dish_ratings:
-        #     res = {
-        #         "restaurant_id": rating.restaurant_id,
-        #         "dish_rating": rating.dish_rating,
-        #         "price_rating": rating.price_rating,
-        #         "service_rating": rating.service_rating
-        #     }
-        #     ratings.append(res)
+        # dish_rating = 0
+        # price_rating = 0
+        # service_rating = 0
+        # total_no_of_ratings = 0
+        # overall_rating = 0
+        for rating in added_dish_ratings:
+            res = {
+                "restaurant_id": rating.restaurant_id,
+                # "dish_rating": rating.dish_rating,
+                # "price_rating": rating.price_rating,
+                # "service_rating": rating.service_rating,
+                "average_dish_rating": rating.avg_dish,
+                "average_price_rating": rating.avg_price,
+                "average_price_rating": rating.avg_service,
+                "average_total_rating": rating.avg_total
+            }
+            ratings.append(res)
             # total_no_of_ratings = total_no_of_ratings+1
             # dish_rating = dish_rating + rating.dish_rating
             # price_rating = price_rating + rating.price_rating
             # service_rating = service_rating + rating.service_rating
-        # print(ratings)
 
-        # resp = {
-        #     "success": True,
-        #     "code": 200,
-        #     "message": "success GetDishRatings",
-        #     "data": {
-        #         "dish_id": dish_id,
-        #         "ratings": ratings
-        #     }
-        # }
+        resp = {
+            "success": True,
+            "code": 200,
+            "message": "success GetDishRatings",
+            "data": {
+                "dish_id": dish_id,
+                "ratings": ratings
+            }
+        }
 
-        # return resp
+        return resp
 
     def delete_rating(self, data):
         # rest_id = data['restaurant_id']
