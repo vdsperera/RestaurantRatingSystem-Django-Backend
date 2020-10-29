@@ -19,19 +19,19 @@ from django.db.models import Avg
 class RatingService:
 
     def __init__(self):
-        self.data = [];
+        self.data = []
 
     def add_rating(self, data):
         # retrieve request data
         try:
             username = data['user']
-            token_number = data['token_number'] #token number 
-            rest_id = data['restaurant_id'] #restaurant id #required
-            dish_id = data['dish_id'] #dish id
-            dish_rating = data['dish_rating'] #dish rating #required
-            price_rating = data['price_rating'] #price rating #required
-            service_rating = data['service_rating'] #service rating #required
-            review = data['review'] #review #required
+            token_number = data['token_number']  # token number
+            rest_id = data['restaurant_id']  # restaurant id #required
+            dish_id = data['dish_id']  # dish id
+            dish_rating = data['dish_rating']  # dish rating #required
+            price_rating = data['price_rating']  # price rating #required
+            service_rating = data['service_rating']  # service rating #required
+            review = data['review']  # review #required
         except KeyError as e:
             raise APIException(f"Key {e} not exists in the request")
 
@@ -43,10 +43,10 @@ class RatingService:
             raise APIException("Price rating is empty")
 
         if(not ValidationService.isset(value=service_rating)):
-            raise APIException("Service rating is empty")    
+            raise APIException("Service rating is empty")
 
         if(not ValidationService.isset(value=review)):
-            raise APIException("Review is empty") 
+            raise APIException("Review is empty")
 
         # validate request data values for db existance
         if(not isinstance(username, str)):
@@ -60,12 +60,12 @@ class RatingService:
         # price rating integer validation
         # price rating range validation
         if(not ValidationService.is_valid_rating(price_rating)):
-            raise APIException("Invalid price rating")        
+            raise APIException("Invalid price rating")
 
         # service rating integer valiation
         # service rating range validation
         if(not ValidationService.is_valid_rating(service_rating)):
-            raise APIException("Invalid service rating")        
+            raise APIException("Invalid service rating")
 
         # check user exists
         # check whether the username exists
@@ -78,7 +78,7 @@ class RatingService:
             user = User.objects.get(username=username)
         except ObjectDoesNotExist as e:
             raise APIException(f"Username name '{username}' not exists")
-            
+
         # check user logged in
 
         # validate restaurant id
@@ -88,7 +88,7 @@ class RatingService:
 
         # if(not restaurant):
         #     raise APIException(f"Restaurant id '{rest_id}' not exists")
-        
+
         try:
             restaurant = Restaurant.objects.get(restaurant_id=rest_id)
         except ObjectDoesNotExist as e:
@@ -99,7 +99,7 @@ class RatingService:
 
         # if(not dish):
         #     raise APIException(f"Dish id '{dish_id}' not exists")
-        if(dish_id != None):            
+        if(dish_id != None):
             try:
                 dish = Dish.objects.get(dish_id=dish_id)
             except ObjectDoesNotExist as e:
@@ -185,7 +185,11 @@ class RatingService:
             }
         }
 
-        return resp  
+        return resp 
+
+    def verify_rating(self, data):
+        pass
+
 
     def get_rating(self, data):
         # rest_id = 1;
@@ -193,6 +197,7 @@ class RatingService:
         # added_dish_ratings = AddedDishRating.objects.get(restaurant_id=rest_id);
         pass
 
+    # get_overall_restaurant_rating(rest_id)
     def get_ratings_for_restaurant(rest_id):
         added_ratings = AddedRating.objects.raw('SELECT added_rating.rating_id, dish_rating, price_rating, service_rating FROM added_rating INNER JOIN rating ON added_rating.rating_id=rating.rating_id WHERE restaurant_id=%s', [rest_id]);
         added_dish_ratings = AddedDishRating.objects.raw('SELECT added_dish_rating.rating_id, dish_rating, price_rating, service_rating FROM added_dish_rating INNER JOIN rating ON added_dish_rating.rating_id=rating.rating_id WHERE restaurant_id=%s', [rest_id]);
@@ -238,54 +243,20 @@ class RatingService:
         return resp;
         pass
 
-    def get_ratings_for_restaurant_dish(rest_id, dish_id):
-        rest_id = 23
-        dish_id = 2
-        # added_ratings = AddedRating.objects.raw('SELECT added_rating.rating_id, dish_rating, price_rating, service_rating FROM added_rating INNER JOIN rating ON added_rating.rating_id=rating.rating_id WHERE restaurant_id=%s', [rest_id]);
-        added_dish_ratings = AddedDishRating.objects.raw('SELECT added_dish_rating.rating_id, dish_rating, price_rating, service_rating FROM added_dish_rating INNER JOIN rating ON added_dish_rating.rating_id=rating.rating_id WHERE restaurant_id=%s AND dish_id=%s', [rest_id, dish_id]);
-        # print(added_dish_ratings)
-        print(added_ratings)
-        dish_rating = 0
-        price_rating = 0
-        service_rating = 0
-        total_no_of_ratings = 0;
-        overall_rating = 0
-        # for rating in added_ratings:
-        #     total_no_of_ratings = total_no_of_ratings+1
-        #     dish_rating = dish_rating + rating.dish_rating
-        #     price_rating = price_rating + rating.price_rating
-        #     service_rating = service_rating + rating.service_rating
 
-        for rating in added_dish_ratings:
-            total_no_of_ratings = total_no_of_ratings+1
-            dish_rating = dish_rating + rating.dish_rating
-            price_rating = price_rating + rating.price_rating
-            service_rating = service_rating + rating.service_rating
-
-        if(total_no_of_ratings!=0):
-            dish_rating = dish_rating/total_no_of_ratings
-            price_rating = price_rating/total_no_of_ratings
-            service_rating = service_rating/total_no_of_ratings
-            overall_rating = (dish_rating+price_rating+service_rating)/3
-
-        resp={
-            "success": True,
-            "code": 200,
-            "message": "success GetDishRating",
-            "data": {
-                "restaurant_id": rest_id,
-                "dish_id": dish_id,
-                "total_no_of_ratings": total_no_of_ratings,
-                "dish_rating": dish_rating,
-                "price_rating": price_rating,
-                "service_rating": service_rating,
-                "overall_rating": overall_dish_rating
-            }
-        }
-
-        return resp
+    def get_restaurant_rating_list(self, data):
         pass
 
+     # customer can see ratings for each dish of that restaurant
+    def get_restaurant_dish_ratings(self, data):
+        pass
+    
+    # customer can see list of ratings for for all restaurants
+    def get_all_restaurant_ratings():
+        pass
+
+    # customer can see list of  dish ratings  for all restaurants for specific dish
+    # get_all_restaurant_dish_ratings(dish_id)
     def get_ratings_for_dish(self, dish_id):
         # using raw query
         added_dish_ratings = AddedDishRating.objects.raw("""
@@ -385,6 +356,55 @@ class RatingService:
         }
 
         return resp
+
+    # customer can see the ratings for of a restaurant for a specific dish
+    def get_ratings_for_restaurant_dish(rest_id, dish_id):
+        rest_id = 23
+        dish_id = 2
+        # added_ratings = AddedRating.objects.raw('SELECT added_rating.rating_id, dish_rating, price_rating, service_rating FROM added_rating INNER JOIN rating ON added_rating.rating_id=rating.rating_id WHERE restaurant_id=%s', [rest_id]);
+        added_dish_ratings = AddedDishRating.objects.raw('SELECT added_dish_rating.rating_id, dish_rating, price_rating, service_rating FROM added_dish_rating INNER JOIN rating ON added_dish_rating.rating_id=rating.rating_id WHERE restaurant_id=%s AND dish_id=%s', [rest_id, dish_id]);
+        # print(added_dish_ratings)
+        print(added_ratings)
+        dish_rating = 0
+        price_rating = 0
+        service_rating = 0
+        total_no_of_ratings = 0
+        overall_rating = 0
+        # for rating in added_ratings:
+        #     total_no_of_ratings = total_no_of_ratings+1
+        #     dish_rating = dish_rating + rating.dish_rating
+        #     price_rating = price_rating + rating.price_rating
+        #     service_rating = service_rating + rating.service_rating
+
+        for rating in added_dish_ratings:
+            total_no_of_ratings = total_no_of_ratings + 1
+            dish_rating = dish_rating + rating.dish_rating
+            price_rating = price_rating + rating.price_rating
+            service_rating = service_rating + rating.service_rating
+
+        if(total_no_of_ratings != 0):
+            dish_rating = dish_rating / total_no_of_ratings
+            price_rating = price_rating / total_no_of_ratings
+            service_rating = service_rating / total_no_of_ratings
+            overall_rating = (dish_rating + price_rating + service_rating) / 3
+
+        resp = {
+            "success": True,
+            "code": 200,
+            "message": "success GetDishRating",
+            "data": {
+                "restaurant_id": rest_id,
+                "dish_id": dish_id,
+                "total_no_of_ratings": total_no_of_ratings,
+                "dish_rating": dish_rating,
+                "price_rating": price_rating,
+                "service_rating": service_rating,
+                "overall_rating": overall_dish_rating
+            }
+        }
+
+        return resp
+        pass
 
     def delete_rating(self, data):
         # rest_id = data['restaurant_id']
