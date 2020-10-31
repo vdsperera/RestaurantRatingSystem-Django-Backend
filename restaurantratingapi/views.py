@@ -20,8 +20,8 @@ logger = logging.getLogger(__name__)
 # logger.info("VDS")
 # Create your views here.
 class UserRoleViewSet(viewsets.ModelViewSet):
-	queryset = UserRole.objects.all().order_by('role_name')
-	serializer_class = UserRoleSerializer
+    queryset = UserRole.objects.all().order_by('role_name')
+    serializer_class = UserRoleSerializer
 
 class RestaurantViewSet(viewsets.ViewSet):
     
@@ -37,26 +37,26 @@ class RestaurantViewSet(viewsets.ViewSet):
         rs = RestaurantService()
         # qry = rs.register_restaurant(data)
         qry = rs.get_restaurant(data)
-		# print(qry)
-		# serializer = RestaurantSerializer(qry)
-		# serialized_obj = serializers.serialize('python', [qry,], ensure_ascii=False)
-		# print(serialized_obj)
-		# return Response(serialized_obj)
-		# return Response(RestaurantSerializer(instance=serialized_obj).data)
-		# return JsonResponse(serializer, safe=False)
-		# return Response({'status':'successful'})
+        # print(qry)
+        # serializer = RestaurantSerializer(qry)
+        # serialized_obj = serializers.serialize('python', [qry,], ensure_ascii=False)
+        # print(serialized_obj)
+        # return Response(serialized_obj)
+        # return Response(RestaurantSerializer(instance=serialized_obj).data)
+        # return JsonResponse(serializer, safe=False)
+        # return Response({'status':'successful'})
         return Response(qry)
 
     def list(self, request):
-	    queryset = Restaurant.objects.all()
-		#logger.info("ccccccvvvvvvv")
-		
-	    serializer = RestaurantSerializer(queryset, many=True, context={'request':request})
-	    return Response(serializer.data)
+        queryset = Restaurant.objects.all()
+        #logger.info("ccccccvvvvvvv")
+        
+        serializer = RestaurantSerializer(queryset, many=True, context={'request':request})
+        return Response(serializer.data)
 
-    def retrieve(self, request, pk=None):
+    def retrieve(self, request, rest_id=None):
         rs = RestaurantService()
-        qry = rs.get_restaurant(pk)
+        qry = rs.get_restaurant(rest_id)
         return Response(qry)
 
 # class RestaurantViewSet(APIView):
@@ -72,12 +72,67 @@ class RatingViewSet(viewsets.ViewSet):
     serializer_class = RestaurantSerializer
 
     def create(self, request):
+        return Response('add rating')
         data = request.data['data']['mdata']
         rating_service = RatingService()
         qry = rating_service.add_rating(data)
         return Response(qry)
 
+
+    def verify(self, request, rating_id=None):
+        return Response('verify rating')
+
+
     def retrieve(self, request, pk=None):
+        myDict = dict(self.request.query_params)
+        print(myDict['restid'][0])
         rs = RatingService()
-        qry = rs.get_ratings_for_dish(pk)
+        # return Response(qry)
+        if 'dishid' in myDict:
+            # print(self.suffix)
+            return Response('retrieve for dish_id')
+
+        if 'restid' in myDict:
+            # return Response('retrieve for rest_id')
+            qry = rs.get_ratings_for_restaurant(myDict['restid'][0])
+
+        # if '' in myDict:
+        #     return Response('')
+
         return Response(qry)
+
+
+    def list(self, request, pk=None):
+        # return Response('list')
+        myDict = dict(self.request.query_params)
+        # print(myDict=={})
+        if 'restid' in myDict:
+            return Response('list for restid')
+
+        if 'dishid' in myDict:
+            return Response('list for dishid')
+
+        if myDict=={}:
+            return Response('list for ratings')
+
+
+    def dish_list(self, request, pk=None):
+        return Response('dish list')
+
+
+    def retrieve_for_rest_id(self, request, rest_id=None):
+        return Response('retrieve for rest_id')
+
+
+    def retrieve_for_dish_id(self, request, dish_id=None):
+        # print('dish_id' in self.kwargs)
+        return Response('retrieve for dish_id')
+
+        return Response('dish rating list of all restaraunt for a specific dish')        
+        # ratings/<int:dish_id>/
+        # rs = RatingService()
+        # qry = rs.get_ratings_for_dish(pk)
+        # return Response(qry)
+
+    def partial_update(self, request, pk=None):
+        return Response('partial update rating')
