@@ -198,7 +198,7 @@ class RatingService:
         pass
 
     # get_overall_restaurant_rating(rest_id)
-    def get_ratings_for_restaurant(rest_id):
+    def get_ratings_for_restaurant(self, rest_id):
         added_ratings = AddedRating.objects.raw('SELECT added_rating.rating_id, dish_rating, price_rating, service_rating FROM added_rating INNER JOIN rating ON added_rating.rating_id=rating.rating_id WHERE restaurant_id=%s', [rest_id]);
         added_dish_ratings = AddedDishRating.objects.raw('SELECT added_dish_rating.rating_id, dish_rating, price_rating, service_rating FROM added_dish_rating INNER JOIN rating ON added_dish_rating.rating_id=rating.rating_id WHERE restaurant_id=%s', [rest_id]);
         # print(added_dish_ratings)
