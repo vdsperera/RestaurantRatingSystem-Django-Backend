@@ -170,7 +170,7 @@ class RestaurantService:
 
         rest = Restaurant.objects.get(restaurant_id=data)
         rating_svc = RatingService
-        rating_resp = rating_svc.get_ratings_for_restaurant(data)
+        rating_resp = rating_svc.get_ratings_for_restaurant(self, data)
         print(rating_resp['data'])
         # return rest.restaurant_id
 
