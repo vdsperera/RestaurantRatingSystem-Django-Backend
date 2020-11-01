@@ -16,12 +16,22 @@ urlpatterns = [
     path('restaurants/<int:rest_id>/', views.RestaurantViewSet.as_view({'get':'retrieve'}), name='RestaurantView'),
 
     # Ratings
+
+    # POST /ratings
     path('ratings/', views.RatingViewSet.as_view({'post': 'create'}), name='RatingView'),
+
+    # POST /ratings/verify/[rating_id]
     path('ratings/verify/<int:rating_id>/', views.RatingViewSet.as_view({'post':'verify'}), name='RatingView'),
-    path('ratings', views.RatingViewSet.as_view({'get':'retrieve'}), name='RatingView'),
-    # path('ratings/<int:rest_id>/', views.RatingViewSet.as_view('get':'retrieve'), name='RatingView')
+
+    # GET /ratings/list - get ratings list for all restaurants(group by rest)(with average ratings) 
+    # GET /ratings/list?restid=[restaurant_id] - get ratings list for the restaurant
     path('ratings/list', views.RatingViewSet.as_view({'get':'list'}), name='RatingView'),
-    path('ratings/dishes', views.RatingViewSet.as_view({'get':'dish_list'}), name='RatingView'),
+
+    # GET /ratings/dishes/list?dishid=[dish_id] - get dish ratings  list for all restaurants for specific dish
+    # GET /ratings/dishes/list?restid=[rest_id] - get dish rating list for a restaurant
+    path('ratings/dishes/list', views.RatingViewSet.as_view({'get':'dish_list'}), name='RatingView'),
+
+    # 
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
 
