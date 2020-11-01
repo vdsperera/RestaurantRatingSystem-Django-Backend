@@ -21,6 +21,7 @@ class RatingService:
     def __init__(self):
         self.data = []
 
+    # POST api/ratings
     def add_rating(self, data):
         # retrieve request data
         try:
@@ -187,17 +188,24 @@ class RatingService:
 
         return resp 
 
+
+    # POST api/ratings/verify/{rating_id]
     def verify_rating(self, data):
         pass
 
-
-    def get_rating(self, data):
+    # GET api/ratings/list
+    # this gets list of ratings for all restaurants and group them by rest_id
+    # this also gives average rating for each resturant
+    def get_rating_list_for_all_restaurants(self, data):
         # rest_id = 1;
         # added_ratings = AddedRating.objects.get(restaurant_id=rest_id);
         # added_dish_ratings = AddedDishRating.objects.get(restaurant_id=rest_id);
         pass
 
-    # get_overall_restaurant_rating(rest_id)
+    # GET api/ratings/list?restid=23
+    # this gets list of ratings for the restaurant
+    # this also gives for the restaurant
+    # def get rating list_for_the_restaurant()
     def get_ratings_for_restaurant(self, rest_id):
         added_ratings = AddedRating.objects.raw('SELECT added_rating.rating_id, dish_rating, price_rating, service_rating FROM added_rating INNER JOIN rating ON added_rating.rating_id=rating.rating_id WHERE restaurant_id=%s', [rest_id]);
         added_dish_ratings = AddedDishRating.objects.raw('SELECT added_dish_rating.rating_id, dish_rating, price_rating, service_rating FROM added_dish_rating INNER JOIN rating ON added_dish_rating.rating_id=rating.rating_id WHERE restaurant_id=%s', [rest_id]);
@@ -243,17 +251,29 @@ class RatingService:
         return resp;
         pass
 
-
-    def get_restaurant_rating_list(self, data):
+    # GET api/ratings/dishes/list?dishid=2
+    # this gets list of dish ratings for all restaurants for a specific dish and group them by restid
+    # this also gives average ratings
+    def get_dish_rating_list_for_all_restaurant_for_the_dish(self, data):
         pass
 
-     # customer can see ratings for each dish of that restaurant
-    def get_restaurant_dish_ratings(self, data):
+    # GET api/ratings/dishes?restid=22
+    # this gives list of dish ratings for the restaurant and group them by dish id
+    # this also gives average ratings
+    def get_dish_rating_list_for_the_restaurant(self, data):
         pass
+
+
+    # def get_restaurant_rating_list(self, data):
+    #     pass
+
+    #  # customer can see ratings for each dish of that restaurant
+    # def get_restaurant_dish_ratings(self, data):
+    #     pass
     
-    # customer can see list of ratings for for all restaurants
-    def get_all_restaurant_ratings():
-        pass
+    # # customer can see list of ratings for for all restaurants
+    # def get_all_restaurant_ratings():
+    #     pass
 
     # customer can see list of  dish ratings  for all restaurants for specific dish
     # get_all_restaurant_dish_ratings(dish_id)
