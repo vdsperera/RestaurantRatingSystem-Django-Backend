@@ -71,6 +71,7 @@ class RatingViewSet(viewsets.ViewSet):
 
     serializer_class = RestaurantSerializer
 
+    # POST /ratings
     def create(self, request):
         return Response('add rating')
         data = request.data['data']['mdata']
@@ -78,9 +79,39 @@ class RatingViewSet(viewsets.ViewSet):
         qry = rating_service.add_rating(data)
         return Response(qry)
 
-
+    # POST /ratings/verify/[rating_id]
     def verify(self, request, rating_id=None):
         return Response('verify rating')
+
+    # GET /ratings/list - get ratings list for all restaurants(group by rest)(with average ratings) 
+    # GET /ratings/list?restid=[restaurant_id] - get ratings list for the restaurant
+    def list(self, request, pk=None):
+        # return Response('list')
+        myDict = dict(self.request.query_params)
+        # print(myDict=={})
+        if 'restid' in myDict:
+            return Response('get ratings list for the restaurant')
+
+        if 'dishid' in myDict:
+            return Response('list for dishid')
+
+        if myDict=={}:
+            return Response('get ratings list for all restaurants(group by rest)(with average ratings)')
+
+
+    # GET /ratings/dishes/list?dishid=[dish_id] - get dish ratings  list for all restaurants for specific dish
+    # GET /ratings/dishes/list?restid=[rest_id] - get dish rating list for a restaurant
+    def dish_list(self, request, pk=None):
+        myDict = dict(self.request.query_params)
+        # print(myDict=={})
+        if 'dishid' in myDict:
+            return Response('get dish ratings  list for all restaurants for specific dish')
+
+        if 'restid' in myDict:
+            return Response('get dish rating list for a restaurant')
+
+        return Response('dish list')
+
 
 
     def retrieve(self, request, pk=None):
@@ -100,24 +131,6 @@ class RatingViewSet(viewsets.ViewSet):
         #     return Response('')
 
         return Response(qry)
-
-
-    def list(self, request, pk=None):
-        # return Response('list')
-        myDict = dict(self.request.query_params)
-        # print(myDict=={})
-        if 'restid' in myDict:
-            return Response('list for restid')
-
-        if 'dishid' in myDict:
-            return Response('list for dishid')
-
-        if myDict=={}:
-            return Response('list for ratings')
-
-
-    def dish_list(self, request, pk=None):
-        return Response('dish list')
 
 
     def retrieve_for_rest_id(self, request, rest_id=None):
