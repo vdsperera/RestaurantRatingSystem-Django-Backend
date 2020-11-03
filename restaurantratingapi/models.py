@@ -212,6 +212,7 @@ class Contribution(models.Model):
 
 class Rating(models.Model):
    rating_id = models.BigAutoField(primary_key=True)
+   restaurant = models.ForeignKey(Restaurant, on_delete=models.DO_NOTHING, db_column='restaurant_id', related_name='added_rating_restaurant')
    dish_rating = models.PositiveIntegerField(blank=True, null=True)
    price_rating = models.PositiveIntegerField(blank=True, null=True)
    service_rating = models.PositiveIntegerField(blank=True, null=True)
@@ -225,7 +226,6 @@ class Rating(models.Model):
 
 class AddedRating(models.Model):
     rating = models.OneToOneField(Rating, on_delete=models.CASCADE, db_column='rating_id', related_name='added_rating_rating', primary_key=True)
-    restaurant = models.ForeignKey(Restaurant, on_delete=models.DO_NOTHING, db_column='restaurant_id', related_name='added_rating_restaurant')
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING, db_column='user_id', related_name='added_rating_user')
     token_number = models.ForeignKey(Token, on_delete=models.DO_NOTHING, db_column='token_number', related_name='added_rating_token', blank=True, null=True)
     longitude = models.FloatField(blank=True, null=True)
@@ -242,7 +242,6 @@ class AddedRating(models.Model):
 
 class AddedDishRating(models.Model):
     rating = models.OneToOneField(Rating, on_delete=models.CASCADE, db_column='rating_id', related_name='added_dish_rating_rating', primary_key=True)
-    restaurant = models.ForeignKey(Restaurant, on_delete=models.DO_NOTHING, db_column='restaurant_id', related_name='added_dish_rating_restaurant')
     dish = models.ForeignKey(Dish, on_delete=models.DO_NOTHING, db_column='dish_id', related_name='added_dish_rating_dish')
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING, db_column='user_id', related_name='added_dish_rating_user')
     token_number = models.ForeignKey(Token, on_delete=models.DO_NOTHING, db_column='token_number', related_name='added_dish_rating_token', blank=True, null=True)
