@@ -133,6 +133,7 @@ class RatingService:
             verified = VerifiedStatus.Verified.value
 
         rating = Rating(
+          restaurant = restaurant,  
           dish_rating = dish_rating,
           price_rating = price_rating,
           service_rating = service_rating,
@@ -147,7 +148,6 @@ class RatingService:
         if(dish_id != None):
             added_dish_rating = AddedDishRating(
             rating = rating,
-            restaurant = restaurant,
             dish = dish,
             user = user,
             token_number = token)
@@ -159,7 +159,6 @@ class RatingService:
         else:
             added_rating = AddedRating(
                 rating = rating,
-                restaurant = restaurant,
                 user = user,
                 token_number = token
                 )
@@ -227,38 +226,39 @@ class RatingService:
 
         #     """)
 
-        added_ratings  = Rating.objects.raw("""
-            SELECT added_rating.rating_id, dish_rating, price_rating,
-            service_rating, added_rating.restaurant_id as res,
-            added_dish_rating.restaurant_id as resd
-            -- AVG(dish_rating) as avg_dish,
-            -- AVG(price_rating) as avg_price,
-            -- AVG(service_rating) as avg_service,
-            -- (AVG(dish_rating)+AVG(price_rating)+AVG(service_rating))/3 as avg_total
-            FROM added_rating 
-            INNER JOIN rating
-            ON added_rating.rating_id = rating.rating_id
-            INNER JOIN added_dish_rating
-            ON rating.rating_id = added_rating.rating_id
-            -- GROUP BY res
-            """)
+        # added_ratings  = Rating.objects.raw("""
+        #     SELECT added_rating.rating_id, dish_rating, price_rating,
+        #     service_rating, added_rating.restaurant_id as res,
+        #     added_dish_rating.restaurant_id as resd
+        #     -- AVG(dish_rating) as avg_dish,
+        #     -- AVG(price_rating) as avg_price,
+        #     -- AVG(service_rating) as avg_service,
+        #     -- (AVG(dish_rating)+AVG(price_rating)+AVG(service_rating))/3 as avg_total
+        #     FROM added_rating 
+        #     INNER JOIN rating
+        #     ON added_rating.rating_id = rating.rating_id
+        #     INNER JOIN added_dish_rating
+        #     ON rating.rating_id = added_rating.rating_id
+        #     -- GROUP BY res
+        #     """)
 
-        cursor = connection.cursor()
-        cursor.execute("""
-            SELECT added_rating.rating_id, dish_rating, price_rating,
-            service_rating, added_rating.restaurant_id as res,
-            added_dish_rating.restaurant_id as resd
-            -- AVG(dish_rating) as avg_dish,
-            -- AVG(price_rating) as avg_price,
-            -- AVG(service_rating) as avg_service,
-            -- (AVG(dish_rating)+AVG(price_rating)+AVG(service_rating))/3 as avg_total
-            FROM added_rating 
-            INNER JOIN rating
-            ON added_rating.rating_id = rating.rating_id
-            INNER JOIN added_dish_rating
-            ON rating.rating_id = added_rating.rating_id
-            -- GROUP BY res
-            """)
+        # cursor = connection.cursor()
+        # cursor.execute("""
+        #     SELECT added_rating.rating_id, dish_rating, price_rating,
+        #     service_rating, added_rating.restaurant_id as res,
+        #     added_dish_rating.restaurant_id as resd
+        #     -- AVG(dish_rating) as avg_dish,
+        #     -- AVG(price_rating) as avg_price,
+        #     -- AVG(service_rating) as avg_service,
+        #     -- (AVG(dish_rating)+AVG(price_rating)+AVG(service_rating))/3 as avg_total
+        #     FROM added_rating 
+        #     INNER JOIN rating
+        #     ON added_rating.rating_id = rating.rating_id
+        #     INNER JOIN added_dish_rating
+        #     ON rating.rating_id = added_rating.rating_id
+        #     -- GROUP BY res
+        #     """)
+
         # print(cursor.fetchone())
 
         # added_dish_ratings = AddedDishRating.objects.raw("""
@@ -273,20 +273,32 @@ class RatingService:
         #     GROUP BY added_dish_rating.restaurant_id
         #     """)
 
+
+        added_ratings  = Rating.objects.raw("""
+            SELECT rating_id, restaurant_id, dish_rating, price_rating,
+            service_rating,
+            AVG(dish_rating) as avg_dish,
+            AVG(price_rating) as avg_price,
+            AVG(service_rating) as avg_service,
+            (AVG(dish_rating)+AVG(price_rating)+AVG(service_rating))/3 as avg_total
+            FROM rating
+            GROUP BY restaurant_id
+            """)        
+
         list = []
         for item in added_ratings:
             # print(item)
             # print(1)
             added_rating_model = {
-                "restaurant_id": item.res,
-                "restaurant_id_dish": item.resd,
-                # "restaurant name": "Test",
-                # "total_no_of_ratings": "Test",
-                # "dish_id": None,
-                # "overall_rating": item.avg_total,
-                # "dish_rating": item.avg_price,
-                # "price_rating": item.avg_price,
-                # "service_rating": item.avg_dish
+                # "restaurant_id": item.res,
+                # "restaurant_id_dish": item.resd,
+                "restaurant name": "Test",
+                "total_no_of_ratings": "Test",
+                "dish_id": None,
+                "overall_rating": item.avg_total,
+                "dish_rating": item.avg_price,
+                "price_rating": item.avg_price,
+                "service_rating": item.avg_dish
             }
             list.append(added_rating_model)
 
