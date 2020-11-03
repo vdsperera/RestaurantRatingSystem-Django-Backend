@@ -36,7 +36,7 @@ class RestaurantViewSet(viewsets.ViewSet):
         #logger.info(request.data)
         rs = RestaurantService()
         # qry = rs.register_restaurant(data)
-        qry = rs.get_restaurant(data)
+        qry = rs.register_restaurant(data)
         # print(qry)
         # serializer = RestaurantSerializer(qry)
         # serialized_obj = serializers.serialize('python', [qry,], ensure_ascii=False)
@@ -73,7 +73,7 @@ class RatingViewSet(viewsets.ViewSet):
 
     # POST /ratings
     def create(self, request):
-        return Response('add rating')
+        # return Response('add rating')
         data = request.data['data']['mdata']
         rating_service = RatingService()
         qry = rating_service.add_rating(data)
