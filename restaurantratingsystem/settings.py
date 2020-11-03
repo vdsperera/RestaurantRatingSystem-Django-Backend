@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'restaurantratingsystem.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'rrs',
+        'NAME': 'rrs2',
         'USER': 'root',
         'PASSWORD': 'vdsforeverr',
         'ROOT_PASSWORD': 'vdsforeverr',
