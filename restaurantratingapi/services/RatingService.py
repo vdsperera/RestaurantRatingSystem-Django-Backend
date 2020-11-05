@@ -280,7 +280,8 @@ class RatingService:
             AVG(dish_rating) as avg_dish,
             AVG(price_rating) as avg_price,
             AVG(service_rating) as avg_service,
-            (AVG(dish_rating)+AVG(price_rating)+AVG(service_rating))/3 as avg_total
+            (AVG(dish_rating)+AVG(price_rating)+AVG(service_rating))/3 as avg_total,
+            COUNT(restaurant_id) as count
             FROM rating
             GROUP BY restaurant_id
             """)        
@@ -290,11 +291,10 @@ class RatingService:
             # print(item)
             # print(1)
             added_rating_model = {
-                # "restaurant_id": item.res,
+                "restaurant_id": item.restaurant_id,
                 # "restaurant_id_dish": item.resd,
-                "restaurant name": "Test",
-                "total_no_of_ratings": "Test",
-                "dish_id": None,
+                # "restaurant name": "Test",
+                "total_no_of_ratings": item.count,
                 "overall_rating": item.avg_total,
                 "dish_rating": item.avg_price,
                 "price_rating": item.avg_price,
@@ -327,49 +327,118 @@ class RatingService:
     # this also gives for the restaurant
     # def get rating list_for_the_restaurant()
     def get_ratings_for_restaurant(self, rest_id):
-        added_ratings = AddedRating.objects.raw('SELECT added_rating.rating_id, dish_rating, price_rating, service_rating FROM added_rating INNER JOIN rating ON added_rating.rating_id=rating.rating_id WHERE restaurant_id=%s', [rest_id]);
-        added_dish_ratings = AddedDishRating.objects.raw('SELECT added_dish_rating.rating_id, dish_rating, price_rating, service_rating FROM added_dish_rating INNER JOIN rating ON added_dish_rating.rating_id=rating.rating_id WHERE restaurant_id=%s', [rest_id]);
+        # added_ratings = AddedRating.objects.raw("""
+        #     SELECT added_rating.rating_id, dish_rating, price_rating,
+        #     service_rating FROM added_rating
+        #     INNER JOIN rating
+        #     ON added_rating.rating_id=rating.rating_id
+        #     WHERE restaurant_id=%s""",
+        #     [rest_id])
+
+        # added_dish_ratings = AddedDishRating.objects.raw("""
+        #     SELECT added_dish_rating.rating_id, dish_rating,
+        #     price_rating, service_rating
+        #     FROM added_dish_rating
+        #     INNER JOIN rating
+        #     ON added_dish_rating.rating_id=rating.rating_id
+        #     WHERE restaurant_id=%s""",
+        #     [rest_id])
         # print(added_dish_ratings)
-        print(added_ratings)
-        dish_rating = 0
-        price_rating = 0
-        service_rating = 0
-        total_no_of_ratings = 0;
+
+
+        # print(added_ratings)
+        # dish_rating = 0
+        # price_rating = 0
+        # service_rating = 0
+        # total_no_of_ratings = 0
+        # overall_rating = 0
+        # for rating in added_ratings:
+        #     total_no_of_ratings = total_no_of_ratings+1
+        #     dish_rating = dish_rating + rating.dish_rating
+        #     price_rating = price_rating + rating.price_rating
+        #     service_rating = service_rating + rating.service_rating
+
+        # for rating in added_dish_ratings:
+        #     total_no_of_ratings = total_no_of_ratings+1
+        #     dish_rating = dish_rating + rating.dish_rating
+        #     price_rating = price_rating + rating.price_rating
+        #     service_rating = service_rating + rating.service_rating
+
+        # if(total_no_of_ratings!=0):
+        #     dish_rating = dish_rating/total_no_of_ratings
+        #     price_rating = price_rating/total_no_of_ratings
+        #     service_rating = service_rating/total_no_of_ratings
+        #     overall_rating = (dish_rating+price_rating+service_rating)/3
+
+        ratings = Rating.objects.raw("""
+            SELECT rating.rating_id, restaurant_id, dish_id, dish_rating,
+            price_rating, service_rating, verified,
+            added_dish_rating.user_id as dish_user_id,
+            added_rating.user_id as restaurant_user_id
+            FROM rating
+            LEFT JOIN added_dish_rating
+            ON added_dish_rating.rating_id=rating.rating_id
+            LEFT JOIN added_rating
+            ON added_rating.rating_id = rating.rating_id 
+            WHERE restaurant_id=%s""",
+            [rest_id])
+
+        list = []
+
+        total_dish_rating = 0
+        total_price_rating = 0
+        total_service_rating = 0
+        total_no_of_ratings = 0
         overall_rating = 0
-        for rating in added_ratings:
-            total_no_of_ratings = total_no_of_ratings+1
-            dish_rating = dish_rating + rating.dish_rating
-            price_rating = price_rating + rating.price_rating
-            service_rating = service_rating + rating.service_rating
+        # for rating in added_ratings:
+        #     total_no_of_ratings = total_no_of_ratings+1
+        #     dish_rating = dish_rating + rating.dish_rating
+        #     price_rating = price_rating + rating.price_rating
+        #     service_rating = service_rating + rating.service_rating
 
-        for rating in added_dish_ratings:
-            total_no_of_ratings = total_no_of_ratings+1
-            dish_rating = dish_rating + rating.dish_rating
-            price_rating = price_rating + rating.price_rating
-            service_rating = service_rating + rating.service_rating
+        for item in ratings:
+            # print(item)
+            # print(1)
+            total_no_of_ratings = total_no_of_ratings + 1
+            total_dish_rating = total_dish_rating + item.dish_rating
+            total_price_rating = total_price_rating + item.price_rating
+            total_service_rating = total_service_rating + item.service_rating
 
-        if(total_no_of_ratings!=0):
-            dish_rating = dish_rating/total_no_of_ratings
-            price_rating = price_rating/total_no_of_ratings
-            service_rating = service_rating/total_no_of_ratings
-            overall_rating = (dish_rating+price_rating+service_rating)/3
+            rating_model = {
+                "rating_id": item.rating_id,
+                "dish_id": item.dish_id,
+                "overall_rating": (item.dish_rating + item.price_rating + item.service_rating)/3,
+                "dish_rating": item.dish_rating,
+                "price_rating": item.price_rating,
+                "service_rating": item.service_rating,
+                "added_by": item.restaurant_user_id if item.restaurant_user_id != None else item.dish_user_id,
+                "verified": item.verified
+            }
+            list.append(rating_model)
 
-        resp={
+        avg_dish_rating = total_dish_rating/total_no_of_ratings
+        avg_price_rating = total_price_rating/total_no_of_ratings
+        avg_service_rating = total_service_rating/total_no_of_ratings
+        overall_rating = (avg_dish_rating + avg_price_rating + avg_service_rating)/3
+
+        resp = {
             "success": True,
             "code": 200,
             "message": "success GetRating",
             "data": {
                 "restaurant_id": rest_id,
                 "total_no_of_ratings": total_no_of_ratings,
-                "dish_rating": dish_rating,
-                "price_rating": price_rating,
-                "service_rating": service_rating,
-                "overall_rating": overall_rating
+                "overall_rating": overall_rating,
+                "dish_rating": avg_dish_rating,
+                "price_rating": avg_price_rating,
+                "service_rating": avg_service_rating,
+                "ratings": list
             }
         }
 
-        return resp;
-        pass
+        return resp
+
+
 
     # GET api/ratings/dishes/list?dishid=2
     # this gets list of dish ratings for all restaurants for a specific dish and group them by restid
