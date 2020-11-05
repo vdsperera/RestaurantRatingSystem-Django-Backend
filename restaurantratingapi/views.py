@@ -83,7 +83,7 @@ class RatingViewSet(viewsets.ViewSet):
     def verify(self, request, rating_id=None):
         return Response('verify rating')
 
-    # GET /ratings/list - get ratings list for all restaurants(group by rest)(with average ratings) 
+    # GET /ratings/list - get ratings details list for all restaurants(group by rest)(with average ratings) 
     # GET /ratings/list?restid=[restaurant_id] - get ratings list for the restaurant
     def list(self, request, pk=None):
         # return Response('list')
@@ -91,7 +91,8 @@ class RatingViewSet(viewsets.ViewSet):
         myDict = dict(self.request.query_params)
         # print(myDict=={})
         if 'restid' in myDict:
-            return Response('get ratings list for the restaurant')
+            qry = rs.get_ratings_for_restaurant(myDict['restid'][0])
+            # return Response('get ratings list for the restaurant')
 
         if 'dishid' in myDict:
             return Response('list for dishid')
