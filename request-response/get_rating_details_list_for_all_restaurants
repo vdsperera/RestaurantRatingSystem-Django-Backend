@@ -1,0 +1,46 @@
+request
+
+/ratings/list
+
+
+response
+
+{
+    "success": true,
+    "code": 200,
+    "message": "success AddRating",
+    "data": {
+        "ratings": [
+            {
+            "restaurant_id": 23,
+            "restaurant name": "Unifo",
+            "total_no_of_ratings": 30,
+            "overall_rating": 4,
+            "dish_rating": 3,
+            "price_rating": 4,
+            "service_rating": 4
+            },
+            {
+            "restaurant_id": 24,
+            "restaurant name": "Red D",
+            "total_no_of_ratings": 50,
+            "overall_rating": 4,
+            "dish_rating": 4,
+            "price_rating": 5,
+            "service_rating": 5
+            },  
+            {
+            "restaurant_id": 23,
+            "restaurant name": "Red D",
+            "total_no_of_ratings": 50,
+            "overall_rating": 4,
+            "dish_rating": 4,
+            "price_rating": 5,
+            "service_rating": 5
+            }       
+
+        ]
+
+        }
+    }
+}

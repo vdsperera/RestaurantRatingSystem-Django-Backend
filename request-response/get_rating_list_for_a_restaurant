@@ -1,0 +1,69 @@
+get ratings list for a restaurant
+
+
+request
+
+/ratings/list
+
+
+response
+
+{
+    "success": true,
+    "code": 200,
+    "message": "success GetRatingListForTheRestaurant",
+    "data": {
+        "restaurant_id": 23,
+        "restaurant name": "Unifo",
+        "total_no_of_ratings": 30,
+        "overall_rating": 4,
+        "dish_rating": 3,
+        "price_rating": 4,
+        "service_rating": 4,
+        "ratings": [
+            {
+            "rating_id": 2,
+            "dish_id": null,
+            "overall_rating": 4,
+            "dish_rating": 3,
+            "price_rating": 4,
+            "service_rating": 4,
+            "added_by": 1,
+            "verified": True            
+            },
+            {
+            "rating_id": 3,
+            "dish_id": null,
+            "overall_rating": 4,
+            "dish_rating": 4,
+            "price_rating": 4,
+            "service_rating": 4,
+            "added_by": 1,
+            "verified": True
+            },  
+            {
+            "rating_id": 4,
+            "dish_id": 2,
+            "overall_rating": 4,
+            "dish_rating": 5,
+            "price_rating": 3,
+            "service_rating": 4,
+            "added_by": 3,
+            "verified": True 
+            },
+            {
+            "rating_id": 5,
+            "dish_id": 3,
+            "overall_rating": 4,
+            "dish_rating": 3,
+            "price_rating": 3,
+            "service_rating": 5,
+            "added_by": 2,
+            "verified": False   
+            }     
+
+        ]
+
+        }
+    }
+}
