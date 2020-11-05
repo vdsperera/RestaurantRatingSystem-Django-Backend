@@ -108,13 +108,16 @@ class RatingViewSet(viewsets.ViewSet):
     # GET /ratings/dishes/list?restid=[rest_id] - get dish rating list for a restaurant
     def dish_list(self, request, pk=None):
         myDict = dict(self.request.query_params)
+        rs = RatingService()
         # print(myDict=={})
         if 'dishid' in myDict:
-            return Response('get dish ratings  list for all restaurants for specific dish')
+            qry = rs.get_dish_rating_list_for_all_restaurant_for_the_dish(myDict['dishid'][0])
+            # return Response('get dish ratings  list for all restaurants for specific dish')
 
         if 'restid' in myDict:
             return Response('get dish rating list for a restaurant')
 
+        return Response(qry)
         return Response('dish list')
 
 
