@@ -23,7 +23,7 @@ urlpatterns = [
     # POST /ratings/verify/[rating_id]
     path('ratings/verify/<int:rating_id>/', views.RatingViewSet.as_view({'post':'verify'}), name='RatingView'),
 
-    # GET /ratings/list - get ratings list for all restaurants(group by rest)(with average ratings) 
+    # GET /ratings/list - get ratings details list for all restaurants(group by rest)(with average ratings) 
     # GET /ratings/list?restid=[restaurant_id] - get ratings list for the restaurant
     path('ratings/list', views.RatingViewSet.as_view({'get':'list'}), name='RatingView'),
 
