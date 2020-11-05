@@ -1,0 +1,48 @@
+get dish ratings list for all restaurants for a specific dish
+
+
+request
+
+/ratings/dishes/list?dishid=[dishid]
+
+
+response
+
+{
+    "success": true,
+    "code": 200,
+    "message": "success GetRatingDishListForAllRestaurant",
+    "data": {
+        "dish_id": 2,
+        "dish_name": "dish_name"
+        "ratings": [
+            {
+            "restaurant_id": 23,
+            "no_of_ratings": 20,
+            "overall_rating": 4,
+            "overall_dish_rating": 3,
+            "overall_price_rating": 4,
+            "overall_service_rating": 4         
+            },
+            {
+            "restaurant_id": 22,
+            "no_of_ratings": 25,
+            "overall_rating": 3,
+            "overall_dish_rating": 3,
+            "overall_price_rating": 3,
+            "overall_service_rating": 3  
+            },  
+            {
+            "restaurant_id": 24,
+            "no_of_ratings": 10,
+            "overall_rating": 5,
+            "overall_dish_rating": 5,
+            "overall_price_rating": 5,
+            "overall_service_rating": 5  
+            } 
+
+        ]
+
+        }
+    }
+}
