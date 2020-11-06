@@ -550,7 +550,48 @@ class RatingService:
     # GET api/ratings/dishes?restid=22
     # this gives list of dish ratings for the restaurant and group them by dish id
     # this also gives average ratings
-    def get_dish_rating_list_for_the_restaurant(self, data):
+    def get_dish_rating_list_for_the_restaurant(self, rest_id):
+
+        added_dish_ratings = Rating.objects.raw("""
+            SELECT rating.rating_id, rating.restaurant_id, dish_id, dish_rating
+            price_rating, service_rating,
+            AVG(dish_rating) as avg_dish_rating,
+            AVG(price_rating) as avg_price_rating,
+            AVG(service_rating) as avg_service_rating,
+            (AVG(dish_rating) + AVG(price_rating) + AVG(service_rating))/3 as avg_overall_rating,
+            COUNT(rating.rating_id) as count
+            FROM rating
+            INNER JOIN added_dish_rating
+            ON rating.rating_id = added_dish_rating.rating_id
+            WHERE restaurant_id = %s
+            GROUP BY dish_id
+            """, [rest_id])
+
+        list = []
+
+        for item in added_dish_ratings:
+            dish_rating = {
+                "dish_id": item.dish_id,
+                # "dish_name": "dish_name",
+                "no_of_ratings": item.count,
+                "overall_rating": item.avg_dish_rating,
+                "overall_dish_rating": item.avg_price_rating,
+                "overall_price_rating": item.avg_service_rating,
+                "overall_service_rating": item.avg_overall_rating
+            }
+            list.append(dish_rating)
+
+        resp = {
+            "success": True,
+            "code": 200,
+            "message": "success GetDishRatingListForTheRestaurant",
+            "data": {
+                "restaurant_id": rest_id,
+                "dish_ratings": list
+            }
+        }
+        return resp
+        return 'get dish rating list for a restaurant'
         pass
 
 
