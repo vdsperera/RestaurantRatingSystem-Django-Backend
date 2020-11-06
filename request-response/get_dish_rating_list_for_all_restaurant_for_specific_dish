@@ -11,7 +11,7 @@ response
 {
     "success": true,
     "code": 200,
-    "message": "success GetRatingDishListForAllRestaurant",
+    "message": "success GetDishRatingListForAllRestaurants",
     "data": {
         "dish_id": 2,
         "dish_name": "dish_name"
