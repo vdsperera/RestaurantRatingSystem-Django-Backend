@@ -28,8 +28,8 @@ class RestaurantViewSet(viewsets.ViewSet):
     # authentication_classes = (BasicAuthentication,)
     # permission_classes = (IsAuthenticated,)
     
-    queryset = Restaurant.objects.all().order_by('restaurant_id')
-    serializer_class = RestaurantSerializer
+    # queryset = Restaurant.objects.all().order_by('restaurant_id')
+    # serializer_class = RestaurantSerializer
     def create(self, request):
         data = request.data['data']['mdata']
         # print(data)
@@ -48,11 +48,15 @@ class RestaurantViewSet(viewsets.ViewSet):
         return Response(qry)
 
     def list(self, request):
-        queryset = Restaurant.objects.all()
+        # queryset = Restaurant.objects.all()
         #logger.info("ccccccvvvvvvv")
+        # serializer = RestaurantSerializer(queryset, many=True, context={'request':request})
+        # return Response(serializer.data)
+        # return Response('get restaurant list')
+        rs = RestaurantService()
+        qry = rs.get_restaurant_list(request)
+        return Response(qry)
         
-        serializer = RestaurantSerializer(queryset, many=True, context={'request':request})
-        return Response(serializer.data)
 
     def retrieve(self, request, rest_id=None):
         rs = RestaurantService()
@@ -69,7 +73,7 @@ class RestaurantViewSet(viewsets.ViewSet):
 
 class RatingViewSet(viewsets.ViewSet):
 
-    serializer_class = RestaurantSerializer
+    # serializer_class = RestaurantSerializer
 
     # POST /ratings
     def create(self, request):
