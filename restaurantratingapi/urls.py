@@ -5,7 +5,7 @@ from . import views
 
 router = routers.DefaultRouter()
 router.register(r'roles', views.UserRoleViewSet)
-router.register(r'restaurants', views.RestaurantViewSet, basename='RestaurantView')
+# router.register(r'restaurants', views.RestaurantViewSet, basename='RestaurantView')
 # router.register(r'ratings', views.RatingViewSet, basename='RatingView')
 
 # Wire up our API using automatic URL routing.
@@ -13,7 +13,12 @@ router.register(r'restaurants', views.RestaurantViewSet, basename='RestaurantVie
 urlpatterns = [
     path('', include(router.urls)),
     # Restaurants
+
+    # GET /restaurants/[restaurant_id]
     path('restaurants/<int:rest_id>/', views.RestaurantViewSet.as_view({'get':'retrieve'}), name='RestaurantView'),
+
+    # GET /restaurants/list
+    path('restaurants/list', views.RestaurantViewSet.as_view({'get':'list'}), name='RestaurantView'),
 
     # Ratings
 
