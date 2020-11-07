@@ -390,11 +390,34 @@ class RatingService:
         total_service_rating = 0
         total_no_of_ratings = 0
         overall_rating = 0
+
+
+        avg_dish_rating = 0
+        avg_price_rating = 0
+        avg_service_rating = 0
+        overall_rating = 0
         # for rating in added_ratings:
         #     total_no_of_ratings = total_no_of_ratings+1
         #     dish_rating = dish_rating + rating.dish_rating
         #     price_rating = price_rating + rating.price_rating
         #     service_rating = service_rating + rating.service_rating
+        if not ratings:
+            resp = {
+                "success": True,
+                "code": 200,
+                "message": "success GetRating",
+                "data": {
+                    "restaurant_id": rest_id,
+                    "total_no_of_ratings": total_no_of_ratings,
+                    "overall_rating": overall_rating,
+                    "dish_rating": avg_dish_rating,
+                    "price_rating": avg_price_rating,
+                    "service_rating": avg_service_rating,
+                    "ratings": list
+                }
+            }
+            return resp
+
 
         for item in ratings:
             # print(item)
