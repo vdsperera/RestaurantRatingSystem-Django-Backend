@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.contrib.gis.geos import Point
+# from django.contrib.gis.geos import Point
 from django.core.validators import RegexValidator
 from phonenumber_field.modelfields import PhoneNumberField
 
