@@ -236,7 +236,7 @@ class RestaurantService:
 
         # rating_svc = RatingService
         # rating_resp = rating_svc.get_ratings_for_restaurant(self, data)
-
+        list.sort(key = lambda x: x['overall_rating'], reverse=True)
         resp = {
             "success": True,
             "code": 200,
