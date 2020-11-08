@@ -213,7 +213,7 @@ class RestaurantService:
         for rest in restaurant_list:
             rating_svc = RatingService
             rating_resp = rating_svc.get_ratings_for_restaurant(self, rest.restaurant_id)
-            print(rest.restaurant_id)
+
             restaurant_model = {
                 "restaurant_id": rest.restaurant_id,
                 "restaurant_name": rest.name,

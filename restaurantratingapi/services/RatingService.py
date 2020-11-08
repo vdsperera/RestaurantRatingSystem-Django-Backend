@@ -522,7 +522,6 @@ class RatingService:
             }
         }
 
-        print(list)
         return list
 
         return 'get ratings list for all restaurants(group by rest)(with average ratings)'
