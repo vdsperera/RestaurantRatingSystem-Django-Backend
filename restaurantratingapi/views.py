@@ -48,12 +48,20 @@ class RestaurantViewSet(viewsets.ViewSet):
         return Response(qry)
 
     def list(self, request):
+        myDict = dict(self.request.query_params)
         # queryset = Restaurant.objects.all()
         #logger.info("ccccccvvvvvvv")
         # serializer = RestaurantSerializer(queryset, many=True, context={'request':request})
         # return Response(serializer.data)
         # return Response('get restaurant list')
         rs = RestaurantService()
+       
+        # not pre planned
+        if 'dishid' in myDict:
+            qry = rs.get_restaurant_list_for_dish(myDict['dishid'][0])
+            # return Response('restaurant list for a dish')
+        # 
+
         qry = rs.get_restaurant_list(request)
         return Response(qry)
         
