@@ -1,0 +1,760 @@
+{
+	"info": {
+		"_postman_id": "cedb7eea-1a59-4aa7-91ee-97d312462909",
+		"name": "RRS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Restaurants",
+			"item": [
+				{
+					"name": "register restaurant",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"data\":{\n  \"event\": \"500\",\n  \"action\": \"register\",\n  \"token\":\"opentoken\",\n  \"mdata\": {\n    \"user\": \"vidumini\",    \n  \t\"name\":\"test16\",\n    \"address\": \"Downhill, Rathgama\",\n    \"phone_number\": \"0770273653\",\n    \"longitude\": \"23.5444\",\n    \"latitude\": 77.5444,\n    \"role\": \"customer\"\n  }\n}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{rrs}}/restaurants/",
+							"host": [
+								"{{rrs}}"
+							],
+							"path": [
+								"restaurants",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "register restaurant_1",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\"data\":{\n  \"event\": \"500\",\n  \"action\": \"register\",\n  \"token\":\"opentoken\",\n  \"mdata\": {\n    \"user\": \"vidumini\",    \n  \t\"name\":\"Unifolanka\",\n    \"address\": \"20/10B Emie Road, Hikkaduwa\",\n    \"phone_number\": \"0710273653\",\n    \"longitude\": 123451.1232,\n    \"latitude\": 434543.5444,\n    \"owner\": null,\n    \"role\": \"owner\"\n  }\n}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{rrs}}restaurants/",
+									"host": [
+										"{{rrs}}restaurants"
+									],
+									"path": [
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 29 Jul 2020 04:50:51 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.7.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Cookie"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "372"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"code\": 200,\n    \"message\": \"success RegisterRestaurant\",\n    \"data\": {\n        \"restaurant_id\": 3,\n        \"restaurant_name\": \"Unifolanka\",\n        \"address\": \"20/10B Emie Road, Hikkaduwa\",\n        \"logitude\": 123451.1232,\n        \"latitude\": 434543.5444,\n        \"phone_number\": \"0710273653\",\n        \"added_by\": 1,\n        \"owner\": \"rest.claimed_by.id\",\n        \"code\": \"oJ05BICJmbnxWMP5wK23\",\n        \"claimed_status\": 0,\n        \"created_on\": \"2020-07-27T03:54:51.914921Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "get restaurant list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{rrs}}/restaurants/list",
+							"host": [
+								"{{rrs}}"
+							],
+							"path": [
+								"restaurants",
+								"list"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "get restaurant list",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{rrs}}/restaurants/list",
+									"host": [
+										"{{rrs}}"
+									],
+									"path": [
+										"restaurants",
+										"list"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 07 Nov 2020 10:46:06 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.7.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Cookie, Origin"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "9471"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"code\": 200,\n    \"message\": \"success GetRestaurantList\",\n    \"data\": {\n        \"restaurant_list\": [\n            {\n                \"restaurant_id\": 1,\n                \"restaurant_name\": \"Unifolanka\",\n                \"address\": \"Hikkaduwa\",\n                \"logitude\": 123451.1232,\n                \"latitude\": 434543.5444,\n                \"phone_number\": \"0710273653\",\n                \"added_by\": 1,\n                \"claimed_by\": null,\n                \"code\": \"8Qb49dLiDgp8O8ju6lsN\",\n                \"claimed_status\": \"Unclaimed\",\n                \"created_on\": \"2020-07-30T02:42:17.431580Z\",\n                \"total_no_of_ratings\": 0,\n                \"dish_rating\": 0,\n                \"price_rating\": 0,\n                \"service_rating\": 0,\n                \"overall_rating\": 0\n            },\n            {\n                \"restaurant_id\": 2,\n                \"restaurant_name\": \"Ted Red\",\n                \"address\": \"Ambalangoda\",\n                \"logitude\": 434543.5444,\n                \"latitude\": 434543.5444,\n                \"phone_number\": \"0710273653\",\n                \"added_by\": 1,\n                \"claimed_by\": null,\n                \"code\": \"tTGCacqjgLuEEvuWssuu\",\n                \"claimed_status\": \"Unclaimed\",\n                \"created_on\": \"2020-08-01T02:33:38.225415Z\",\n                \"total_no_of_ratings\": 0,\n                \"dish_rating\": 0,\n                \"price_rating\": 0,\n                \"service_rating\": 0,\n                \"overall_rating\": 0\n            },\n            {\n                \"restaurant_id\": 3,\n                \"restaurant_name\": \"Peblo\",\n                \"address\": \"Ahangama\",\n                \"logitude\": 53.5444,\n                \"latitude\": 37.5444,\n                \"phone_number\": \"0770273653\",\n                \"added_by\": 1,\n                \"claimed_by\": null,\n                \"code\": \"6iaKkJwaIX2j6elnlrAd\",\n                \"claimed_status\": \"Unclaimed\",\n                \"created_on\": \"2020-08-10T14:32:21.658392Z\",\n                \"total_no_of_ratings\": 0,\n                \"dish_rating\": 0,\n                \"price_rating\": 0,\n                \"service_rating\": 0,\n                \"overall_rating\": 0\n            },\n            {\n                \"restaurant_id\": 4,\n                \"restaurant_name\": \"Happy H\",\n                \"address\": \"Galle\",\n                \"logitude\": 33.5444,\n                \"latitude\": 37.5444,\n                \"phone_number\": \"0770273653\",\n                \"added_by\": 1,\n                \"claimed_by\": null,\n                \"code\": \"No8oviPG6KjEwWOHvbAJ\",\n                \"claimed_status\": \"Unclaimed\",\n                \"created_on\": \"2020-08-10T14:35:01.323349Z\",\n                \"total_no_of_ratings\": 0,\n                \"dish_rating\": 0,\n                \"price_rating\": 0,\n                \"service_rating\": 0,\n                \"overall_rating\": 0\n            },\n            {\n                \"restaurant_id\": 5,\n                \"restaurant_name\": \"Sithru\",\n                \"address\": \"Koggala\",\n                \"logitude\": 33.5444,\n                \"latitude\": 37.5444,\n                \"phone_number\": \"0770273653\",\n                \"added_by\": 1,\n                \"claimed_by\": null,\n                \"code\": \"CtQGezbVk7Z8IUkX66qY\",\n                \"claimed_status\": \"Unclaimed\",\n                \"created_on\": \"2020-08-10T14:35:39.393765Z\",\n                \"total_no_of_ratings\": 0,\n                \"dish_rating\": 0,\n                \"price_rating\": 0,\n                \"service_rating\": 0,\n                \"overall_rating\": 0\n            },\n            {\n                \"restaurant_id\": 6,\n                \"restaurant_name\": \"Lenny Bros\",\n                \"address\": \"Rathgama\",\n                \"logitude\": 23.5444,\n                \"latitude\": 77.5444,\n                \"phone_number\": \"0770273653\",\n                \"added_by\": 1,\n                \"claimed_by\": null,\n                \"code\": \"7wDCf0rRrQnwmIcOEQNn\",\n                \"claimed_status\": \"Unclaimed\",\n                \"created_on\": \"2020-08-10T14:36:57.467450Z\",\n                \"total_no_of_ratings\": 0,\n                \"dish_rating\": 0,\n                \"price_rating\": 0,\n                \"service_rating\": 0,\n                \"overall_rating\": 0\n            },\n            {\n                \"restaurant_id\": 7,\n                \"restaurant_name\": \"Raveena\",\n                \"address\": \"Unawatuna\",\n                \"logitude\": 23.5444,\n                \"latitude\": 77.5444,\n                \"phone_number\": \"0770273653\",\n                \"added_by\": 1,\n                \"claimed_by\": null,\n                \"code\": \"PBkfoIQxU2FSt2RG2s8l\",\n                \"claimed_status\": \"Unclaimed\",\n                \"created_on\": \"2020-08-19T13:53:42.998373Z\",\n                \"total_no_of_ratings\": 0,\n                \"dish_rating\": 0,\n                \"price_rating\": 0,\n                \"service_rating\": 0,\n                \"overall_rating\": 0\n            },\n            {\n                \"restaurant_id\": 8,\n                \"restaurant_name\": \"Test100\",\n                \"address\": \"baddegama\",\n                \"logitude\": 23.5444,\n                \"latitude\": 77.5444,\n                \"phone_number\": \"+94718812099\",\n                \"added_by\": 1,\n                \"claimed_by\": null,\n                \"code\": \"ONEG5eNLwOL9aiP8TveT\",\n                \"claimed_status\": \"Unclaimed\",\n                \"created_on\": \"2020-10-07T07:55:33.967546Z\",\n                \"total_no_of_ratings\": 0,\n                \"dish_rating\": 0,\n                \"price_rating\": 0,\n                \"service_rating\": 0,\n                \"overall_rating\": 0\n            },\n            {\n                \"restaurant_id\": 9,\n                \"restaurant_name\": \"Test400\",\n                \"address\": \"Hikkaduva\",\n                \"logitude\": 23.5444,\n                \"latitude\": 77.5444,\n                \"phone_number\": \"+94718812086\",\n                \"added_by\": 1,\n                \"claimed_by\": null,\n                \"code\": \"oJM8J70ohCx2wA7iwb7z\",\n                \"claimed_status\": \"Unclaimed\",\n                \"created_on\": \"2020-10-10T18:27:54.920637Z\",\n                \"total_no_of_ratings\": 0,\n                \"dish_rating\": 0,\n                \"price_rating\": 0,\n                \"service_rating\": 0,\n                \"overall_rating\": 0\n            },\n            {\n                \"restaurant_id\": 10,\n                \"restaurant_name\": \"test1\",\n                \"address\": \"Downhill, Rathgama\",\n                \"logitude\": 23.5444,\n                \"latitude\": 77.5444,\n                \"phone_number\": \"0770273653\",\n                \"added_by\": 1,\n                \"claimed_by\": null,\n                \"code\": \"PE8FrTNTk9VfgPkASQoY\",\n                \"claimed_status\": \"Unclaimed\",\n                \"created_on\": \"2020-11-03T11:12:32.206410Z\",\n                \"total_no_of_ratings\": 0,\n                \"dish_rating\": 0,\n                \"price_rating\": 0,\n                \"service_rating\": 0,\n                \"overall_rating\": 0\n            },\n            {\n                \"restaurant_id\": 11,\n                \"restaurant_name\": \"test2\",\n                \"address\": \"Downhill, Rathgama\",\n                \"logitude\": 23.5444,\n                \"latitude\": 77.5444,\n                \"phone_number\": \"0770273653\",\n                \"added_by\": 1,\n                \"claimed_by\": null,\n                \"code\": \"uXRLjkI0qGwqsjqG6Yzj\",\n                \"claimed_status\": \"Unclaimed\",\n                \"created_on\": \"2020-11-03T11:12:38.269829Z\",\n                \"total_no_of_ratings\": 0,\n                \"dish_rating\": 0,\n                \"price_rating\": 0,\n                \"service_rating\": 0,\n                \"overall_rating\": 0\n            },\n            {\n                \"restaurant_id\": 12,\n                \"restaurant_name\": \"test3\",\n                \"address\": \"Downhill, Rathgama\",\n                \"logitude\": 23.5444,\n                \"latitude\": 77.5444,\n                \"phone_number\": \"0770273653\",\n                \"added_by\": 1,\n                \"claimed_by\": null,\n                \"code\": \"VfPYyz3wyXbWwCMMqwE1\",\n                \"claimed_status\": \"Unclaimed\",\n                \"created_on\": \"2020-11-03T11:12:42.963279Z\",\n                \"total_no_of_ratings\": 0,\n                \"dish_rating\": 0,\n                \"price_rating\": 0,\n                \"service_rating\": 0,\n                \"overall_rating\": 0\n            },\n            {\n                \"restaurant_id\": 13,\n                \"restaurant_name\": \"test4\",\n                \"address\": \"Downhill, Rathgama\",\n                \"logitude\": 23.5444,\n                \"latitude\": 77.5444,\n                \"phone_number\": \"0770273653\",\n                \"added_by\": 1,\n                \"claimed_by\": null,\n                \"code\": \"SIOj4pGiqlqMmZthh64R\",\n                \"claimed_status\": \"Unclaimed\",\n                \"created_on\": \"2020-11-03T11:12:48.861539Z\",\n                \"total_no_of_ratings\": 0,\n                \"dish_rating\": 0,\n                \"price_rating\": 0,\n                \"service_rating\": 0,\n                \"overall_rating\": 0\n            },\n            {\n                \"restaurant_id\": 14,\n                \"restaurant_name\": \"test5\",\n                \"address\": \"Downhill, Rathgama\",\n                \"logitude\": 23.5444,\n                \"latitude\": 77.5444,\n                \"phone_number\": \"0770273653\",\n                \"added_by\": 1,\n                \"claimed_by\": null,\n                \"code\": \"nXhJKMXMLOXJG9zSHTtG\",\n                \"claimed_status\": \"Unclaimed\",\n                \"created_on\": \"2020-11-03T11:12:53.679697Z\",\n                \"total_no_of_ratings\": 0,\n                \"dish_rating\": 0,\n                \"price_rating\": 0,\n                \"service_rating\": 0,\n                \"overall_rating\": 0\n            },\n            {\n                \"restaurant_id\": 15,\n                \"restaurant_name\": \"test6\",\n                \"address\": \"Downhill, Rathgama\",\n                \"logitude\": 23.5444,\n                \"latitude\": 77.5444,\n                \"phone_number\": \"0770273653\",\n                \"added_by\": 1,\n                \"claimed_by\": null,\n                \"code\": \"FxAnYhANX53BFJymc5S0\",\n                \"claimed_status\": \"Unclaimed\",\n                \"created_on\": \"2020-11-03T11:12:58.172097Z\",\n                \"total_no_of_ratings\": 0,\n                \"dish_rating\": 0,\n                \"price_rating\": 0,\n                \"service_rating\": 0,\n                \"overall_rating\": 0\n            },\n            {\n                \"restaurant_id\": 16,\n                \"restaurant_name\": \"test7\",\n                \"address\": \"Downhill, Rathgama\",\n                \"logitude\": 23.5444,\n                \"latitude\": 77.5444,\n                \"phone_number\": \"0770273653\",\n                \"added_by\": 1,\n                \"claimed_by\": null,\n                \"code\": \"7dkNMKsWFL8gj1R0R9Qy\",\n                \"claimed_status\": \"Unclaimed\",\n                \"created_on\": \"2020-11-03T11:13:02.874810Z\",\n                \"total_no_of_ratings\": 0,\n                \"dish_rating\": 0,\n                \"price_rating\": 0,\n                \"service_rating\": 0,\n                \"overall_rating\": 0\n            },\n            {\n                \"restaurant_id\": 17,\n                \"restaurant_name\": \"test8\",\n                \"address\": \"Downhill, Rathgama\",\n                \"logitude\": 23.5444,\n                \"latitude\": 77.5444,\n                \"phone_number\": \"0770273653\",\n                \"added_by\": 1,\n                \"claimed_by\": null,\n                \"code\": \"MTo6IyLBaHtp84HgwWJ2\",\n                \"claimed_status\": \"Unclaimed\",\n                \"created_on\": \"2020-11-03T11:13:07.462744Z\",\n                \"total_no_of_ratings\": 0,\n                \"dish_rating\": 0,\n                \"price_rating\": 0,\n                \"service_rating\": 0,\n                \"overall_rating\": 0\n            },\n            {\n                \"restaurant_id\": 18,\n                \"restaurant_name\": \"test9\",\n                \"address\": \"Downhill, Rathgama\",\n                \"logitude\": 23.5444,\n                \"latitude\": 77.5444,\n                \"phone_number\": \"0770273653\",\n                \"added_by\": 1,\n                \"claimed_by\": null,\n                \"code\": \"GSIrYnt65kyrPXRNWLVT\",\n                \"claimed_status\": \"Unclaimed\",\n                \"created_on\": \"2020-11-03T11:13:13.139884Z\",\n                \"total_no_of_ratings\": 0,\n                \"dish_rating\": 0,\n                \"price_rating\": 0,\n                \"service_rating\": 0,\n                \"overall_rating\": 0\n            },\n            {\n                \"restaurant_id\": 19,\n                \"restaurant_name\": \"test10\",\n                \"address\": \"Downhill, Rathgama\",\n                \"logitude\": 23.5444,\n                \"latitude\": 77.5444,\n                \"phone_number\": \"0770273653\",\n                \"added_by\": 1,\n                \"claimed_by\": null,\n                \"code\": \"4SI7sXkG5pGPZ597ZkZN\",\n                \"claimed_status\": \"Unclaimed\",\n                \"created_on\": \"2020-11-03T11:13:18.552140Z\",\n                \"total_no_of_ratings\": 0,\n                \"dish_rating\": 0,\n                \"price_rating\": 0,\n                \"service_rating\": 0,\n                \"overall_rating\": 0\n            },\n            {\n                \"restaurant_id\": 20,\n                \"restaurant_name\": \"test11\",\n                \"address\": \"Downhill, Rathgama\",\n                \"logitude\": 23.5444,\n                \"latitude\": 77.5444,\n                \"phone_number\": \"0770273653\",\n                \"added_by\": 1,\n                \"claimed_by\": null,\n                \"code\": \"BvJY02cpgzyDUHykcqdM\",\n                \"claimed_status\": \"Unclaimed\",\n                \"created_on\": \"2020-11-03T11:13:22.791468Z\",\n                \"total_no_of_ratings\": 0,\n                \"dish_rating\": 0,\n                \"price_rating\": 0,\n                \"service_rating\": 0,\n                \"overall_rating\": 0\n            },\n            {\n                \"restaurant_id\": 21,\n                \"restaurant_name\": \"test12\",\n                \"address\": \"Downhill, Rathgama\",\n                \"logitude\": 23.5444,\n                \"latitude\": 77.5444,\n                \"phone_number\": \"0770273653\",\n                \"added_by\": 1,\n                \"claimed_by\": null,\n                \"code\": \"FDHf7HuELA0x0HkOO9GL\",\n                \"claimed_status\": \"Unclaimed\",\n                \"created_on\": \"2020-11-03T11:13:27.298192Z\",\n                \"total_no_of_ratings\": 10,\n                \"dish_rating\": 3.3,\n                \"price_rating\": 3.9,\n                \"service_rating\": 4,\n                \"overall_rating\": 3.733333333333333\n            },\n            {\n                \"restaurant_id\": 22,\n                \"restaurant_name\": \"test13\",\n                \"address\": \"Downhill, Rathgama\",\n                \"logitude\": 23.5444,\n                \"latitude\": 77.5444,\n                \"phone_number\": \"0770273653\",\n                \"added_by\": 1,\n                \"claimed_by\": null,\n                \"code\": \"Sx3ehIZtTKPYrzTFKTMr\",\n                \"claimed_status\": \"Unclaimed\",\n                \"created_on\": \"2020-11-03T11:13:31.616922Z\",\n                \"total_no_of_ratings\": 14,\n                \"dish_rating\": 3.9285714285714284,\n                \"price_rating\": 4.142857142857143,\n                \"service_rating\": 4.214285714285714,\n                \"overall_rating\": 4.095238095238095\n            },\n            {\n                \"restaurant_id\": 23,\n                \"restaurant_name\": \"test14\",\n                \"address\": \"Downhill, Rathgama\",\n                \"logitude\": 23.5444,\n                \"latitude\": 77.5444,\n                \"phone_number\": \"0770273653\",\n                \"added_by\": 1,\n                \"claimed_by\": null,\n                \"code\": \"N4Ncmv0SdwtFoZIOQaYG\",\n                \"claimed_status\": \"Unclaimed\",\n                \"created_on\": \"2020-11-03T11:15:09.819584Z\",\n                \"total_no_of_ratings\": 7,\n                \"dish_rating\": 3.142857142857143,\n                \"price_rating\": 4,\n                \"service_rating\": 4,\n                \"overall_rating\": 3.714285714285714\n            },\n            {\n                \"restaurant_id\": 24,\n                \"restaurant_name\": \"test15\",\n                \"address\": \"Downhill, Rathgama\",\n                \"logitude\": 23.5444,\n                \"latitude\": 77.5444,\n                \"phone_number\": \"0770273653\",\n                \"added_by\": 1,\n                \"claimed_by\": null,\n                \"code\": \"NpH5us3RtlkAOQ48EbeL\",\n                \"claimed_status\": \"Unclaimed\",\n                \"created_on\": \"2020-11-03T11:15:13.979459Z\",\n                \"total_no_of_ratings\": 0,\n                \"dish_rating\": 0,\n                \"price_rating\": 0,\n                \"service_rating\": 0,\n                \"overall_rating\": 0\n            },\n            {\n                \"restaurant_id\": 25,\n                \"restaurant_name\": \"test16\",\n                \"address\": \"Downhill, Rathgama\",\n                \"logitude\": 23.5444,\n                \"latitude\": 77.5444,\n                \"phone_number\": \"0770273653\",\n                \"added_by\": 1,\n                \"claimed_by\": null,\n                \"code\": \"Hxvh0bcTXwY5BCNuQrAu\",\n                \"claimed_status\": \"Unclaimed\",\n                \"created_on\": \"2020-11-03T11:15:17.892139Z\",\n                \"total_no_of_ratings\": 0,\n                \"dish_rating\": 0,\n                \"price_rating\": 0,\n                \"service_rating\": 0,\n                \"overall_rating\": 0\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "(not pre planned)get restaurant list Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{rrs}}/restaurants/list?dishid=2",
+							"host": [
+								"{{rrs}}"
+							],
+							"path": [
+								"restaurants",
+								"list"
+							],
+							"query": [
+								{
+									"key": "dishid",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "get restaurant list",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{rrs}}/restaurants/list",
+									"host": [
+										"{{rrs}}"
+									],
+									"path": [
+										"restaurants",
+										"list"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 07 Nov 2020 10:46:06 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.7.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Cookie, Origin"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "9471"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"code\": 200,\n    \"message\": \"success GetRestaurantList\",\n    \"data\": {\n        \"restaurant_list\": [\n            {\n                \"restaurant_id\": 1,\n                \"restaurant_name\": \"Unifolanka\",\n                \"address\": \"Hikkaduwa\",\n                \"logitude\": 123451.1232,\n                \"latitude\": 434543.5444,\n                \"phone_number\": \"0710273653\",\n                \"added_by\": 1,\n                \"claimed_by\": null,\n                \"code\": \"8Qb49dLiDgp8O8ju6lsN\",\n                \"claimed_status\": \"Unclaimed\",\n                \"created_on\": \"2020-07-30T02:42:17.431580Z\",\n                \"total_no_of_ratings\": 0,\n                \"dish_rating\": 0,\n                \"price_rating\": 0,\n                \"service_rating\": 0,\n                \"overall_rating\": 0\n            },\n            {\n                \"restaurant_id\": 2,\n                \"restaurant_name\": \"Ted Red\",\n                \"address\": \"Ambalangoda\",\n                \"logitude\": 434543.5444,\n                \"latitude\": 434543.5444,\n                \"phone_number\": \"0710273653\",\n                \"added_by\": 1,\n                \"claimed_by\": null,\n                \"code\": \"tTGCacqjgLuEEvuWssuu\",\n                \"claimed_status\": \"Unclaimed\",\n                \"created_on\": \"2020-08-01T02:33:38.225415Z\",\n                \"total_no_of_ratings\": 0,\n                \"dish_rating\": 0,\n                \"price_rating\": 0,\n                \"service_rating\": 0,\n                \"overall_rating\": 0\n            },\n            {\n                \"restaurant_id\": 3,\n                \"restaurant_name\": \"Peblo\",\n                \"address\": \"Ahangama\",\n                \"logitude\": 53.5444,\n                \"latitude\": 37.5444,\n                \"phone_number\": \"0770273653\",\n                \"added_by\": 1,\n                \"claimed_by\": null,\n                \"code\": \"6iaKkJwaIX2j6elnlrAd\",\n                \"claimed_status\": \"Unclaimed\",\n                \"created_on\": \"2020-08-10T14:32:21.658392Z\",\n                \"total_no_of_ratings\": 0,\n                \"dish_rating\": 0,\n                \"price_rating\": 0,\n                \"service_rating\": 0,\n                \"overall_rating\": 0\n            },\n            {\n                \"restaurant_id\": 4,\n                \"restaurant_name\": \"Happy H\",\n                \"address\": \"Galle\",\n                \"logitude\": 33.5444,\n                \"latitude\": 37.5444,\n                \"phone_number\": \"0770273653\",\n                \"added_by\": 1,\n                \"claimed_by\": null,\n                \"code\": \"No8oviPG6KjEwWOHvbAJ\",\n                \"claimed_status\": \"Unclaimed\",\n                \"created_on\": \"2020-08-10T14:35:01.323349Z\",\n                \"total_no_of_ratings\": 0,\n                \"dish_rating\": 0,\n                \"price_rating\": 0,\n                \"service_rating\": 0,\n                \"overall_rating\": 0\n            },\n            {\n                \"restaurant_id\": 5,\n                \"restaurant_name\": \"Sithru\",\n                \"address\": \"Koggala\",\n                \"logitude\": 33.5444,\n                \"latitude\": 37.5444,\n                \"phone_number\": \"0770273653\",\n                \"added_by\": 1,\n                \"claimed_by\": null,\n                \"code\": \"CtQGezbVk7Z8IUkX66qY\",\n                \"claimed_status\": \"Unclaimed\",\n                \"created_on\": \"2020-08-10T14:35:39.393765Z\",\n                \"total_no_of_ratings\": 0,\n                \"dish_rating\": 0,\n                \"price_rating\": 0,\n                \"service_rating\": 0,\n                \"overall_rating\": 0\n            },\n            {\n                \"restaurant_id\": 6,\n                \"restaurant_name\": \"Lenny Bros\",\n                \"address\": \"Rathgama\",\n                \"logitude\": 23.5444,\n                \"latitude\": 77.5444,\n                \"phone_number\": \"0770273653\",\n                \"added_by\": 1,\n                \"claimed_by\": null,\n                \"code\": \"7wDCf0rRrQnwmIcOEQNn\",\n                \"claimed_status\": \"Unclaimed\",\n                \"created_on\": \"2020-08-10T14:36:57.467450Z\",\n                \"total_no_of_ratings\": 0,\n                \"dish_rating\": 0,\n                \"price_rating\": 0,\n                \"service_rating\": 0,\n                \"overall_rating\": 0\n            },\n            {\n                \"restaurant_id\": 7,\n                \"restaurant_name\": \"Raveena\",\n                \"address\": \"Unawatuna\",\n                \"logitude\": 23.5444,\n                \"latitude\": 77.5444,\n                \"phone_number\": \"0770273653\",\n                \"added_by\": 1,\n                \"claimed_by\": null,\n                \"code\": \"PBkfoIQxU2FSt2RG2s8l\",\n                \"claimed_status\": \"Unclaimed\",\n                \"created_on\": \"2020-08-19T13:53:42.998373Z\",\n                \"total_no_of_ratings\": 0,\n                \"dish_rating\": 0,\n                \"price_rating\": 0,\n                \"service_rating\": 0,\n                \"overall_rating\": 0\n            },\n            {\n                \"restaurant_id\": 8,\n                \"restaurant_name\": \"Test100\",\n                \"address\": \"baddegama\",\n                \"logitude\": 23.5444,\n                \"latitude\": 77.5444,\n                \"phone_number\": \"+94718812099\",\n                \"added_by\": 1,\n                \"claimed_by\": null,\n                \"code\": \"ONEG5eNLwOL9aiP8TveT\",\n                \"claimed_status\": \"Unclaimed\",\n                \"created_on\": \"2020-10-07T07:55:33.967546Z\",\n                \"total_no_of_ratings\": 0,\n                \"dish_rating\": 0,\n                \"price_rating\": 0,\n                \"service_rating\": 0,\n                \"overall_rating\": 0\n            },\n            {\n                \"restaurant_id\": 9,\n                \"restaurant_name\": \"Test400\",\n                \"address\": \"Hikkaduva\",\n                \"logitude\": 23.5444,\n                \"latitude\": 77.5444,\n                \"phone_number\": \"+94718812086\",\n                \"added_by\": 1,\n                \"claimed_by\": null,\n                \"code\": \"oJM8J70ohCx2wA7iwb7z\",\n                \"claimed_status\": \"Unclaimed\",\n                \"created_on\": \"2020-10-10T18:27:54.920637Z\",\n                \"total_no_of_ratings\": 0,\n                \"dish_rating\": 0,\n                \"price_rating\": 0,\n                \"service_rating\": 0,\n                \"overall_rating\": 0\n            },\n            {\n                \"restaurant_id\": 10,\n                \"restaurant_name\": \"test1\",\n                \"address\": \"Downhill, Rathgama\",\n                \"logitude\": 23.5444,\n                \"latitude\": 77.5444,\n                \"phone_number\": \"0770273653\",\n                \"added_by\": 1,\n                \"claimed_by\": null,\n                \"code\": \"PE8FrTNTk9VfgPkASQoY\",\n                \"claimed_status\": \"Unclaimed\",\n                \"created_on\": \"2020-11-03T11:12:32.206410Z\",\n                \"total_no_of_ratings\": 0,\n                \"dish_rating\": 0,\n                \"price_rating\": 0,\n                \"service_rating\": 0,\n                \"overall_rating\": 0\n            },\n            {\n                \"restaurant_id\": 11,\n                \"restaurant_name\": \"test2\",\n                \"address\": \"Downhill, Rathgama\",\n                \"logitude\": 23.5444,\n                \"latitude\": 77.5444,\n                \"phone_number\": \"0770273653\",\n                \"added_by\": 1,\n                \"claimed_by\": null,\n                \"code\": \"uXRLjkI0qGwqsjqG6Yzj\",\n                \"claimed_status\": \"Unclaimed\",\n                \"created_on\": \"2020-11-03T11:12:38.269829Z\",\n                \"total_no_of_ratings\": 0,\n                \"dish_rating\": 0,\n                \"price_rating\": 0,\n                \"service_rating\": 0,\n                \"overall_rating\": 0\n            },\n            {\n                \"restaurant_id\": 12,\n                \"restaurant_name\": \"test3\",\n                \"address\": \"Downhill, Rathgama\",\n                \"logitude\": 23.5444,\n                \"latitude\": 77.5444,\n                \"phone_number\": \"0770273653\",\n                \"added_by\": 1,\n                \"claimed_by\": null,\n                \"code\": \"VfPYyz3wyXbWwCMMqwE1\",\n                \"claimed_status\": \"Unclaimed\",\n                \"created_on\": \"2020-11-03T11:12:42.963279Z\",\n                \"total_no_of_ratings\": 0,\n                \"dish_rating\": 0,\n                \"price_rating\": 0,\n                \"service_rating\": 0,\n                \"overall_rating\": 0\n            },\n            {\n                \"restaurant_id\": 13,\n                \"restaurant_name\": \"test4\",\n                \"address\": \"Downhill, Rathgama\",\n                \"logitude\": 23.5444,\n                \"latitude\": 77.5444,\n                \"phone_number\": \"0770273653\",\n                \"added_by\": 1,\n                \"claimed_by\": null,\n                \"code\": \"SIOj4pGiqlqMmZthh64R\",\n                \"claimed_status\": \"Unclaimed\",\n                \"created_on\": \"2020-11-03T11:12:48.861539Z\",\n                \"total_no_of_ratings\": 0,\n                \"dish_rating\": 0,\n                \"price_rating\": 0,\n                \"service_rating\": 0,\n                \"overall_rating\": 0\n            },\n            {\n                \"restaurant_id\": 14,\n                \"restaurant_name\": \"test5\",\n                \"address\": \"Downhill, Rathgama\",\n                \"logitude\": 23.5444,\n                \"latitude\": 77.5444,\n                \"phone_number\": \"0770273653\",\n                \"added_by\": 1,\n                \"claimed_by\": null,\n                \"code\": \"nXhJKMXMLOXJG9zSHTtG\",\n                \"claimed_status\": \"Unclaimed\",\n                \"created_on\": \"2020-11-03T11:12:53.679697Z\",\n                \"total_no_of_ratings\": 0,\n                \"dish_rating\": 0,\n                \"price_rating\": 0,\n                \"service_rating\": 0,\n                \"overall_rating\": 0\n            },\n            {\n                \"restaurant_id\": 15,\n                \"restaurant_name\": \"test6\",\n                \"address\": \"Downhill, Rathgama\",\n                \"logitude\": 23.5444,\n                \"latitude\": 77.5444,\n                \"phone_number\": \"0770273653\",\n                \"added_by\": 1,\n                \"claimed_by\": null,\n                \"code\": \"FxAnYhANX53BFJymc5S0\",\n                \"claimed_status\": \"Unclaimed\",\n                \"created_on\": \"2020-11-03T11:12:58.172097Z\",\n                \"total_no_of_ratings\": 0,\n                \"dish_rating\": 0,\n                \"price_rating\": 0,\n                \"service_rating\": 0,\n                \"overall_rating\": 0\n            },\n            {\n                \"restaurant_id\": 16,\n                \"restaurant_name\": \"test7\",\n                \"address\": \"Downhill, Rathgama\",\n                \"logitude\": 23.5444,\n                \"latitude\": 77.5444,\n                \"phone_number\": \"0770273653\",\n                \"added_by\": 1,\n                \"claimed_by\": null,\n                \"code\": \"7dkNMKsWFL8gj1R0R9Qy\",\n                \"claimed_status\": \"Unclaimed\",\n                \"created_on\": \"2020-11-03T11:13:02.874810Z\",\n                \"total_no_of_ratings\": 0,\n                \"dish_rating\": 0,\n                \"price_rating\": 0,\n                \"service_rating\": 0,\n                \"overall_rating\": 0\n            },\n            {\n                \"restaurant_id\": 17,\n                \"restaurant_name\": \"test8\",\n                \"address\": \"Downhill, Rathgama\",\n                \"logitude\": 23.5444,\n                \"latitude\": 77.5444,\n                \"phone_number\": \"0770273653\",\n                \"added_by\": 1,\n                \"claimed_by\": null,\n                \"code\": \"MTo6IyLBaHtp84HgwWJ2\",\n                \"claimed_status\": \"Unclaimed\",\n                \"created_on\": \"2020-11-03T11:13:07.462744Z\",\n                \"total_no_of_ratings\": 0,\n                \"dish_rating\": 0,\n                \"price_rating\": 0,\n                \"service_rating\": 0,\n                \"overall_rating\": 0\n            },\n            {\n                \"restaurant_id\": 18,\n                \"restaurant_name\": \"test9\",\n                \"address\": \"Downhill, Rathgama\",\n                \"logitude\": 23.5444,\n                \"latitude\": 77.5444,\n                \"phone_number\": \"0770273653\",\n                \"added_by\": 1,\n                \"claimed_by\": null,\n                \"code\": \"GSIrYnt65kyrPXRNWLVT\",\n                \"claimed_status\": \"Unclaimed\",\n                \"created_on\": \"2020-11-03T11:13:13.139884Z\",\n                \"total_no_of_ratings\": 0,\n                \"dish_rating\": 0,\n                \"price_rating\": 0,\n                \"service_rating\": 0,\n                \"overall_rating\": 0\n            },\n            {\n                \"restaurant_id\": 19,\n                \"restaurant_name\": \"test10\",\n                \"address\": \"Downhill, Rathgama\",\n                \"logitude\": 23.5444,\n                \"latitude\": 77.5444,\n                \"phone_number\": \"0770273653\",\n                \"added_by\": 1,\n                \"claimed_by\": null,\n                \"code\": \"4SI7sXkG5pGPZ597ZkZN\",\n                \"claimed_status\": \"Unclaimed\",\n                \"created_on\": \"2020-11-03T11:13:18.552140Z\",\n                \"total_no_of_ratings\": 0,\n                \"dish_rating\": 0,\n                \"price_rating\": 0,\n                \"service_rating\": 0,\n                \"overall_rating\": 0\n            },\n            {\n                \"restaurant_id\": 20,\n                \"restaurant_name\": \"test11\",\n                \"address\": \"Downhill, Rathgama\",\n                \"logitude\": 23.5444,\n                \"latitude\": 77.5444,\n                \"phone_number\": \"0770273653\",\n                \"added_by\": 1,\n                \"claimed_by\": null,\n                \"code\": \"BvJY02cpgzyDUHykcqdM\",\n                \"claimed_status\": \"Unclaimed\",\n                \"created_on\": \"2020-11-03T11:13:22.791468Z\",\n                \"total_no_of_ratings\": 0,\n                \"dish_rating\": 0,\n                \"price_rating\": 0,\n                \"service_rating\": 0,\n                \"overall_rating\": 0\n            },\n            {\n                \"restaurant_id\": 21,\n                \"restaurant_name\": \"test12\",\n                \"address\": \"Downhill, Rathgama\",\n                \"logitude\": 23.5444,\n                \"latitude\": 77.5444,\n                \"phone_number\": \"0770273653\",\n                \"added_by\": 1,\n                \"claimed_by\": null,\n                \"code\": \"FDHf7HuELA0x0HkOO9GL\",\n                \"claimed_status\": \"Unclaimed\",\n                \"created_on\": \"2020-11-03T11:13:27.298192Z\",\n                \"total_no_of_ratings\": 10,\n                \"dish_rating\": 3.3,\n                \"price_rating\": 3.9,\n                \"service_rating\": 4,\n                \"overall_rating\": 3.733333333333333\n            },\n            {\n                \"restaurant_id\": 22,\n                \"restaurant_name\": \"test13\",\n                \"address\": \"Downhill, Rathgama\",\n                \"logitude\": 23.5444,\n                \"latitude\": 77.5444,\n                \"phone_number\": \"0770273653\",\n                \"added_by\": 1,\n                \"claimed_by\": null,\n                \"code\": \"Sx3ehIZtTKPYrzTFKTMr\",\n                \"claimed_status\": \"Unclaimed\",\n                \"created_on\": \"2020-11-03T11:13:31.616922Z\",\n                \"total_no_of_ratings\": 14,\n                \"dish_rating\": 3.9285714285714284,\n                \"price_rating\": 4.142857142857143,\n                \"service_rating\": 4.214285714285714,\n                \"overall_rating\": 4.095238095238095\n            },\n            {\n                \"restaurant_id\": 23,\n                \"restaurant_name\": \"test14\",\n                \"address\": \"Downhill, Rathgama\",\n                \"logitude\": 23.5444,\n                \"latitude\": 77.5444,\n                \"phone_number\": \"0770273653\",\n                \"added_by\": 1,\n                \"claimed_by\": null,\n                \"code\": \"N4Ncmv0SdwtFoZIOQaYG\",\n                \"claimed_status\": \"Unclaimed\",\n                \"created_on\": \"2020-11-03T11:15:09.819584Z\",\n                \"total_no_of_ratings\": 7,\n                \"dish_rating\": 3.142857142857143,\n                \"price_rating\": 4,\n                \"service_rating\": 4,\n                \"overall_rating\": 3.714285714285714\n            },\n            {\n                \"restaurant_id\": 24,\n                \"restaurant_name\": \"test15\",\n                \"address\": \"Downhill, Rathgama\",\n                \"logitude\": 23.5444,\n                \"latitude\": 77.5444,\n                \"phone_number\": \"0770273653\",\n                \"added_by\": 1,\n                \"claimed_by\": null,\n                \"code\": \"NpH5us3RtlkAOQ48EbeL\",\n                \"claimed_status\": \"Unclaimed\",\n                \"created_on\": \"2020-11-03T11:15:13.979459Z\",\n                \"total_no_of_ratings\": 0,\n                \"dish_rating\": 0,\n                \"price_rating\": 0,\n                \"service_rating\": 0,\n                \"overall_rating\": 0\n            },\n            {\n                \"restaurant_id\": 25,\n                \"restaurant_name\": \"test16\",\n                \"address\": \"Downhill, Rathgama\",\n                \"logitude\": 23.5444,\n                \"latitude\": 77.5444,\n                \"phone_number\": \"0770273653\",\n                \"added_by\": 1,\n                \"claimed_by\": null,\n                \"code\": \"Hxvh0bcTXwY5BCNuQrAu\",\n                \"claimed_status\": \"Unclaimed\",\n                \"created_on\": \"2020-11-03T11:15:17.892139Z\",\n                \"total_no_of_ratings\": 0,\n                \"dish_rating\": 0,\n                \"price_rating\": 0,\n                \"service_rating\": 0,\n                \"overall_rating\": 0\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "get restaurant",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{rrs}}/restaurants/22",
+							"host": [
+								"{{rrs}}"
+							],
+							"path": [
+								"restaurants",
+								"22"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get rating for a restaurant",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{rrs}}/restaurants/22/",
+							"host": [
+								"{{rrs}}"
+							],
+							"path": [
+								"restaurants",
+								"22",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Ratings",
+			"item": [
+				{
+					"name": "add ratings",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"data\":{\n  \"event\": \"500\",\n  \"action\": \"register\",\n  \"token\":\"opentoken\",\n  \"mdata\": {\n    \"user\": \"vidumini\",\n\t\"token_number\": \"#34A4344\",\n\t\"restaurant_id\": 22,\n \t\"dish_id\": 2,\n\t\"dish_rating\": 3,\n\t\"price_rating\": 3,\n\t\"service_rating\": 3, \n    \"review\": \"Good experience\"\n  }\n}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{rrs}}/ratings/",
+							"host": [
+								"{{rrs}}"
+							],
+							"path": [
+								"ratings",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "add ratings with dish",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\"data\":{\n  \"event\": \"500\",\n  \"action\": \"register\",\n  \"token\":\"opentoken\",\n  \"mdata\": {\n    \"user\": \"vidumini\",\n\t\"token_number\": \"#34A4344\",\n\t\"restaurant_id\": 22,\n \t\"dish_id\": 2,\n\t\"dish_rating\": 3,\n\t\"price_rating\": 3,\n\t\"service_rating\": 3, \n    \"review\": \"Good experience\"\n  }\n}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{rrs}}/ratings/",
+									"host": [
+										"{{rrs}}"
+									],
+									"path": [
+										"ratings",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 07 Nov 2020 05:19:43 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.7.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Cookie, Origin"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "193"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"code\": 200,\n    \"message\": \"success AddRating\",\n    \"data\": {\n        \"rated_by\": \"vidumini\",\n        \"verified\": \"Verified\",\n        \"restaurant_id\": 22,\n        \"dish_id\": 2,\n        \"dish_rating\": 3,\n        \"price_rating\": 3,\n        \"service_rating\": 3\n    }\n}"
+						},
+						{
+							"name": "add ratings without dish",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\"data\":{\n  \"event\": \"500\",\n  \"action\": \"register\",\n  \"token\":\"opentoken\",\n  \"mdata\": {\n    \"user\": \"vidumini\",\n\t\"token_number\": \"#34A4344\",\n\t\"restaurant_id\": 22,\n \t\"dish_id\": null,\n\t\"dish_rating\": 2,\n\t\"price_rating\": 3,\n\t\"service_rating\": 3, \n    \"review\": \"Good experience\"\n  }\n}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{rrs}}/ratings/",
+									"host": [
+										"{{rrs}}"
+									],
+									"path": [
+										"ratings",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 07 Nov 2020 05:21:25 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.7.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Cookie, Origin"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "196"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"code\": 200,\n    \"message\": \"success AddRating\",\n    \"data\": {\n        \"rated_by\": \"vidumini\",\n        \"verified\": \"Verified\",\n        \"restaurant_id\": 22,\n        \"dish_id\": null,\n        \"dish_rating\": 2,\n        \"price_rating\": 3,\n        \"service_rating\": 3\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "verify rating",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"data\":{\n  \"event\": \"500\",\n  \"action\": \"register\",\n  \"token\":\"opentoken\",\n  \"mdata\": {\n    \"user\": \"vidumini\"\n  }\n}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{rrs}}/ratings/verify/1/",
+							"host": [
+								"{{rrs}}"
+							],
+							"path": [
+								"ratings",
+								"verify",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get rating list for a restaurant",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{rrs}}/ratings/list?restid=22",
+							"host": [
+								"{{rrs}}"
+							],
+							"path": [
+								"ratings",
+								"list"
+							],
+							"query": [
+								{
+									"key": "restid",
+									"value": "22"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "get rating list for a restaurant",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{rrs}}/ratings/list?restid=22",
+									"host": [
+										"{{rrs}}"
+									],
+									"path": [
+										"ratings",
+										"list"
+									],
+									"query": [
+										{
+											"key": "restid",
+											"value": "22"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Thu, 05 Nov 2020 06:40:51 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.7.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Cookie, Origin"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1764"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"code\": 200,\n    \"message\": \"success GetRating\",\n    \"data\": {\n        \"restaurant_id\": \"22\",\n        \"total_no_of_ratings\": 11,\n        \"overall_rating\": 4.363636363636363,\n        \"dish_rating\": 4.181818181818182,\n        \"price_rating\": 4.363636363636363,\n        \"service_rating\": 4.545454545454546,\n        \"ratings\": [\n            {\n                \"rating_id\": 11,\n                \"dish_id\": 4,\n                \"overall_rating\": 4,\n                \"dish_rating\": 4,\n                \"price_rating\": 4,\n                \"service_rating\": 4,\n                \"added_by\": 1,\n                \"verified\": 1\n            },\n            {\n                \"rating_id\": 12,\n                \"dish_id\": 4,\n                \"overall_rating\": 4.333333333333333,\n                \"dish_rating\": 5,\n                \"price_rating\": 4,\n                \"service_rating\": 4,\n                \"added_by\": 1,\n                \"verified\": 1\n            },\n            {\n                \"rating_id\": 13,\n                \"dish_id\": 4,\n                \"overall_rating\": 4.666666666666667,\n                \"dish_rating\": 5,\n                \"price_rating\": 4,\n                \"service_rating\": 5,\n                \"added_by\": 1,\n                \"verified\": 1\n            },\n            {\n                \"rating_id\": 14,\n                \"dish_id\": 4,\n                \"overall_rating\": 5,\n                \"dish_rating\": 5,\n                \"price_rating\": 5,\n                \"service_rating\": 5,\n                \"added_by\": 1,\n                \"verified\": 1\n            },\n            {\n                \"rating_id\": 15,\n                \"dish_id\": 3,\n                \"overall_rating\": 5,\n                \"dish_rating\": 5,\n                \"price_rating\": 5,\n                \"service_rating\": 5,\n                \"added_by\": 1,\n                \"verified\": 1\n            },\n            {\n                \"rating_id\": 16,\n                \"dish_id\": 3,\n                \"overall_rating\": 4.666666666666667,\n                \"dish_rating\": 4,\n                \"price_rating\": 5,\n                \"service_rating\": 5,\n                \"added_by\": 1,\n                \"verified\": 1\n            },\n            {\n                \"rating_id\": 17,\n                \"dish_id\": 3,\n                \"overall_rating\": 4.333333333333333,\n                \"dish_rating\": 4,\n                \"price_rating\": 5,\n                \"service_rating\": 4,\n                \"added_by\": 1,\n                \"verified\": 1\n            },\n            {\n                \"rating_id\": 18,\n                \"dish_id\": null,\n                \"overall_rating\": 4.333333333333333,\n                \"dish_rating\": 4,\n                \"price_rating\": 5,\n                \"service_rating\": 4,\n                \"added_by\": 1,\n                \"verified\": 1\n            },\n            {\n                \"rating_id\": 19,\n                \"dish_id\": null,\n                \"overall_rating\": 4,\n                \"dish_rating\": 4,\n                \"price_rating\": 4,\n                \"service_rating\": 4,\n                \"added_by\": 1,\n                \"verified\": 1\n            },\n            {\n                \"rating_id\": 20,\n                \"dish_id\": null,\n                \"overall_rating\": 4,\n                \"dish_rating\": 3,\n                \"price_rating\": 4,\n                \"service_rating\": 5,\n                \"added_by\": 1,\n                \"verified\": 1\n            },\n            {\n                \"rating_id\": 21,\n                \"dish_id\": null,\n                \"overall_rating\": 3.6666666666666665,\n                \"dish_rating\": 3,\n                \"price_rating\": 3,\n                \"service_rating\": 5,\n                \"added_by\": 1,\n                \"verified\": 1\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "get dish rating list for a restaurant",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{rrs}}/ratings/dishes/list?restid=22",
+							"host": [
+								"{{rrs}}"
+							],
+							"path": [
+								"ratings",
+								"dishes",
+								"list"
+							],
+							"query": [
+								{
+									"key": "restid",
+									"value": "22"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "get dish rating list for a restaurant",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{rrs}}/ratings/dishes/list?restid=22",
+									"host": [
+										"{{rrs}}"
+									],
+									"path": [
+										"ratings",
+										"dishes",
+										"list"
+									],
+									"query": [
+										{
+											"key": "restid",
+											"value": "22"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 06 Nov 2020 11:41:41 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.7.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Cookie, Origin"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "555"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"code\": 200,\n    \"message\": \"success GetDishRatingListForTheRestaurant\",\n    \"data\": {\n        \"restaurant_id\": \"22\",\n        \"dish_ratings\": [\n            {\n                \"dish_id\": 2,\n                \"no_of_ratings\": 1,\n                \"overall_rating\": 4,\n                \"overall_dish_rating\": 4,\n                \"overall_price_rating\": 3,\n                \"overall_service_rating\": 3.66666667\n            },\n            {\n                \"dish_id\": 3,\n                \"no_of_ratings\": 3,\n                \"overall_rating\": 4.3333,\n                \"overall_dish_rating\": 5,\n                \"overall_price_rating\": 4.6667,\n                \"overall_service_rating\": 4.66666667\n            },\n            {\n                \"dish_id\": 4,\n                \"no_of_ratings\": 4,\n                \"overall_rating\": 4.75,\n                \"overall_dish_rating\": 4.25,\n                \"overall_price_rating\": 4.5,\n                \"overall_service_rating\": 4.5\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "get rating list for all restaurants",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{rrs}}/ratings/list",
+							"host": [
+								"{{rrs}}"
+							],
+							"path": [
+								"ratings",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get dish rating list for all restaurants",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{rrs}}/ratings/dishes/list?dishid=2",
+							"host": [
+								"{{rrs}}"
+							],
+							"path": [
+								"ratings",
+								"dishes",
+								"list"
+							],
+							"query": [
+								{
+									"key": "dishid",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "(not pre planned) get detailed ratings for a restaurant",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "get roles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{rrs}}/roles/",
+							"host": [
+								"{{rrs}}"
+							],
+							"path": [
+								"roles",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
