@@ -20,6 +20,11 @@ urlpatterns = [
     # GET /restaurants/list
     path('restaurants/list', views.RestaurantViewSet.as_view({'get':'list'}), name='RestaurantView'),
 
+    # not pre planned
+    # GET /restaurants/list
+    path('restaurants/list', views.RestaurantViewSet.as_view({'get':'list'}), name='RestaurantView'),
+    # 
+
     # Ratings
 
     # POST /ratings
