@@ -607,14 +607,14 @@ class RatingService:
         for rating in added_dish_ratings:
             res = {
                 "restaurant_id": rating.restaurant_id,
-                "no_of_ratings": rating.count,
+                "total_no_of_ratings": rating.count,
                 # "dish_rating": rating.dish_rating,
                 # "price_rating": rating.price_rating,
                 # "service_rating": rating.service_rating,
-                "average_total_rating": rating.avg_total,
-                "average_dish_rating": rating.avg_dish,
-                "average_price_rating": rating.avg_price,
-                "average_service_rating": rating.avg_service
+                "overall_rating": rating.avg_total,
+                "dish_rating": rating.avg_dish,
+                "price_rating": rating.avg_price,
+                "service_rating": rating.avg_service
             }
             ratings.append(res)
             # total_no_of_ratings = total_no_of_ratings+1
@@ -804,7 +804,7 @@ class RatingService:
         # added_ratings = AddedRating.objects.raw('SELECT added_rating.rating_id, dish_rating, price_rating, service_rating FROM added_rating INNER JOIN rating ON added_rating.rating_id=rating.rating_id WHERE restaurant_id=%s', [rest_id]);
         added_dish_ratings = AddedDishRating.objects.raw('SELECT added_dish_rating.rating_id, dish_rating, price_rating, service_rating FROM added_dish_rating INNER JOIN rating ON added_dish_rating.rating_id=rating.rating_id WHERE restaurant_id=%s AND dish_id=%s', [rest_id, dish_id]);
         # print(added_dish_ratings)
-        print(added_ratings)
+        # print(added_ratings)
         dish_rating = 0
         price_rating = 0
         service_rating = 0
@@ -839,7 +839,7 @@ class RatingService:
                 "dish_rating": dish_rating,
                 "price_rating": price_rating,
                 "service_rating": service_rating,
-                "overall_rating": overall_dish_rating
+                "overall_rating": overall_rating
             }
         }
 
