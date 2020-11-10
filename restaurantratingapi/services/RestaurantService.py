@@ -264,6 +264,9 @@ class RestaurantService:
         for rest in restaurant_list:
             rating_svc = RatingService
             rating_resp = rating_svc.get_ratings_for_restaurant_dish(rest.restaurant_id, dish_id)
+            # print(rating_resp['data']['total_no_of_ratings'])
+            if rating_resp['data']['total_no_of_ratings'] == 0:
+                continue
 
             restaurant_model = {
                 "restaurant_id": rest.restaurant_id,
