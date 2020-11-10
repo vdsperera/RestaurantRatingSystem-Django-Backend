@@ -59,6 +59,7 @@ class RestaurantViewSet(viewsets.ViewSet):
         # not pre planned
         if 'dishid' in myDict:
             qry = rs.get_restaurant_list_for_dish(myDict['dishid'][0])
+            return Response(qry)
             # return Response('restaurant list for a dish')
         # 
 
