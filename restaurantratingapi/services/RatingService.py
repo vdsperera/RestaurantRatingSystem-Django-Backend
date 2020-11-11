@@ -112,18 +112,20 @@ class RatingService:
         # if(not token):
         #     raise APIException(f"Token number '{token_number}' not exists")
 
-        try:
-            token = Token.objects.get(token_number=token_number)
-        except ObjectDoesNotExist as e:
-            token = None
-            raise APIException(f"Token number '{token_number}' not exists")
+        # try:
+        #     token = Token.objects.get(token_number=token_number)
+        # except ObjectDoesNotExist as e:
+        #     token = None
+        #     raise APIException(f"Token number '{token_number}' not exists")
 
-        try:
-            token = Token.objects.get(token_number=token_number, restaurant=restaurant)
-        except ObjectDoesNotExist as e:
+        if token_number != None:            
+            try:
+                token = Token.objects.get(token_number=token_number, restaurant=restaurant)
+            except ObjectDoesNotExist as e:
+                token = None
+                raise APIException(f"Token number '{token_number}' not exists for the restaurant")
+        else:
             token = None
-            raise APIException(f"Token number '{token_number}' not exists for the restaurant")
-
         # validate rating categories
 
         if(token == None):
