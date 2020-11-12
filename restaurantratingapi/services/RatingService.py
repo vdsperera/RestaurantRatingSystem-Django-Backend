@@ -660,9 +660,10 @@ class RatingService:
         list = []
 
         for item in added_dish_ratings:
+            dish = Dish.objects.get(dish_id=item.dish_id)
             dish_rating = {
                 "dish_id": item.dish_id,
-                # "dish_name": "dish_name",
+                "dish_name": dish.dish_name,
                 "no_of_ratings": item.count,
                 "overall_rating": item.avg_dish_rating,
                 "overall_dish_rating": item.avg_price_rating,
