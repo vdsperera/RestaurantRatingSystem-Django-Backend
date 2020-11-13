@@ -14,6 +14,10 @@ urlpatterns = [
     path('', include(router.urls)),
     # Restaurants
 
+    # POST /restaurants/
+    path('restaurants/', views.RestaurantViewSet.as_view({'post':'create'}), name='RestaurantView'),
+
+
     # GET /restaurants/[restaurant_id]
     path('restaurants/<int:rest_id>/', views.RestaurantViewSet.as_view({'get':'retrieve'}), name='RestaurantView'),
 
