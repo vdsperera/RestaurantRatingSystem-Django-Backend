@@ -10,6 +10,10 @@ from django.core.validators import RegexValidator
 import re
 from .RatingService import RatingService
 from ..models import Rating
+from ..models import Dish
+from ..models import RestaurantDish
+from django.core.exceptions import ObjectDoesNotExist
+
 
 class RestaurantService:
 
@@ -198,6 +202,7 @@ class RestaurantService:
             "data": {
                 "restaurant_id": rest.restaurant_id,
                 "restaurant_name": rest.name,
+                "dishes": dish_list,
                 "address": rest.address,
                 "logitude": rest.longitude,
                 "latitude": rest.latitude,        
@@ -318,6 +323,109 @@ class RestaurantService:
         return resp
         pass
     # 
+
+
+    def add_dishes_for_the_restaurant(self, data):
+
+        # retrieve request data
+        req_user = data["user"]
+        req_restaurant_id = data["restaurant_id"]
+        req_dish_id = data["dish_id"]
+        req_dish_name = data["dish_name"]
+        new_dish = False
+
+        # validate request data for null or empty values
+        # 
+        # 
+        if(not ValidationService.isset(value=req_dish_id)):
+            if(not ValidationService.isset(value=req_dish_name)):
+                raise APIException("Dish name is empty")
+            new_dish = True
+
+        # validate request data types
+        # 
+        # 
+
+        # set defaults
+        # 
+        # 
+        status = 0
+
+        # validate request data for existance in db
+        # 
+        # 
+        # new to check already exists dish name
+        # 
+        # 
+        try: 
+            restaurant = Restaurant.objects.get(restaurant_id=req_restaurant_id)
+        except IntegrityError as e:
+            raise APIException("Restaurant is not available in the system")
+
+        try:
+            user = User.objects.get(username=req_user)
+        except ObjectDoesNotExist as e:
+            raise APIException(f"Username name '{req_user}' not exists")
+
+
+        if(new_dish == False):
+            print('not new')
+            # dishC = RestaurantDish.objects.get(dish_id=re, restaurant=restaurant)
+            # print('print')
+            # print(dishC)
+            try:
+                dish = Dish.objects.get(dish_id=req_dish_id)
+            except:
+                # new_dish = Dish(
+                #     dish_name=)
+                raise APIException("Dish is not available in the system")
+                # pass
+            restaurantdish = None
+            try:
+                restaurantdish = RestaurantDish.objects.get(dish=dish, restaurant=restaurant)
+            except ObjectDoesNotExist as e:
+                pass               
+            if(restaurantdish):
+                print(restaurantdish)
+                raise APIException("Dish is already in the restaurant")
+        else:
+            dish = Dish(
+            dish_name = req_dish_name,
+            status = 0,
+            created_by = user,
+            created_on = "2020-11-14"
+            )
+            try: 
+                dish.save()
+            except IntegrityError as e:
+                raise APIException(e)
+
+        added_dish = RestaurantDish(
+            dish = dish,
+            restaurant = restaurant,
+            added_by = user,
+            status = status,
+            created_on = "2020-11-14"
+            )
+
+        try: 
+            added_dish.save()
+        except IntegrityError as e:
+            raise APIException(e)
+
+        resp = {
+            "success": True,
+            "code": 200,
+            "message": "success AddDIshesForRestaurant",
+            "data": {
+                "restaurant_id": added_dish.dish_id,
+                "dish_id": dish.dish_id,
+                "dish_name": dish.dish_name,
+                "added_by": added_dish.added_by.username,
+                "added_status": added_dish.status
+            }
+        }
+        return resp
 
 
     def request_edit():
