@@ -172,8 +172,24 @@ class RestaurantService:
         rest = Restaurant.objects.get(restaurant_id=data)
         rating_svc = RatingService
         rating_resp = rating_svc.get_ratings_for_restaurant(self, data)
+        dishes = Dish.objects.raw("""
+            SELECT restaurant_id, dish.dish_id as dish_id,
+            dish_name, restaurant_dish.status as status
+            FROM dish 
+            INNER JOIN restaurant_dish
+            ON dish.dish_id=restaurant_dish.dish_id
+            WHERE restaurant_id=%s
+            """, [data])
         print(rating_resp['data'])
         # return rest.restaurant_id
+        dish_list = []
+        for item in dishes:
+            dish = {
+            "dish_id":item.dish_id,
+            "dish_name":item.dish_name,
+            "added_status": item.status
+            }
+            dish_list.append(dish)
 
         resp={
             "success": True,
