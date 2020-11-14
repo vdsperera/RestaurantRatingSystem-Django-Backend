@@ -1,0 +1,76 @@
+POST /restaurants/dishes
+
+request
+
+{
+"data":{
+  "event": "500",
+  "action": "add_dishes_for_restaurant",
+  "token":"opentoken",
+  "mdata": {
+    "user": "vidumini",
+	"restaurant_id": 22,
+    "dish_id": 2,
+    "dish_name": "Dish 01"
+  }
+}
+}
+
+{
+"data":{
+  "event": "500",
+  "action": "add_dishes_for_restaurant",
+  "token":"opentoken",
+  "mdata": {
+    "user": "vidumini",
+	"restaurant_id": 22,
+	"dish_id": null,
+    "dish_name": "Dish 02"
+  }
+}
+}
+
+
+
+{
+"data":{
+  "event": "500",
+  "action": "add_dishes_for_restaurant",
+  "token":"opentoken",
+  "mdata": {
+    "user": "vidumini",
+	"restaurant_id": 22,
+ 	"dishes": [
+     {
+     "dish_id": 2,
+     "dish_name": "Dish 01"
+     },
+     {
+     "dish_id": 1,
+     "dish_name": "Dish 02"
+
+     },
+     {
+     "dish_name": "Dish 03"
+     }
+ 	]
+  }
+}
+}
+
+
+
+response
+
+{
+    "success": true,
+    "code": 200,
+    "message": "success AddDIshesForRestaurant",
+    "data": {
+        "restaurant_id": 22,
+        "dish_id": 2,
+        "dish_name": "Dish -2"
+        "added_by": "vidumini",
+        "added_status": 1
+    }
+}
