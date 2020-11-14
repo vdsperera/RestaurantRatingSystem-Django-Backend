@@ -72,6 +72,11 @@ class RestaurantViewSet(viewsets.ViewSet):
         qry = rs.get_restaurant(rest_id)
         return Response(qry)
 
+    def add_dishes(self, request):
+        rs = RestaurantService()
+        qry = rs.add_dishes_for_the_restaurant(request.data['data']['mdata'])
+        return Response(qry)
+
 # class RestaurantViewSet(APIView):
 
 #     def post(self, request):
