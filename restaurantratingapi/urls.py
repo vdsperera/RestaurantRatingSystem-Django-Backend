@@ -17,7 +17,6 @@ urlpatterns = [
     # POST /restaurants/
     path('restaurants/', views.RestaurantViewSet.as_view({'post':'create'}), name='RestaurantView'),
 
-
     # GET /restaurants/[restaurant_id]
     path('restaurants/<int:rest_id>/', views.RestaurantViewSet.as_view({'get':'retrieve'}), name='RestaurantView'),
 
@@ -28,6 +27,10 @@ urlpatterns = [
     # GET /restaurants/list
     path('restaurants/list', views.RestaurantViewSet.as_view({'get':'list'}), name='RestaurantView'),
     # 
+
+    # not pre planned
+    # POST /restaurants/dishes
+    path('restaurants/dishes', views.RestaurantViewSet.as_view({'post':'add_dishes'}), name='RestaurantView'),
 
     # Ratings
 
