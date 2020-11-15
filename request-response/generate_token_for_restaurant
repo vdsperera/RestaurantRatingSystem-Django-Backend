@@ -1,0 +1,36 @@
+generate token for restaurant
+
+request
+
+POST /system/tokens
+
+{
+"data":{
+  "event": "500",
+  "action": "generate tokens",
+  "token":"opentoken",
+  "mdata": {
+    "user": "vidumini",
+	  "restaurant_id": 22,
+    "size": 100
+  }
+}
+}
+
+
+response
+
+{
+    "success": true,
+    "code": 200,
+    "message": "success AddRating",
+    "data": {
+        "restaurant_id": 22,
+        "added_by": "vidumini"
+        "tokens": [
+         "token_number":"#r5454S32",
+         "token_number":"#r3354S32",
+         "token_number":"#r4454S32"
+        ]
+    }
+}
