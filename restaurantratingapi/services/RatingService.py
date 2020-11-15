@@ -194,7 +194,8 @@ class RatingService:
     # POST api/ratings/verify/{rating_id]
     def verify_rating(self, data):
         pass
-
+ 
+    ## should check with activity diagram
     # GET api/ratings/list
     # this gets list of ratings for all restaurants and group them by rest_id
     # this also gives average rating for each resturant
@@ -324,6 +325,7 @@ class RatingService:
         return 'get ratings list for all restaurants(group by rest)(with average ratings)'
         pass
 
+    ## should check with activity diagram
     # GET api/ratings/list?restid=23
     # this gets list of ratings for the restaurant
     # this also gives for the restaurant
@@ -464,7 +466,7 @@ class RatingService:
         return resp
 
 
-
+    ## should check with activity diagram
     # created for restaurant service(not pre planned function)
     # now this seems to be unnecesary and this can be achieved by above function - get_ratings_for_restaurant
 
@@ -529,7 +531,7 @@ class RatingService:
         return 'get ratings list for all restaurants(group by rest)(with average ratings)'
 
 
-
+    ## should check with activity diagram
     # GET api/ratings/dishes/list?dishid=2
     # this gets list of dish ratings for all restaurants for a specific dish and group them by restid
     # this also gives average ratings
@@ -799,7 +801,8 @@ class RatingService:
         }
 
         return resp
-
+    
+    ## should check with activity diagram
     # customer can see the ratings for of a restaurant for a specific dish
     def get_ratings_for_restaurant_dish(rest_id, dish_id):
         # rest_id = 23
