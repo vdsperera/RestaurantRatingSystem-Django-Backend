@@ -222,6 +222,7 @@ class RestaurantService:
 
         return resp;
 
+    ## should check with activity diagram
     def get_restaurant_list(self, data):
         # return 'get restaurant list'
         # rest = Restaurant.objects.get()
@@ -368,6 +369,8 @@ class RestaurantService:
             raise APIException(f"Username name '{req_user}' not exists")
 
 
+        ## check whether user is other restaurant owner, this restaurant owner or customer
+
         if(new_dish == False):
             print('not new')
             # dishC = RestaurantDish.objects.get(dish_id=re, restaurant=restaurant)
@@ -388,6 +391,8 @@ class RestaurantService:
             if(restaurantdish):
                 print(restaurantdish)
                 raise APIException("Dish is already in the restaurant")
+
+            ## check whether dish is rejected one or already requested one
         else:
             dish = Dish(
             dish_name = req_dish_name,
