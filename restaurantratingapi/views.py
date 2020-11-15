@@ -10,6 +10,7 @@ from rest_framework.response import Response
 import logging
 from .services.RestaurantService import RestaurantService
 from .services.RatingService import RatingService
+from .services.DishService import DishService
 from django.forms.models import model_to_dict
 from django.http import JsonResponse
 from django.core import serializers
@@ -176,3 +177,12 @@ class RatingViewSet(viewsets.ViewSet):
 
     def partial_update(self, request, pk=None):
         return Response('partial update rating')
+
+
+class DishViewSet(viewsets.ViewSet):
+
+    def list(self, request):
+        ds = DishService()
+        qry = ds.get_system_dish_list(request)
+        return Response(qry)
+        pass
