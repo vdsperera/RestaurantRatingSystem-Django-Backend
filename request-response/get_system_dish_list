@@ -1,0 +1,21 @@
+get dish ratings list for a restaurants
+
+
+request
+
+GET /dishes/
+
+
+response
+
+{
+    "success": true,
+    "code": 200,
+    "message": "success GetSystemDishList",
+    "data": {
+        "dish_id": 23,
+        "dish_name": "Dish 23",
+        "dish_status": 1,
+        "added_by": "vidumini"
+    }
+}
