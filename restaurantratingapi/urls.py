@@ -48,6 +48,12 @@ urlpatterns = [
     # GET /ratings/dishes/list?restid=[rest_id] - get dish rating list for a restaurant
     path('ratings/dishes/list', views.RatingViewSet.as_view({'get':'dish_list'}), name='RatingView'),
 
+    
+    # Dishes
+
+    # GET /dishes/
+    path('dishes/', views.DishViewSet.as_view({'get':'list'}), name='DishView'),
+
     # 
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
