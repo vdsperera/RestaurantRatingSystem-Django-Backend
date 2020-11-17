@@ -1,0 +1,22 @@
+get tokens for restaurant
+
+request
+
+GET /system/tokens/list?restid=[restid]
+
+
+response
+
+{
+    "success": True,
+    "code": 200,
+    "message": "success GetTokensForRestaurant",
+    "data": {
+        "restaurant_id": 22,
+        "tokens": [
+         "token_number":"#r5454S32",
+         "token_number":"#r3354S32",
+         "token_number":"#r4454S32"
+        ]
+    }
+}
