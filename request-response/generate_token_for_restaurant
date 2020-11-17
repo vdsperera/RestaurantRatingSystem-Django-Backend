@@ -12,7 +12,7 @@ POST /system/tokens
   "mdata": {
     "user": "vidumini",
 	  "restaurant_id": 22,
-    "size": 100
+    "generate_size": 2000
   }
 }
 }
@@ -21,11 +21,12 @@ POST /system/tokens
 response
 
 {
-    "success": true,
+    "success": True,
     "code": 200,
-    "message": "success AddRating",
+    "message": "success GenerateTokesForRestaurant",
     "data": {
         "restaurant_id": 22,
+        "generate_size": 2000
         "added_by": "vidumini"
         "tokens": [
          "token_number":"#r5454S32",
