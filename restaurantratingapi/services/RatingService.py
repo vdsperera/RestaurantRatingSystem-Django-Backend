@@ -124,6 +124,12 @@ class RatingService:
             except ObjectDoesNotExist as e:
                 token = None
                 raise APIException(f"Token number '{token_number}' not exists for the restaurant")
+
+            added_rating = AddedRating.objects.filter(token_number=token)
+            added_dish_rating = AddedDishRating.objects.filter(token_number=token)
+            if((added_rating.exists() == True) or (added_dish_rating.exists() == True)):
+                raise APIException(f"Token number '{token_number}' is already used")
+
         else:
             token = None
         # validate rating categories
