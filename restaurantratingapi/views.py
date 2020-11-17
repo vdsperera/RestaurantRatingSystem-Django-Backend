@@ -11,6 +11,7 @@ import logging
 from .services.RestaurantService import RestaurantService
 from .services.RatingService import RatingService
 from .services.DishService import DishService
+from .services.SystemService import SystemService
 from django.forms.models import model_to_dict
 from django.http import JsonResponse
 from django.core import serializers
@@ -186,3 +187,18 @@ class DishViewSet(viewsets.ViewSet):
         qry = ds.get_system_dish_list(request)
         return Response(qry)
         pass
+
+class SystemViewSet(viewsets.ViewSet):
+
+    def create(self, request):
+        data = request.data['data']['mdata']
+        ss = SystemService()
+        qry = ss.generate_tokens_for_restaurant(data)
+        return Response(qry)
+
+    def list(self, request):
+        myDict = dict(self.request.query_params)
+        print(myDict)
+        ss = SystemService()
+        qry = ss.get_tokens_for_restaurant(myDict)
+        return Response(qry)
