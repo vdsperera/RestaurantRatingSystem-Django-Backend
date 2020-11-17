@@ -54,6 +54,15 @@ urlpatterns = [
     # GET /dishes/
     path('dishes/', views.DishViewSet.as_view({'get':'list'}), name='DishView'),
 
+
+    # System
+
+    # POST /system/tokens
+    path('system/tokens', views.SystemViewSet.as_view({'post':'create'}), name='SystemView'),
+
+    # GET /system/tokens/list?restid=[restid]
+    path('system/tokens/list', views.SystemViewSet.as_view({'get':'list'}), name='SystemView'),
+
     # 
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
