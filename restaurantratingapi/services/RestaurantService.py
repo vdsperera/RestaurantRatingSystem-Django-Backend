@@ -14,6 +14,7 @@ from ..models import Rating
 from ..models import Dish
 from ..models import RestaurantDish
 from django.core.exceptions import ObjectDoesNotExist
+import string
 
 
 class RestaurantService:
@@ -27,7 +28,10 @@ class RestaurantService:
         try:
             username = data['user']
             rest_name = data['name'] #restaurant name #required
-            rest_address = data['address'] #restaurant address
+            # rest_address = data['address'] #restaurant address
+            rest_street = data['address']['street_address'] + ', '
+            rest_city = string.capwords(data['address']['city'])
+            print(rest_street+ rest_city)
             rest_pnumber = data['phone_number'] #restaurant phone number
             # rest_added_by = data['user'] #restaurant is added by #required
             # rest_owner = data['owner'] #owner of the restaurant
@@ -42,6 +46,7 @@ class RestaurantService:
         rest_code = SystemService.generate_restaurant_code()
         rest_claimed = ClaimStatus.Unclaimed.value
         rest_owner = None
+        rest_address = data['address']['street_address'] + ', ' + data['address']['city']
 
         # validate request data for null or empty values
         if(not ValidationService.isset(value=rest_name)):
@@ -49,6 +54,9 @@ class RestaurantService:
 
         if(not ValidationService.isset(value=username)):
             raise APIException("User is empty")
+
+        if(not ValidationService.isset(value=rest_city)):
+            raise APIException("City is empty")
 
         if(not ValidationService.isset(value=rest_longitude)):
             raise APIException("Longitude is empty")    
@@ -137,10 +145,10 @@ class RestaurantService:
             code=rest_code,
             created_by=user)      
          
-        try: 
-            rest.save()
-        except IntegrityError as e:
-            raise APIException(e)
+        # try: 
+        #     rest.save()
+        # except IntegrityError as e:
+        #     raise APIException(e)
         
         print(rest_owner.id if rest_owner != None else None)
         # print(type(rest))
@@ -153,7 +161,7 @@ class RestaurantService:
             "code": 200,
             "message": "success RegisterRestaurant",
             "data": {
-                "restaurant_id": rest.restaurant_id,
+                # "restaurant_id": rest.restaurant_id,
                 "restaurant_name": rest.name,
                 "address": rest.address,
                 "logitude": rest.longitude,
