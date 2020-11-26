@@ -1,6 +1,7 @@
 from .ValidationService import ValidationService
 from .SystemService import SystemService
 from ..enums.RestaurantEnums import ClaimStatus
+from ..enums.ContributionEnums import ContributionTypes
 from ..models import Restaurant
 from django.contrib.auth.models import User
 from ..models import CustomUser
