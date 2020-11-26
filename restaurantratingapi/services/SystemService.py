@@ -125,3 +125,6 @@ class SystemService:
 
     def check_token_is_already_used(self, data):
         pass
+
+    def add_contribution_points(contribution_type):
+        pass
