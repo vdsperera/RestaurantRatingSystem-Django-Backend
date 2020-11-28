@@ -7,5 +7,7 @@ class ContributionTypes(Enum):
 	AddVerifiedRestaurantRatingg = 3
 	AddUnverifiedDishRating = 4
 	AddVerifiedDishRating = 5
+	AddDishToRestaurant = 6
+	AddDishToSystem = 7
 
 
