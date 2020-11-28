@@ -1,6 +1,8 @@
 from django.utils.crypto import get_random_string
 from ..models import Token
 from ..models import Restaurant
+from ..models import Contribution
+from ..models import ContributionType
 from django.contrib.auth.models import User
 from rest_framework.exceptions import APIException
 from rest_framework.exceptions import NotFound
@@ -126,5 +128,13 @@ class SystemService:
     def check_token_is_already_used(self, data):
         pass
 
-    def add_contribution_points(contribution_type):
+    def add_contribution_points(self, contribution_type_value, user):
+        print('contribution_type_value')
+        print(contribution_type_value)
+        contribution_type = ContributionType.objects.get(contribution_type_id=contribution_type_value)
+        print(contribution_type)
+        contribution = Contribution(
+            contribution_type = contribution_type,
+            user = user
+            )
         pass
