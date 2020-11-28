@@ -123,6 +123,7 @@ class RestaurantService:
         if(not users):
             print("User is not an owner")
             if(selected_role=='owner'):
+                raise APIException(f"User '{username}' currently not a owner")
                 pass
                 ###Redirect to customer-owner transformation process and end current process###
         else:
@@ -155,28 +156,33 @@ class RestaurantService:
         # print(type(rest))
 
         ### Need to add contribution points to the user ###
+        # print(ContributionTypes.AddVerifiedDishRating.name)
+        if(not users):
+            system_service = SystemService()
+            system_service.add_contribution_points(ContributionTypes.AddRestaurant.value, user)
+
 
         # this should be change by using response model
-        resp={
-            "success": True,
-            "code": 200,
-            "message": "success RegisterRestaurant",
-            "data": {
-                # "restaurant_id": rest.restaurant_id,
-                "restaurant_name": rest.name,
-                "address": rest.address,
-                "logitude": rest.longitude,
-                "latitude": rest.latitude,        
-                "phone_number": rest.phone_number,
-                "added_by": rest.created_by.id,
-                "claimed_by": rest_owner.id if rest_owner != None else None,
-                "code": rest.code,
-                "claimed_status": ClaimStatus(rest.claimed).name,
-                "created_on": rest.created_on
-            }
-        }
+        # resp={
+        #     "success": True,
+        #     "code": 200,
+        #     "message": "success RegisterRestaurant",
+        #     "data": {
+        #         # "restaurant_id": rest.restaurant_id,
+        #         "restaurant_name": rest.name,
+        #         "address": rest.address,
+        #         "logitude": rest.longitude,
+        #         "latitude": rest.latitude,        
+        #         "phone_number": rest.phone_number,
+        #         "added_by": rest.created_by.id,
+        #         "claimed_by": rest_owner.id if rest_owner != None else None,
+        #         "code": rest.code,
+        #         "claimed_status": ClaimStatus(rest.claimed).name,
+        #         "created_on": rest.created_on
+        #     }
+        # }
 
-        return resp     
+        # return resp     
         
     def de_register_restaurant():
         pass    
@@ -344,6 +350,7 @@ class RestaurantService:
         req_dish_id = data["dish_id"]
         req_dish_name = data["dish_name"]
         new_dish = False
+        system_service = SystemService()
 
         # validate request data for null or empty values
         # 
@@ -481,6 +488,7 @@ class RestaurantService:
         # return 1
         try: 
             added_dish.save()
+            system_service.add_contribution_points(ContributionTypes.AddDishToRestaurant.value, user)
         except IntegrityError as e:
             raise APIException(e)
 
