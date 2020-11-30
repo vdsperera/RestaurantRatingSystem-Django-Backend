@@ -12,7 +12,9 @@ from django.core.exceptions import ObjectDoesNotExist
 from .ValidationService import ValidationService
 from django.db import IntegrityError
 from ..enums.RatingEnums import VerifiedStatus
+from ..enums.ContributionEnums import ContributionTypes
 from .ValidationService import ValidationService
+from .SystemService import SystemService
 from django.db.models import Count
 from django.db.models import Avg
 from django.db import connection
@@ -153,6 +155,7 @@ class RatingService:
         except IntegrityError as e:
             raise APIException(e)   
 
+        system_service = SystemService()
         if(dish_id != None):
             added_dish_rating = AddedDishRating(
             rating = rating,
@@ -162,6 +165,10 @@ class RatingService:
             try: 
                 # pass
                 added_dish_rating.save()
+                if(verified == VerifiedStatus.Verified.value):
+                    system_service.add_contribution_points(ContributionTypes.AddVerifiedDishRating.value, user)
+                else:
+                    system_service.add_contribution_points(ContributionTypes.AddUnverifiedDishRating.value, user)
             except IntegrityError as e:
                 raise APIException(e)
         else:
@@ -173,10 +180,15 @@ class RatingService:
 
             try: 
                 added_rating.save()
+                if(verified == VerifiedStatus.Verified.value):
+                    system_service.add_contribution_points(ContributionTypes.AddVerifiedRestaurantRating.value, user)
+                else:
+                    system_service.add_contribution_points(ContributionTypes.AddUnverifiedRestaurantRating.value, user)
             except IntegrityError as e:
                 raise APIException(e)    
 
         # add contribution points to the user
+        
 
         # this should be change by using response model
         resp={
