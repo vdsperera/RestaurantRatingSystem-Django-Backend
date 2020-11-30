@@ -147,10 +147,10 @@ class RestaurantService:
             code=rest_code,
             created_by=user)      
          
-        # try: 
-        #     rest.save()
-        # except IntegrityError as e:
-        #     raise APIException(e)
+        try: 
+            rest.save()
+        except IntegrityError as e:
+            raise APIException(e)
         
         print(rest_owner.id if rest_owner != None else None)
         # print(type(rest))
@@ -163,26 +163,26 @@ class RestaurantService:
 
 
         # this should be change by using response model
-        # resp={
-        #     "success": True,
-        #     "code": 200,
-        #     "message": "success RegisterRestaurant",
-        #     "data": {
-        #         # "restaurant_id": rest.restaurant_id,
-        #         "restaurant_name": rest.name,
-        #         "address": rest.address,
-        #         "logitude": rest.longitude,
-        #         "latitude": rest.latitude,        
-        #         "phone_number": rest.phone_number,
-        #         "added_by": rest.created_by.id,
-        #         "claimed_by": rest_owner.id if rest_owner != None else None,
-        #         "code": rest.code,
-        #         "claimed_status": ClaimStatus(rest.claimed).name,
-        #         "created_on": rest.created_on
-        #     }
-        # }
+        resp={
+            "success": True,
+            "code": 200,
+            "message": "success RegisterRestaurant",
+            "data": {
+                # "restaurant_id": rest.restaurant_id,
+                "restaurant_name": rest.name,
+                "address": rest.address,
+                "logitude": rest.longitude,
+                "latitude": rest.latitude,        
+                "phone_number": rest.phone_number,
+                "added_by": rest.created_by.id,
+                "claimed_by": rest_owner.id if rest_owner != None else None,
+                "code": rest.code,
+                "claimed_status": ClaimStatus(rest.claimed).name,
+                "created_on": rest.created_on
+            }
+        }
 
-        # return resp     
+        return resp     
         
     def de_register_restaurant():
         pass    
@@ -223,8 +223,8 @@ class RestaurantService:
                 "logitude": rest.longitude,
                 "latitude": rest.latitude,        
                 "phone_number": rest.phone_number,
-                "added_by": rest.created_by.id,
-                "claimed_by": rest.claimed_by,
+                "added_by": rest.created_by.username,
+                "claimed_by": rest.claimed_by.username if rest.claimed_by != None else None,
                 "code": rest.code,
                 "claimed_status": ClaimStatus(rest.claimed).name,
                 "created_on": rest.created_on,
@@ -284,6 +284,8 @@ class RestaurantService:
                 "restaurant_list": list
             }
         }
+        system_service = SystemService()
+        print(system_service.get_top_contributors(data={"from_date": "2020-11-01", "to_date": "2020-12-01"}))
         return resp
         pass
 
