@@ -137,4 +137,31 @@ class SystemService:
             contribution_type = contribution_type,
             user = user
             )
+        try: 
+            contribution.save()
+        except IntegrityError as e:
+            raise APIException(e)    
         pass
+
+    def get_top_contributors(self, data):
+        pass
+        from_date = data["from_date"]
+        to_date = data["to_date"]
+        contributions = Contribution.objects.raw("""
+            SELECT contribution.contribution_id, contribution.user_id, SUM(contribution_type.allocated_points) as total_points
+            FROM contribution
+            INNER JOIN contribution_type
+            ON contribution.contribution_type = contribution_type.contribution_type_id
+            WHERE contribution.created_on BETWEEN %s AND %s
+            GROUP BY contribution.user_id
+            ORDER BY total_points DESC
+            """, [from_date, to_date])
+        list = []
+        for item in contributions:
+            model = {
+              "user": item.user_id,
+              "total_points": item.total_points
+            }
+            list.append(model)
+
+        return list
