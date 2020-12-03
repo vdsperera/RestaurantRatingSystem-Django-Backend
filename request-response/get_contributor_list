@@ -1,0 +1,44 @@
+get contributor list
+
+request
+GET /contributions/list?fromdate=[from_date]&todate=[to_date]
+
+{
+"data":{
+  "event": "500",
+  "action": "get_contributors",
+  "token":"opentoken",
+  "mdata": {
+    "user": "vidumini",
+   	"contribution_type": 22
+  }
+}
+}
+
+
+
+response
+
+{
+    "success": true,
+    "code": 200,
+    "message": "success GetContributors",
+    "data": {
+      "contributors":[
+        {
+          user: "numin",
+          total_points: 90
+        },
+        {
+          user: "dilshan",
+          total_points: 70
+        },
+        {
+          user: "asanka",
+          total_points: 50
+        }
+
+      ]
+
+    }
+}
