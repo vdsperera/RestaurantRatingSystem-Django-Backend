@@ -12,7 +12,7 @@ router.register(r'roles', views.UserRoleViewSet)
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     path('', include(router.urls)),
-    # Restaurants
+    ## Restaurants ##
 
     # POST /restaurants/
     path('restaurants/', views.RestaurantViewSet.as_view({'post':'create'}), name='RestaurantView'),
@@ -32,7 +32,7 @@ urlpatterns = [
     # POST /restaurants/dishes
     path('restaurants/dishes', views.RestaurantViewSet.as_view({'post':'add_dishes'}), name='RestaurantView'),
 
-    # Ratings
+    ## Ratings ##
 
     # POST /ratings
     path('ratings/', views.RatingViewSet.as_view({'post': 'create'}), name='RatingView'),
@@ -49,19 +49,26 @@ urlpatterns = [
     path('ratings/dishes/list', views.RatingViewSet.as_view({'get':'dish_list'}), name='RatingView'),
 
     
-    # Dishes
+    ## Dishes ##
 
     # GET /dishes/
     path('dishes/', views.DishViewSet.as_view({'get':'list'}), name='DishView'),
 
 
-    # System
+    ## System ##
 
     # POST /system/tokens
     path('system/tokens', views.SystemViewSet.as_view({'post':'create'}), name='SystemView'),
 
     # GET /system/tokens/list?restid=[restid]
     path('system/tokens/list', views.SystemViewSet.as_view({'get':'list'}), name='SystemView'),
+
+
+    ## Contributions ##
+
+    # GET /contributions/list?fromdate=[from_date]&todate=[to_date]
+    path('contributions/list', views.ContributionViewSet.as_view({'get':'list'}), name='ContributionView'),
+
 
     # 
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
