@@ -42,6 +42,10 @@ class ValidationService:
             return False
         return True
 
+    @staticmethod
+    def is_valid_date(value):
+        return True
+
 
 
 
