@@ -1,0 +1,31 @@
+POST /contributions/
+
+request
+
+{
+"data":{
+  "event": "500",
+  "action": "add_contribution_points",
+  "token":"opentoken",
+  "mdata": {
+    "user": "vidumini",
+	"contribution_type": 22
+  }
+}
+}
+
+
+
+response
+
+{
+    "success": true,
+    "code": 200,
+    "message": "success AddContributionPoints",
+    "data": {
+        "added_for": 22,
+        "contribution_type": 2,
+        "allocated_points": 10,
+        "added_by": "vidumini"
+    }
+}
