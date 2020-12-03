@@ -188,6 +188,18 @@ class DishViewSet(viewsets.ViewSet):
         return Response(qry)
         pass
 
+
+class ContributionViewSet(viewsets.ViewSet):
+
+    def list(self, request):
+        # need to replace this with contribution service
+        myDict = dict(self.request.query_params)
+        # print(myDict)
+        ss = SystemService()
+        qry = ss.get_top_contributors(myDict)
+        return Response(qry)       
+
+
 class SystemViewSet(viewsets.ViewSet):
 
     def create(self, request):
