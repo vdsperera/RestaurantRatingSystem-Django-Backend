@@ -1,4 +1,5 @@
 from django.utils.crypto import get_random_string
+from .ValidationService import ValidationService
 from ..models import Token
 from ..models import Restaurant
 from ..models import Contribution
@@ -144,19 +145,47 @@ class SystemService:
         pass
 
     def get_top_contributors(self, data):
-        pass
-        from_date = data["from_date"]
-        to_date = data["to_date"]
-        contributions = Contribution.objects.raw("""
-            SELECT contribution.contribution_id, contribution.user_id, SUM(contribution_type.allocated_points) as total_points
-            FROM contribution
-            INNER JOIN contribution_type
-            ON contribution.contribution_type = contribution_type.contribution_type_id
-            WHERE contribution.created_on BETWEEN %s AND %s
-            GROUP BY contribution.user_id
-            ORDER BY total_points DESC
-            """, [from_date, to_date])
+
+        # from_date = data["from_date"]
+        # to_date = data["to_date"]
+        all = False
+        try:
+            from_date = data['fromdate'][0]
+            to_date = data['todate'][0]
+        except:
+            all = True
+
+        if(not ValidationService.isset(value=from_date) or not ValidationService.isset(value=to_date)):
+            all = True
+
+        if(not ValidationService.is_valid_date(value=from_date)):
+            raise APIException("Invalid from date") 
+
+        if(not ValidationService.is_valid_date(value=to_date)):
+            raise APIException("Invalid to date") 
+
+        if(all):
+            contributions = Contribution.objects.raw("""
+                SELECT contribution.contribution_id, contribution.user_id, SUM(contribution_type.allocated_points) as total_points
+                FROM contribution
+                INNER JOIN contribution_type
+                ON contribution.contribution_type = contribution_type.contribution_type_id
+                GROUP BY contribution.user_id
+                ORDER BY total_points DESC
+                """)
+        else:            
+            contributions = Contribution.objects.raw("""
+                SELECT contribution.contribution_id, contribution.user_id, SUM(contribution_type.allocated_points) as total_points
+                FROM contribution
+                INNER JOIN contribution_type
+                ON contribution.contribution_type = contribution_type.contribution_type_id
+                WHERE contribution.created_on BETWEEN %s AND %s
+                GROUP BY contribution.user_id
+                ORDER BY total_points DESC
+                """, [from_date, to_date])
+
         list = []
+
         for item in contributions:
             model = {
               "user": item.user_id,
@@ -164,4 +193,15 @@ class SystemService:
             }
             list.append(model)
 
-        return list
+        resp={
+            "success": True,
+            "code": 200,
+            "message": "uccess GetContributors",
+            "data": {
+                "from_date": from_date if all != True else None,
+                "to_date": to_date if all != True else None,
+                "contributors": list
+            }
+        }
+
+        return resp
