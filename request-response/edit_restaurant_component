@@ -1,0 +1,31 @@
+PUT /restaurant/
+
+request
+
+{
+"data":{
+  "event": "500",
+  "action": "edit_restaurant_component",
+  "token":"opentoken",
+  "mdata": {
+    "user": "vidumini",
+    "restaurant_id": 23,
+	  "component": 2,
+    "current_value": "ab",
+    "new_value": "ds",
+  }
+}
+}
+
+
+
+response
+
+{
+    "success": true,
+    "code": 200,
+    "message": "success EditRestaurantComponent",
+    "data": {
+
+    }
+}
