@@ -32,6 +32,9 @@ urlpatterns = [
     # POST /restaurants/dishes
     path('restaurants/dishes', views.RestaurantViewSet.as_view({'post':'add_dishes'}), name='RestaurantView'),
 
+    # PUT /restaurants/[restaurant_id]
+    path('restaurants', views.RestaurantViewSet.as_view({'put':'edit_restaurant'}), name='RestaurantView'),
+
     ## Ratings ##
 
     # POST /ratings
