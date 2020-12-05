@@ -2,9 +2,14 @@ from .ValidationService import ValidationService
 from .SystemService import SystemService
 from ..enums.RestaurantEnums import ClaimStatus
 from ..enums.ContributionEnums import ContributionTypes
+from ..enums.UserEnums import UserRoles
 from ..models import Restaurant
 from django.contrib.auth.models import User
 from ..models import CustomUser
+from..models import EditHistory
+from..models import EditComponent
+from..models import UserEditHistoryComponent
+from..models import UserEditHistoryConfirmation
 from rest_framework.exceptions import APIException
 from rest_framework.exceptions import NotFound
 from django.db import IntegrityError
@@ -509,7 +514,67 @@ class RestaurantService:
         return resp
 
 
-    def request_edit():
+    def request_edit(request, data):
+
+        username = 'dilshan'
+        restaurant_id = data['restaurant_id']
+        component = data['component']
+        current_value = data['current_value']
+        new_value = data['new_value']
+        is_owner = False
+
+
+        editComponent = EditComponent.objects.filter(component)
+
+        if(not editComponent.exists()):
+            return False
+
+        user = User.objects.filter(username=username)
+        custom_user = CustomUser.objects.filter(user_id=user[0].id)
+
+        user_role = custom_user[0].role_id.role_id
+        if(user_role == UserRoles.Admin.value):
+            is_owner = True
+            # return True
+
+        restaurant = Restaurant.objects.filter(restaurant_id=restaurant_id, claimed_by=user[0])
+        # print(restaurant)
+        if(is_owner == True):
+            if(restaurant.exists() == False):
+                return False
+            else:
+                edit_history = EditHistory(
+                    current_value = current_value,
+                    requested_value = new_value,
+                    status = 1,
+                    confirmed_by = user
+                    )
+                edit_history.save()
+
+                user_edit_history_component = UserEditHistoryComponent(
+                    user = user,
+                    history = edit_history,
+                    restaurant = restaurant,
+                    component = editComponent[0])
+                user_edit_history_component.save()
+
+                user_edit_history_confirmation = UserEditHistoryConfirmation(
+                    user = user,
+                    history = edit_history,
+                    confirmation_points = 40)
+                user_edit_history_confirmation.save()
+                pass
+                # allow edit
+
+
+
+        return restaurant
+        #check whether the username already exists
+        # if(not User):
+        #     raise APIException(f"Username name '{username}' not exists")
+        print(custom_user)
+        return user
+
         pass
 
     def approve_edit():
