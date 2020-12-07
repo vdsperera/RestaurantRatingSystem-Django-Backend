@@ -1,6 +1,6 @@
 from .ValidationService import ValidationService
 from .SystemService import SystemService
-from ..enums.RestaurantEnums import ClaimStatus
+from ..enums.RestaurantEnums import ClaimStatus, RestaurantComponents
 from ..enums.ContributionEnums import ContributionTypes
 from ..enums.UserEnums import UserRoles
 from ..models import Restaurant
@@ -514,7 +514,7 @@ class RestaurantService:
         return resp
 
 
-    def request_edit(request, data):
+    def request_edit(self, data):
 
         username = 'dilshan'
         restaurant_id = data['restaurant_id']
@@ -524,13 +524,15 @@ class RestaurantService:
         is_owner = False
 
 
-        editComponent = EditComponent.objects.filter(component)
+        edit_component = EditComponent.objects.filter(component_id = component)
+        # print(editComponent[0].confirmation_point_level)
 
-        if(not editComponent.exists()):
+        if(not edit_component.exists()):
             return False
 
         user = User.objects.filter(username=username)
         custom_user = CustomUser.objects.filter(user_id=user[0].id)
+        print(custom_user[0].level_number.allocated_comfirmation_points)
 
         user_role = custom_user[0].role_id.role_id
         if(user_role == UserRoles.Admin.value):
@@ -543,28 +545,172 @@ class RestaurantService:
             if(restaurant.exists() == False):
                 return False
             else:
-                edit_history = EditHistory(
-                    current_value = current_value,
-                    requested_value = new_value,
-                    status = 1,
-                    confirmed_by = user
-                    )
-                edit_history.save()
+                pass
+                # return True
+                self.set_history(user[0], restaurant[0], edit_component[0], current_value, new_value, status=2)
+                # edit_history = EditHistory(
+                #     current_value = current_value,
+                #     requested_value = new_value,
+                #     status = 1,
+                #     confirmed_by = user[0]
+                #     )
+                # # edit_history.save()
 
-                user_edit_history_component = UserEditHistoryComponent(
-                    user = user,
-                    history = edit_history,
-                    restaurant = restaurant,
-                    component = editComponent[0])
-                user_edit_history_component.save()
+                # user_edit_history_component = UserEditHistoryComponent(
+                #     user = user[0],
+                #     history = edit_history,
+                #     restaurant = restaurant[0],
+                #     component = edit_component[0])
+                # # user_edit_history_component.save()
 
-                user_edit_history_confirmation = UserEditHistoryConfirmation(
-                    user = user,
-                    history = edit_history,
-                    confirmation_points = 40)
-                user_edit_history_confirmation.save()
+                # user_edit_history_confirmation = UserEditHistoryConfirmation(
+                #     user = user[0],
+                #     history = edit_history,
+                #     confirmation_points = edit_component[0].confirmation_point_level)
+
+                # edit_history.save()
+                # user_edit_history_component.save()
+                # user_edit_history_confirmation.save()
+
+                self.update_restaurant_component_value(component, restaurant[0], new_value)
+                # if(component == RestaurantComponents.RestaurantAddress.value):
+                #     restaurant[0].address = new_value
+                # elif(component == RestaurantComponents.RestaurantEmail.value):
+                #     pass
+                #     # restaurant[0].email = new_value
+                # elif(component == RestaurantComponents.RestaurantLocation):
+                #     pass
+                #     # restaurant[0].address = new_value
+                # elif(component == RestaurantComponents.RestaurantName):
+                #     restaurant[0].name = new_value
+                # elif(component == RestaurantComponents.RestaurantWebsite):
+                #     pass
+                #     # restaurant[0].website = new_value
+                # elif(component == RestaurantComponents.RestaurantPhoneNumber):
+                #     restaurant[0].phone_number = new_value
+                #     restaurant[0].save()
                 pass
                 # allow edit
+        else:
+            pass
+            hasRecentChangesByThisUser = False
+            hasRecentChangesByOtherUsers = False
+            if(hasRecentChangesByThisUser):#check user has recent changes for the component
+                return APIException("has recently edited")
+            if(hasRecentChangesByOtherUsers):
+                # pass
+                # path 01
+                self.set_history(user[0], restaurant[0], edit_component[0], current_value, new_value, status=2)
+                # edit_history = EditHistory(
+                #     current_value = current_value,
+                #     requested_value = new_value,
+                #     status = 2,#approved
+                #     confirmed_by = user[0]
+                #     )
+                # # edit_history.save()
+
+                # user_edit_history_component = UserEditHistoryComponent(
+                #     user = user[0],
+                #     history = edit_history,
+                #     restaurant = restaurant[0],
+                #     component = editComponent[0])
+                # # user_edit_history_component.save()
+
+                # user_edit_history_confirmation = UserEditHistoryConfirmation(
+                #     user = user[0],
+                #     history = edit_history,
+                #     confirmation_points = editComponent[0].confirmation_point_level)
+
+                # # edit_history.save()
+                # # user_edit_history_component.save()
+                # # user_edit_history_confirmation.save()
+
+                update_restaurant_component_value(component, restaurant[0], new_value)
+                # if(component == RestaurantComponents.RestaurantAddress.value):
+                #     restaurant[0].address = new_value
+                # elif(component == RestaurantComponents.RestaurantEmail.value):
+                #     pass
+                #     # restaurant[0].email = new_value
+                # elif(component == RestaurantComponents.RestaurantLocation):
+                #     pass
+                #     # restaurant[0].address = new_value
+                # elif(component == RestaurantComponents.RestaurantName):
+                #     restaurant[0].name = new_value
+                # elif(component == RestaurantComponents.RestaurantWebsite):
+                #     pass
+                #     # restaurant[0].website = new_value
+                # elif(component == RestaurantComponents.RestaurantPhoneNumber):
+                #     restaurant[0].phone_number = new_value
+                #     restaurant[0].save()
+            else:
+                pass
+                if(restaurant[0].claimed_status == 2):#claimed restaurant
+                    self.set_history(user[0], restaurant[0], edit_component[0], current_value, new_value, status=2)
+                    # edit_history = EditHistory(
+                    #     current_value = current_value,
+                    #     requested_value = new_value,
+                    #     status = 0
+                    #     )
+                    # # edit_history.save()
+
+                    # user_edit_history_component = UserEditHistoryComponent(
+                    #     user = user[0],
+                    #     history = edit_history,
+                    #     restaurant = restaurant[0],
+                    #     component = editComponent[0])
+                    # # user_edit_history_component.save()
+
+                    # user_edit_history_confirmation = UserEditHistoryConfirmation(
+                    #     user = user[0],
+                    #     history = edit_history,
+                    #     confirmation_points = custom_user[0].level_number.allocated_comfirmation_points)
+                    # user_edit_history_confirmation.save()
+                else:
+                    pass
+                    self.set_history(user[0], restaurant[0], edit_component[0], current_value, new_value, status=2)
+                    # edit_history = EditHistory(
+                    #     current_value = current_value,
+                    #     requested_value = new_value,
+                    #     status = 2,#approved
+                    #     confirmed_by = user[0]
+                    #     )
+                    # # edit_history.save()
+
+                    # user_edit_history_component = UserEditHistoryComponent(
+                    #     user = user[0],
+                    #     history = edit_history,
+                    #     restaurant = restaurant[0],
+                    #     component = editComponent[0])
+                    # # user_edit_history_component.save()
+
+                    # user_edit_history_confirmation = UserEditHistoryConfirmation(
+                    #     user = user[0],
+                    #     history = edit_history,
+                    #     confirmation_points = editComponent[0].confirmation_point_level)
+
+                    # edit_history.save()
+                    # user_edit_history_component.save()
+                    # user_edit_history_confirmation.save()
+
+                    update_restaurant_component_value(component, restaurant[0], new_value)
+                    # if(component == RestaurantComponents.RestaurantAddress.value):
+                    #     restaurant[0].address = new_value
+                    # elif(component == RestaurantComponents.RestaurantEmail.value):
+                    #     pass
+                    #     # restaurant[0].email = new_value
+                    # elif(component == RestaurantComponents.RestaurantLocation):
+                    #     pass
+                    #     # restaurant[0].address = new_value
+                    # elif(component == RestaurantComponents.RestaurantName):
+                    #     restaurant[0].name = new_value
+                    # elif(component == RestaurantComponents.RestaurantWebsite):
+                    #     pass
+                    #     # restaurant[0].website = new_value
+                    # elif(component == RestaurantComponents.RestaurantPhoneNumber):
+                    #     restaurant[0].phone_number = new_value
+                    #     restaurant[0].save()
+
+            #check other users have recent changes for the component
 
 
 
@@ -575,6 +721,53 @@ class RestaurantService:
         print(custom_user)
         return user
 
+        pass
+
+    def set_history(self, user, restaurant, edit_component, current_value, new_value, status=2):
+
+        edit_history = EditHistory(
+            current_value = current_value,
+            requested_value = new_value,
+            status = status,#approved
+            confirmed_by = user
+            )
+        # edit_history.save()
+
+        user_edit_history_component = UserEditHistoryComponent(
+            user = user,
+            history = edit_history,
+            restaurant = restaurant,
+            component = edit_component)
+        # user_edit_history_component.save()
+
+        user_edit_history_confirmation = UserEditHistoryConfirmation(
+            user = user,
+            history = edit_history,
+            confirmation_points = edit_component.confirmation_point_level)
+
+        # edit_history.save()
+        # user_edit_history_component.save()
+        # user_edit_history_confirmation.save()   
+        print('okkkkkkkk 1111')
+
+    def update_restaurant_component_value(self, component, restaurant, new_value):
+        if(component == RestaurantComponents.RestaurantAddress.value):
+            restaurant[0].address = new_value
+        elif(component == RestaurantComponents.RestaurantEmail.value):
+            pass
+            # restaurant[0].email = new_value
+        elif(component == RestaurantComponents.RestaurantLocation):
+            pass
+            # restaurant[0].address = new_value
+        elif(component == RestaurantComponents.RestaurantName):
+            restaurant[0].name = new_value
+        elif(component == RestaurantComponents.RestaurantWebsite):
+            pass
+            # restaurant[0].website = new_value
+        elif(component == RestaurantComponents.RestaurantPhoneNumber):
+            restaurant[0].phone_number = new_value
+            # restaurant[0].save()     
+        print('okkkkkkkk 2222')
         pass
 
     def approve_edit():
