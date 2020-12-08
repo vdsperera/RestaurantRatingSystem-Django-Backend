@@ -13,3 +13,8 @@ class RestaurantComponents(Enum):
 	RestaurantEmail = 4
 	RestaurantAddress = 5
 	RestaurantLocation = 6
+
+class RestaurantComponentsStatus(Enum):
+	Rejected = 0
+	Pending = 1
+	Approved = 2
