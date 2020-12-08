@@ -289,8 +289,6 @@ class RestaurantService:
                 "restaurant_list": list
             }
         }
-        system_service = SystemService()
-        print(system_service.get_top_contributors(data={"from_date": "2020-11-01", "to_date": "2020-12-01"}))
         return resp
         pass
 
