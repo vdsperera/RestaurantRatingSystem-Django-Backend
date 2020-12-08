@@ -529,23 +529,30 @@ class RestaurantService:
             return False
 
         user = User.objects.filter(username=username)
+        # print(user.exists())
         custom_user = CustomUser.objects.filter(user_id=user[0].id)
-        print(custom_user[0].level_number.allocated_comfirmation_points)
+        confirmation_points = custom_user[0].level_number.allocated_comfirmation_points
+        # print(custom_user[0].level_number.allocated_comfirmation_points)
 
         user_role = custom_user[0].role_id.role_id
         if(user_role == UserRoles.Admin.value):
             is_owner = True
             # return True
+        print(custom_user[0].role_id.role_name)
+        # return 1
 
         restaurant = Restaurant.objects.filter(restaurant_id=restaurant_id, claimed_by=user[0])
-        # print(restaurant)
+        print("restaurant exists", restaurant.exists())
         if(is_owner == True):
+            print("path 01")
             if(restaurant.exists() == False):
-                return False
+                print("path 01_01")
+                return "Restaurant not owned by this user"
             else:
-                pass
+                print("path 01 02")
                 # return True
-                self.set_history(user[0], restaurant[0], edit_component[0], current_value, new_value, status=2)
+                confirmation_points = edit_component[0].confirmation_point_level
+                self.set_history(user[0], restaurant[0], edit_component[0], current_value, new_value, 2, confirmation_points)
                 # edit_history = EditHistory(
                 #     current_value = current_value,
                 #     requested_value = new_value,
@@ -590,15 +597,19 @@ class RestaurantService:
                 pass
                 # allow edit
         else:
-            pass
+            print("path 02")
             hasRecentChangesByThisUser = False
             hasRecentChangesByOtherUsers = False
             if(hasRecentChangesByThisUser):#check user has recent changes for the component
+                print("path 02 01")
                 return APIException("has recently edited")
-            if(hasRecentChangesByOtherUsers):
+            elif(hasRecentChangesByOtherUsers):
                 # pass
                 # path 01
-                self.set_history(user[0], restaurant[0], edit_component[0], current_value, new_value, status=2)
+                print("path 02 02")
+                # yet to implement
+                # self.set_history(user[0], restaurant[0], edit_component[0], current_value, new_value, 2, confirmation_points)
+
                 # edit_history = EditHistory(
                 #     current_value = current_value,
                 #     requested_value = new_value,
@@ -641,9 +652,12 @@ class RestaurantService:
                 #     restaurant[0].phone_number = new_value
                 #     restaurant[0].save()
             else:
-                pass
-                if(restaurant[0].claimed_status == 2):#claimed restaurant
-                    self.set_history(user[0], restaurant[0], edit_component[0], current_value, new_value, status=2)
+                print("path 02 03")
+                restaurant = Restaurant.objects.filter(restaurant_id=restaurant_id)
+                print("claimed", restaurant[0].claimed )
+                if(restaurant[0].claimed == 2):#claimed restaurant
+                    print("path 02 03 01")
+                    self.set_history(user[0], restaurant[0], edit_component[0], current_value, new_value, 1, confirmation_points)
                     # edit_history = EditHistory(
                     #     current_value = current_value,
                     #     requested_value = new_value,
@@ -664,8 +678,9 @@ class RestaurantService:
                     #     confirmation_points = custom_user[0].level_number.allocated_comfirmation_points)
                     # user_edit_history_confirmation.save()
                 else:
-                    pass
-                    self.set_history(user[0], restaurant[0], edit_component[0], current_value, new_value, status=2)
+                    print("path 02 03 02")
+                    confirmation_points = edit_component[0].confirmation_point_level
+                    self.set_history(user[0], restaurant[0], edit_component[0], current_value, new_value, 2, confirmation_points)
                     # edit_history = EditHistory(
                     #     current_value = current_value,
                     #     requested_value = new_value,
@@ -690,7 +705,7 @@ class RestaurantService:
                     # user_edit_history_component.save()
                     # user_edit_history_confirmation.save()
 
-                    update_restaurant_component_value(component, restaurant[0], new_value)
+                    self.update_restaurant_component_value(component, restaurant[0], new_value)
                     # if(component == RestaurantComponents.RestaurantAddress.value):
                     #     restaurant[0].address = new_value
                     # elif(component == RestaurantComponents.RestaurantEmail.value):
@@ -721,12 +736,12 @@ class RestaurantService:
 
         pass
 
-    def set_history(self, user, restaurant, edit_component, current_value, new_value, status=2):
+    def set_history(self, user, restaurant, edit_component, current_value, new_value, status, confirmation_points):
 
         edit_history = EditHistory(
             current_value = current_value,
             requested_value = new_value,
-            status = status,#approved
+            status = status,
             confirmed_by = user
             )
         # edit_history.save()
@@ -737,11 +752,13 @@ class RestaurantService:
             restaurant = restaurant,
             component = edit_component)
         # user_edit_history_component.save()
-
+        
         user_edit_history_confirmation = UserEditHistoryConfirmation(
-            user = user,
-            history = edit_history,
-            confirmation_points = edit_component.confirmation_point_level)
+        user = user,
+        history = edit_history,
+        confirmation_points = confirmation_points)
+
+
 
         # edit_history.save()
         # user_edit_history_component.save()
