@@ -21,6 +21,7 @@ from ..models import Dish
 from ..models import RestaurantDish
 from django.core.exceptions import ObjectDoesNotExist
 import string
+from django.db import transaction
 
 
 class RestaurantService:
@@ -514,7 +515,7 @@ class RestaurantService:
 
     def request_edit(self, data):
 
-        username = 'dilshan'
+        username = 'asanka'
         restaurant_id = data['restaurant_id']
         component = data['component']
         current_value = data['current_value']
@@ -552,7 +553,15 @@ class RestaurantService:
                 print("path 01 02")
                 # return True
                 confirmation_points = edit_component[0].confirmation_point_level
-                self.set_history(user[0], restaurant[0], edit_component[0], current_value, new_value, 2, confirmation_points)
+                try:
+                    with transaction.atomic():
+                        self.set_history(user[0], restaurant[0], edit_component[0], current_value, new_value, 2, confirmation_points)
+                        self.update_restaurant_component_value(component, restaurant[0], new_value)
+                except:
+                    raise APIException("Fail")
+
+                # self.set_history(user[0], restaurant[0], edit_component[0], current_value, new_value, 2, confirmation_points)
+
                 # edit_history = EditHistory(
                 #     current_value = current_value,
                 #     requested_value = new_value,
@@ -577,7 +586,8 @@ class RestaurantService:
                 # user_edit_history_component.save()
                 # user_edit_history_confirmation.save()
 
-                self.update_restaurant_component_value(component, restaurant[0], new_value)
+                # self.update_restaurant_component_value(component, restaurant[0], new_value)
+
                 # if(component == RestaurantComponents.RestaurantAddress.value):
                 #     restaurant[0].address = new_value
                 # elif(component == RestaurantComponents.RestaurantEmail.value):
@@ -608,6 +618,13 @@ class RestaurantService:
                 # path 01
                 print("path 02 02")
                 # yet to implement
+                # try:
+                #     with transaction.atomic():
+                #         self.set_history(user[0], restaurant[0], edit_component[0], current_value, new_value, 2, confirmation_points)
+                #         self.update_restaurant_component_value(component, restaurant[0], new_value)
+                # except:
+                #     raise APIException("Failed")
+
                 # self.set_history(user[0], restaurant[0], edit_component[0], current_value, new_value, 2, confirmation_points)
 
                 # edit_history = EditHistory(
@@ -634,7 +651,8 @@ class RestaurantService:
                 # # user_edit_history_component.save()
                 # # user_edit_history_confirmation.save()
 
-                update_restaurant_component_value(component, restaurant[0], new_value)
+                # self.update_restaurant_component_value(component, restaurant[0], new_value)
+
                 # if(component == RestaurantComponents.RestaurantAddress.value):
                 #     restaurant[0].address = new_value
                 # elif(component == RestaurantComponents.RestaurantEmail.value):
@@ -657,7 +675,14 @@ class RestaurantService:
                 print("claimed", restaurant[0].claimed )
                 if(restaurant[0].claimed == 2):#claimed restaurant
                     print("path 02 03 01")
-                    self.set_history(user[0], restaurant[0], edit_component[0], current_value, new_value, 1, confirmation_points)
+                    try:
+                        with transaction.atomic():
+                            self.set_history(user[0], restaurant[0], edit_component[0], current_value, new_value, 1, confirmation_points)
+                    except:
+                        raise APIException("Fail")
+
+                    # self.set_history(user[0], restaurant[0], edit_component[0], current_value, new_value, 1, confirmation_points)
+
                     # edit_history = EditHistory(
                     #     current_value = current_value,
                     #     requested_value = new_value,
@@ -680,7 +705,15 @@ class RestaurantService:
                 else:
                     print("path 02 03 02")
                     confirmation_points = edit_component[0].confirmation_point_level
-                    self.set_history(user[0], restaurant[0], edit_component[0], current_value, new_value, 2, confirmation_points)
+                    try:
+                        with transaction.atomic():
+                            self.set_history(user[0], restaurant[0], edit_component[0], current_value, new_value, 2, confirmation_points)
+                            self.update_restaurant_component_value(component, restaurant[0], new_value)
+                    except:
+                        raise APIException("Fail")
+
+                    # self.update_restaurant_component_value(component, restaurant[0], new_value)
+
                     # edit_history = EditHistory(
                     #     current_value = current_value,
                     #     requested_value = new_value,
@@ -705,7 +738,8 @@ class RestaurantService:
                     # user_edit_history_component.save()
                     # user_edit_history_confirmation.save()
 
-                    self.update_restaurant_component_value(component, restaurant[0], new_value)
+                    # self.update_restaurant_component_value(component, restaurant[0], new_value)
+
                     # if(component == RestaurantComponents.RestaurantAddress.value):
                     #     restaurant[0].address = new_value
                     # elif(component == RestaurantComponents.RestaurantEmail.value):
@@ -744,14 +778,14 @@ class RestaurantService:
             status = status,
             confirmed_by = user
             )
-        # edit_history.save()
+        edit_history.save()
 
         user_edit_history_component = UserEditHistoryComponent(
             user = user,
             history = edit_history,
             restaurant = restaurant,
             component = edit_component)
-        # user_edit_history_component.save()
+        user_edit_history_component.save()
         
         user_edit_history_confirmation = UserEditHistoryConfirmation(
         user = user,
@@ -762,30 +796,53 @@ class RestaurantService:
 
         # edit_history.save()
         # user_edit_history_component.save()
-        # user_edit_history_confirmation.save()   
+        user_edit_history_confirmation.save()   
         print('okkkkkkkk 1111')
 
     def update_restaurant_component_value(self, component, restaurant, new_value):
+        print("update rest")
+        print(restaurant)
         if(component == RestaurantComponents.RestaurantAddress.value):
-            restaurant[0].address = new_value
+            restaurant.address = new_value
         elif(component == RestaurantComponents.RestaurantEmail.value):
             pass
             # restaurant[0].email = new_value
-        elif(component == RestaurantComponents.RestaurantLocation):
+        elif(component == RestaurantComponents.RestaurantLocation.value):
             pass
             # restaurant[0].address = new_value
-        elif(component == RestaurantComponents.RestaurantName):
-            restaurant[0].name = new_value
-        elif(component == RestaurantComponents.RestaurantWebsite):
+        elif(component == RestaurantComponents.RestaurantName.value):
+            print("rest name")
+            restaurant.name = new_value
+            print("rest name after")
+        elif(component == RestaurantComponents.RestaurantWebsite.value):
+            print("rest web")
             pass
             # restaurant[0].website = new_value
-        elif(component == RestaurantComponents.RestaurantPhoneNumber):
-            restaurant[0].phone_number = new_value
-            # restaurant[0].save()     
+        elif(component == RestaurantComponents.RestaurantPhoneNumber.value):
+            print("rest phone")
+            restaurant.phone_number = new_value
+        print("final")
+        restaurant.save()     
         print('okkkkkkkk 2222')
         pass
 
     def approve_edit():
+        history_id = 4
+        username = 'asanka'
+        approval = True
+
+        user = User.objects.filter(username=username)
+        if(not user.exists()):
+            raise APIException("User not found")
+        custom_user = CustomUser.objects.filter(user_id=user[0].id)
+        confirmation_points = custom_user[0].level_number.allocated_comfirmation_points
+
+        user_edit_history_confirmation = UserEditHistoryConfirmation.objects.filter(user_id=user_id, history_id=history_id)
+        if(user_edit_history_confirmation.exists()):
+            raise APIException("Already submited")
+        if(approval):
+
+
         pass
 
     def claim_restaurant():
