@@ -813,7 +813,7 @@ class RestaurantService:
         elif(component == RestaurantComponents.RestaurantName.value):
             print("rest name")
             restaurant.name = new_value
-            print("rest name after")
+            print("rest name after", new_value)
         elif(component == RestaurantComponents.RestaurantWebsite.value):
             print("rest web")
             pass
@@ -826,24 +826,70 @@ class RestaurantService:
         print('okkkkkkkk 2222')
         pass
 
-    def approve_edit():
-        history_id = 4
-        username = 'asanka'
-        approval = True
+    def approve_edit(self, data):
+        history_id = data['history_id']
+        username = data['user']
+        approval = data['approval']
 
         user = User.objects.filter(username=username)
+
         if(not user.exists()):
             raise APIException("User not found")
+
         custom_user = CustomUser.objects.filter(user_id=user[0].id)
         confirmation_points = custom_user[0].level_number.allocated_comfirmation_points
 
-        user_edit_history_confirmation = UserEditHistoryConfirmation.objects.filter(user_id=user_id, history_id=history_id)
+        edit_history = EditHistory.objects.filter(history_id = history_id)
+        user_edit_history_confirmation = UserEditHistoryConfirmation.objects.filter(user_id=user[0].id, history_id=edit_history[0])
+
+        # print(user_edit_history_confirmation)
+
         if(user_edit_history_confirmation.exists()):
             raise APIException("Already submited")
-        if(approval):
+
+        try:
+            with transaction.atomic():
+
+                if(approval == 'Approval'):
+                    pass
+                    new_approval = UserEditHistoryConfirmation(
+                        user = user[0],
+                        history = edit_history[0],
+                        confirmation_points = confirmation_points
+                        )
+                    new_approval.save()
+
+                    user_edit_history_component = UserEditHistoryComponent.objects.filter(history_id=edit_history[0])
+                    edit_component = EditComponent.objects.get(component_id=user_edit_history_component[0].component_id)
+                    component_confirmation_level = edit_component.confirmation_point_level
+                    print("confirmation level", component_confirmation_level)
+                    
+                    # try:
+                    #     with transaction.atomic():
+
+                    confimations = UserEditHistoryConfirmation.objects.raw("""
+                        SELECT id, history_id, SUM(confirmation_points) AS total_confirmation_points
+                        FROM user_edit_history_confirmation
+                        WHERE history_id = %s
+                        GROUP BY history_id
+                        """, [history_id])
+                    # for item in confimations:
+                    #     print('item', item)
+                    current_confirmation_points = confimations[0].total_confirmation_points
+                    print('current_confirmation_points ', current_confirmation_points)
+                    if(current_confirmation_points >= component_confirmation_level):
+                        # print()
+                        # restaurant = user_edit_history_component[0].restaurant_id
+                        restaurant = Restaurant.objects.get(restaurant_id=user_edit_history_component[0].restaurant_id)
+                        print(restaurant)
+                        self.update_restaurant_component_value(edit_component.component_id, restaurant, edit_history[0].requested_value)
+                        print('new value', edit_history[0].requested_value)
+                    # except:
+                    #     raise APIException("failed")
+        except:
+            raise APIException("failed")        
 
 
-        pass
 
     def claim_restaurant():
         pass
