@@ -1,0 +1,29 @@
+PUT /restaurant/approval
+
+request
+
+{
+"data":{
+  "event": "500",
+  "action": "approve_restaurant_component_edit_request",
+  "token":"opentoken",
+  "mdata": {
+    "user": "vidumini",
+    "history_id": 2,
+	  "approval": "Approve"
+  }
+}
+}
+
+
+
+response
+
+{
+    "success": true,
+    "code": 200,
+    "message": "success ApproveRestaurantComponentEditRequest",
+    "data": {
+
+    }
+}
