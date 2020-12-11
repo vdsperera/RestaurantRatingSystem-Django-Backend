@@ -840,18 +840,28 @@ class RestaurantService:
         confirmation_points = custom_user[0].level_number.allocated_comfirmation_points
 
         edit_history = EditHistory.objects.filter(history_id = history_id)
+
+        if(not edit_history.exists()):
+            raise APIException("Not exists")
+
+        if(edit_history[0].status == 0):
+            raise APIException("Already Rejected")
+
+        if(edit_history[0].status == 2):
+            raise APIException("Already Approved")
+
         user_edit_history_confirmation = UserEditHistoryConfirmation.objects.filter(user_id=user[0].id, history_id=edit_history[0])
 
         # print(user_edit_history_confirmation)
-
+        # return edit_history[0].status
+        # return 1
         if(user_edit_history_confirmation.exists()):
             raise APIException("Already submited")
-
-        try:
-            with transaction.atomic():
-
-                if(approval == 'Approval'):
-                    pass
+        
+        if(approval == 'Approval'):
+            pass
+            try:
+                with transaction.atomic():
                     new_approval = UserEditHistoryConfirmation(
                         user = user[0],
                         history = edit_history[0],
