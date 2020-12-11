@@ -873,9 +873,6 @@ class RestaurantService:
                     edit_component = EditComponent.objects.get(component_id=user_edit_history_component[0].component_id)
                     component_confirmation_level = edit_component.confirmation_point_level
                     print("confirmation level", component_confirmation_level)
-                    
-                    # try:
-                    #     with transaction.atomic():
 
                     confimations = UserEditHistoryConfirmation.objects.raw("""
                         SELECT id, history_id, SUM(confirmation_points) AS total_confirmation_points
@@ -883,8 +880,6 @@ class RestaurantService:
                         WHERE history_id = %s
                         GROUP BY history_id
                         """, [history_id])
-                    # for item in confimations:
-                    #     print('item', item)
                     current_confirmation_points = confimations[0].total_confirmation_points
                     print('current_confirmation_points ', current_confirmation_points)
                     if(current_confirmation_points >= component_confirmation_level):
@@ -893,12 +888,61 @@ class RestaurantService:
                         restaurant = Restaurant.objects.get(restaurant_id=user_edit_history_component[0].restaurant_id)
                         print(restaurant)
                         self.update_restaurant_component_value(edit_component.component_id, restaurant, edit_history[0].requested_value)
-                        print('new value', edit_history[0].requested_value)
-                    # except:
-                    #     raise APIException("failed")
-        except:
-            raise APIException("failed")        
+                        # ed = EditHistory.objects.get(history_id=edit_history[0].history_id)
+                        # ed.status = 2
+                        # ed.save()
+                        ed = edit_history[0]
+                        ed.status = 2
+                        ed.save()
 
+                        # edit_history[0].status = 2
+                        # edit_history[0].save()
+                        print('new value', edit_history[0].requested_value)
+
+                        ### Add Contribution Points ###
+                        ### add and reduce for all related users ###
+            except:
+                raise APIException("failed")        
+        elif(approval == 'Rejection'):
+            try:
+                with transaction.atomic():
+                    confirmation_points = -confirmation_points
+                    new_approval = UserEditHistoryConfirmation(
+                        user = user[0],
+                        history = edit_history[0],
+                        confirmation_points = confirmation_points
+                        )
+                    new_approval.save()
+
+                    user_edit_history_component = UserEditHistoryComponent.objects.filter(history_id=edit_history[0])
+                    edit_component = EditComponent.objects.get(component_id=user_edit_history_component[0].component_id)
+                    component_confirmation_level = -edit_component.confirmation_point_level
+                    print("confirmation level", component_confirmation_level)
+
+                    confimations = UserEditHistoryConfirmation.objects.raw("""
+                        SELECT id, history_id, SUM(confirmation_points) AS total_confirmation_points
+                        FROM user_edit_history_confirmation
+                        WHERE history_id = %s
+                        GROUP BY history_id
+                        """, [history_id])
+                    current_confirmation_points = confimations[0].total_confirmation_points
+                    print('current_confirmation_points ', current_confirmation_points)
+                    if(current_confirmation_points <= component_confirmation_level):
+                        # print()
+                        # restaurant = user_edit_history_component[0].restaurant_id
+                        # restaurant = Restaurant.objects.get(restaurant_id=user_edit_history_component[0].restaurant_id)
+                        # print(restaurant)
+                        # self.update_restaurant_component_value(edit_component.component_id, restaurant, edit_history[0].requested_value)
+                        ed = edit_history[0]
+                        ed.status = 0
+                        ed.save()
+                        print("edit his id", edit_history[0].history_id)
+                        print("edit his status", edit_history[0].status)
+
+                        ### Add Contribution Points ###
+                        ### add and reduce for all related users ###
+            except:
+                raise APIException("failed")   
 
 
     def claim_restaurant():
