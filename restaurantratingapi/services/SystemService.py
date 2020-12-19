@@ -187,8 +187,9 @@ class SystemService:
         list = []
 
         for item in contributions:
+            user = User.objects.get(id=item.user_id)
             model = {
-              "user": item.user_id,
+              "user": user.username,
               "total_points": item.total_points
             }
             list.append(model)
