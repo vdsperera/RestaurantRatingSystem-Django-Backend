@@ -238,7 +238,8 @@ class RestaurantService:
                 "dish_rating": rating_resp['data']['dish_rating'],
                 "price_rating": rating_resp['data']['price_rating'],
                 "service_rating": rating_resp['data']['service_rating'],
-                "overall_rating": rating_resp['data']['overall_rating']
+                "overall_rating": rating_resp['data']['overall_rating'],
+                "ratings": rating_resp['data']['ratings']
             }
         }
 
@@ -515,7 +516,7 @@ class RestaurantService:
 
     def request_edit(self, data):
 
-        username = 'asanka'
+        username = data['username']
         restaurant_id = data['restaurant_id']
         component = data['component']
         current_value = data['current_value']
@@ -767,7 +768,22 @@ class RestaurantService:
         #     raise APIException(f"Username name '{username}' not exists")
         print(custom_user)
         return user
-
+        resp = {
+            "success": True,
+            "code": 200,
+            "message": "success EditRestaurantComponent",
+            "data": {
+              "requested_by": username,
+              "restaurant_id": restaurant_id,
+              "component": 2,
+              "current_value": current_value,
+              "requested_value": new_value,
+              "history_id": 2,
+              "status": "Pending",
+              "confirmation_point_level": 100,
+              "current_points": 50
+            }
+        }
         pass
 
     def set_history(self, user, restaurant, edit_component, current_value, new_value, status, confirmation_points):
@@ -839,9 +855,14 @@ class RestaurantService:
         custom_user = CustomUser.objects.filter(user_id=user[0].id)
         confirmation_points = custom_user[0].level_number.allocated_comfirmation_points
         user_role = custom_user[0].role_id
-        print('Role is ', UserRoles(user_role.role_id).name)
-        print(UserRoles.Customer.value)
+        # print('Role is ', UserRoles(user_role.role_id).name)
+        # print(UserRoles.Customer.value)
         edit_history = EditHistory.objects.filter(history_id = history_id)
+
+        user_edit_history_component = UserEditHistoryComponent.objects.filter(history_id=edit_history[0])
+        # print(user_edit_history_component[0].__dict__)
+        # print(user_edit_history_component[0].restaurant_id)
+        # return 1
 
         if(not edit_history.exists()):
             raise APIException("Not exists")
@@ -856,13 +877,12 @@ class RestaurantService:
 
         # print(user_edit_history_confirmation)
         # return edit_history[0].status
-        # return 1
+        # return user_role.role_id == UserRoles.Owner.value or user_role.role_id == UserRoles.Admin.value
         if(user_edit_history_confirmation.exists()):
             raise APIException("Already submited")
-        
+        # return user_role.role_id == UserRoles.Owner.value
         if(user_role.role_id == UserRoles.Customer.value):
             if(approval == 'Approval'):
-                return 'App'
                 try:
                     with transaction.atomic():
                         new_approval = UserEditHistoryConfirmation(
@@ -875,7 +895,7 @@ class RestaurantService:
                         user_edit_history_component = UserEditHistoryComponent.objects.filter(history_id=edit_history[0])
                         edit_component = EditComponent.objects.get(component_id=user_edit_history_component[0].component_id)
                         component_confirmation_level = edit_component.confirmation_point_level
-                        print("confirmation level", component_confirmation_level)
+                        # print("confirmation level", component_confirmation_level)
 
                         confimations = UserEditHistoryConfirmation.objects.raw("""
                             SELECT id, history_id, SUM(confirmation_points) AS total_confirmation_points
@@ -884,7 +904,7 @@ class RestaurantService:
                             GROUP BY history_id
                             """, [history_id])
                         current_confirmation_points = confimations[0].total_confirmation_points
-                        print('current_confirmation_points ', current_confirmation_points)
+                        # print('current_confirmation_points ', current_confirmation_points)
                         if(current_confirmation_points >= component_confirmation_level):
                             # print()
                             # restaurant = user_edit_history_component[0].restaurant_id
@@ -900,14 +920,13 @@ class RestaurantService:
 
                             # edit_history[0].status = 2
                             # edit_history[0].save()
-                            print('new value', edit_history[0].requested_value)
+                            # print('new value', edit_history[0].requested_value)
 
                             ### Add Contribution Points ###
                             ### add and reduce for all related users ###
                 except:
                     raise APIException("failed")        
             elif(approval == 'Rejection'):
-                return 'Rej'
                 try:
                     with transaction.atomic():
                         confirmation_points = -confirmation_points
@@ -921,7 +940,7 @@ class RestaurantService:
                         user_edit_history_component = UserEditHistoryComponent.objects.filter(history_id=edit_history[0])
                         edit_component = EditComponent.objects.get(component_id=user_edit_history_component[0].component_id)
                         component_confirmation_level = -edit_component.confirmation_point_level
-                        print("confirmation level", component_confirmation_level)
+                        # print("confirmation level", component_confirmation_level)
 
                         confimations = UserEditHistoryConfirmation.objects.raw("""
                             SELECT id, history_id, SUM(confirmation_points) AS total_confirmation_points
@@ -930,7 +949,7 @@ class RestaurantService:
                             GROUP BY history_id
                             """, [history_id])
                         current_confirmation_points = confimations[0].total_confirmation_points
-                        print('current_confirmation_points ', current_confirmation_points)
+                        # print('current_confirmation_points ', current_confirmation_points)
                         if(current_confirmation_points <= component_confirmation_level):
                             # print()
                             # restaurant = user_edit_history_component[0].restaurant_id
@@ -940,20 +959,20 @@ class RestaurantService:
                             ed = edit_history[0]
                             ed.status = 0
                             ed.save()
-                            print("edit his id", edit_history[0].history_id)
-                            print("edit his status", edit_history[0].status)
+                            # print("edit his id", edit_history[0].history_id)
+                            # print("edit his status", edit_history[0].status)
 
                             ### Add Contribution Points ###
                             ### add and reduce for all related users ###
                 except:
                     raise APIException("failed")  
-        elif(user_role.role_id == UserRoles.Owner.value | user_role.role_id == UserRoles.Admin.value):
-            pass
+        elif(user_role.role_id == UserRoles.Owner.value or user_role.role_id == UserRoles.Admin.value):
+            # return 'Owner'
             user_edit_history_component = UserEditHistoryComponent.objects.filter(history_id=edit_history[0])
             # print(user_edit_history_component[0].restaurant)
             restaurant = Restaurant.objects.filter(restaurant_id=user_edit_history_component[0].restaurant.restaurant_id, claimed_by=user[0])
-            print(restaurant.exists())
-            if(not restaurant.exists()):
+            # print(restaurant.exists())
+            if(user_role.role_id == UserRoles.Owner.value and not restaurant.exists()):
                 raise APIException('Not the owner of the restaurant')
             if(approval == 'Approval'):
                 # return 'Owner App'
@@ -962,23 +981,23 @@ class RestaurantService:
 
                         user_edit_history_component = UserEditHistoryComponent.objects.filter(history_id=edit_history[0])
                         edit_component = EditComponent.objects.get(component_id=user_edit_history_component[0].component_id)
-                        component_confirmation_level = edit_component.confirmation_point_level
+                        component_confirmation_level = 2 * edit_component.confirmation_point_level
                         print("confirmation level", component_confirmation_level)
 
                         new_approval = UserEditHistoryConfirmation(
                             user = user[0],
                             history = edit_history[0],
-                            confirmation_points = edit_component.confirmation_point_level
+                            confirmation_points = component_confirmation_level
                             )
                         new_approval.save()
 
-                        # confimations = UserEditHistoryConfirmation.objects.raw("""
-                        #     SELECT id, history_id, SUM(confirmation_points) AS total_confirmation_points
-                        #     FROM user_edit_history_confirmation
-                        #     WHERE history_id = %s
-                        #     GROUP BY history_id
-                        #     """, [history_id])
-                        # current_confirmation_points = confimations[0].total_confirmation_points
+                        confimations = UserEditHistoryConfirmation.objects.raw("""
+                            SELECT id, history_id, SUM(confirmation_points) AS total_confirmation_points
+                            FROM user_edit_history_confirmation
+                            WHERE history_id = %s
+                            GROUP BY history_id
+                            """, [history_id])
+                        current_confirmation_points = confimations[0].total_confirmation_points
                         # print('current_confirmation_points ', current_confirmation_points)
                         # if(current_confirmation_points >= component_confirmation_level):
 
@@ -996,7 +1015,7 @@ class RestaurantService:
 
                         # edit_history[0].status = 2
                         # edit_history[0].save()
-                        print('new value', edit_history[0].requested_value)
+                        # print('new value', edit_history[0].requested_value)
 
                         ### Add Contribution Points ###
                         ### add and reduce for all related users ###
@@ -1010,23 +1029,23 @@ class RestaurantService:
 
                         user_edit_history_component = UserEditHistoryComponent.objects.filter(history_id=edit_history[0])
                         edit_component = EditComponent.objects.get(component_id=user_edit_history_component[0].component_id)
-                        component_confirmation_level = -edit_component.confirmation_point_level
-                        print("confirmation level", component_confirmation_level)
+                        component_confirmation_level = 2 * -edit_component.confirmation_point_level
+                        # print("confirmation level", component_confirmation_level)
 
                         new_approval = UserEditHistoryConfirmation(
                             user = user[0],
                             history = edit_history[0],
-                            confirmation_points = -edit_component.confirmation_point_level
+                            confirmation_points = component_confirmation_level
                             )
                         new_approval.save()
 
-                        # confimations = UserEditHistoryConfirmation.objects.raw("""
-                        #     SELECT id, history_id, SUM(confirmation_points) AS total_confirmation_points
-                        #     FROM user_edit_history_confirmation
-                        #     WHERE history_id = %s
-                        #     GROUP BY history_id
-                        #     """, [history_id])
-                        # current_confirmation_points = confimations[0].total_confirmation_points
+                        confimations = UserEditHistoryConfirmation.objects.raw("""
+                            SELECT id, history_id, SUM(confirmation_points) AS total_confirmation_points
+                            FROM user_edit_history_confirmation
+                            WHERE history_id = %s
+                            GROUP BY history_id
+                            """, [history_id])
+                        current_confirmation_points = confimations[0].total_confirmation_points
                         # print('current_confirmation_points ', current_confirmation_points)
                         # if(current_confirmation_points <= component_confirmation_level):
 
@@ -1038,13 +1057,34 @@ class RestaurantService:
                         ed = edit_history[0]
                         ed.status = 0
                         ed.save()
-                        print("edit his id", edit_history[0].history_id)
-                        print("edit his status", edit_history[0].status)
+                        # print("edit his id", edit_history[0].history_id)
+                        # print("edit his status", edit_history[0].status)
 
                             ### Add Contribution Points ###
                             ### add and reduce for all related users ###
                 except:
                     raise APIException("failed")  
+
+        resp = {
+            "success": True,
+            "code": 200,
+            "message": "success ApproveRestaurantComponentEditRequest",
+            "data": {
+              "confirmed_by": username,
+              "approval": approval,
+              "requested_by": user_edit_history_component[0].user.username,
+              "restaurant_id": user_edit_history_component[0].restaurant_id,
+              "component": user_edit_history_component[0].component.component_name,
+              "current_value": edit_history[0].current_value,
+              "requested_value": edit_history[0].requested_value,
+              "history_id": edit_history[0].history_id,
+              "status": ed.status,
+              "confirmation_point_level": user_edit_history_component[0].component.confirmation_point_level,
+              "current_points": current_confirmation_points
+            }
+        }
+
+        return resp
 
     def claim_restaurant():
         pass
