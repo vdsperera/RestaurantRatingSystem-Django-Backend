@@ -449,15 +449,23 @@ class RatingService:
             total_price_rating = total_price_rating + item.price_rating
             total_service_rating = total_service_rating + item.service_rating
 
+            if(item.restaurant_user_id != None):
+                user = User.objects.get(id=item.restaurant_user_id)
+            else:
+                user = User.objects.get(id=item.dish_user_id)
+
+
+
             rating_model = {
                 "rating_id": item.rating_id,
                 "dish_id": item.dish_id,
-                "overall_rating": (item.dish_rating + item.price_rating + item.service_rating)/3,
+                "overall_rating": round(((item.dish_rating + item.price_rating + item.service_rating)/3), 1),
                 "dish_rating": item.dish_rating,
                 "price_rating": item.price_rating,
                 "service_rating": item.service_rating,
-                "added_by": item.restaurant_user_id if item.restaurant_user_id != None else item.dish_user_id,
-                "verified": item.verified
+                "added_by": user.username,
+                "verified": item.verified,
+                "created_on": item.created_on
             }
             list.append(rating_model)
 
