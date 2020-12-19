@@ -12,7 +12,7 @@ request
     "restaurant_id": 23,
 	  "component": 2,
     "current_value": "ab",
-    "new_value": "ds",
+    "new_value": "ds"
   }
 }
 }
@@ -26,6 +26,14 @@ response
     "code": 200,
     "message": "success EditRestaurantComponent",
     "data": {
-
+      "requested_by": "vidumini",
+      "restaurant_id": 23,
+      "component": 2,
+      "current_value": "ab",
+      "requested_value": "ds",
+      "history_id": 2,
+      "status": "Pending",
+      "confirmation_point_level": 100,
+      "current_points": 50
     }
 }
