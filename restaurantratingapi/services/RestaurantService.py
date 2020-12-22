@@ -45,6 +45,7 @@ class RestaurantService:
             rest_longitude = data['longitude'] #restaurant GEO location-longitude #required
             rest_latitude = data['latitude'] #restaurant GEO location-latitude #required
             selected_role = data['role'] #user's requested role for the restaurant
+            dishes = data['dishes']
         except KeyError as e:
             print(f"Key {e} not exists in the request")
             raise APIException(f"Key {e} not exists in the request")
@@ -174,7 +175,7 @@ class RestaurantService:
             "code": 200,
             "message": "success RegisterRestaurant",
             "data": {
-                # "restaurant_id": rest.restaurant_id,
+                "restaurant_id": rest.restaurant_id,
                 "restaurant_name": rest.name,
                 "address": rest.address,
                 "logitude": rest.longitude,
@@ -187,6 +188,22 @@ class RestaurantService:
                 "created_on": rest.created_on
             }
         }
+
+        if(ValidationService.isset(value=dishes) and dishes):
+            for dish in dishes:
+                # print((dish))
+                dish_data = {
+                    "user": username,
+                    "restaurant_id": rest.restaurant_id,
+                    "dish_id": dish['dish_id'],
+                    "dish_name": dish['dish_name']                
+                }
+                # print(dish_data)
+                self.add_dishes_for_the_restaurant(dish_data)
+        
+        
+
+
 
         return resp     
         
