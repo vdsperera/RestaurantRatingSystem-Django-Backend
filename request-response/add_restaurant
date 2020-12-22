@@ -1,0 +1,52 @@
+request
+
+POST /restaurant/
+
+{
+"data":{
+  "event": "500",
+  "action": "register",
+  "token":"opentoken",
+  "mdata": {
+    "user": "vidumini",    
+    "name": "test_01_16",
+    "address": {
+        "street_address": "Merit Street",
+        "city": "Rathgama"
+    },
+    "phone_number": "0770273653",
+    "longitude": "23.5444",
+    "latitude": 77.5444,
+    "role": "customer",
+    "dishes":[
+      {
+        "dish_id": 5,
+        "dish_name": "new_dish_5"
+      },
+      {
+        "dish_id": 6,
+        "dish_name": "new_dish_6"
+      }
+    ]
+  }
+}
+}
+
+
+response
+
+{
+    "success": true,
+    "code": 200,
+    "message": "success AddRating",
+    "data": {
+        "rated_by": "vidumini",
+        "verified": "Verified",
+        "restaurant_id": 22,
+        "dish_id": 2,
+        "dish_rating": 3,
+        "price_rating": 3,
+        "service_rating": 3
+    }
+}
+
