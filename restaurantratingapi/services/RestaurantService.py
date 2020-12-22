@@ -506,7 +506,7 @@ class RestaurantService:
             dish = dish[0],
             restaurant = restaurant,
             added_by = user,
-            status = 1 if owner == True else 0,
+            status = 1 if (owner == True or restaurant.claimed == 0) else 0,
             created_on = "2020-11-14"
             )
         # return 1
