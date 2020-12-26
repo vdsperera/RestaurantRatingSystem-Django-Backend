@@ -779,12 +779,13 @@ class RestaurantService:
 
 
 
-        return restaurant
+        # return restaurant
         #check whether the username already exists
         # if(not User):
         #     raise APIException(f"Username name '{username}' not exists")
-        print(custom_user)
-        return user
+        # print(custom_user)
+        # return user
+        return 'success'
         resp = {
             "success": True,
             "code": 200,
