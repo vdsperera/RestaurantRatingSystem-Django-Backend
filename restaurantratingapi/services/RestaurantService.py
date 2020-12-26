@@ -628,6 +628,20 @@ class RestaurantService:
         else:
             print("path 02")
             hasRecentChangesByThisUser = False
+            recent_edits = UserEditHistoryComponent.objects.raw("""
+                SELECT uehc.id, uehc.history_id
+                FROM user_edit_history_component as uehc
+                INNER JOIN  edit_history as eh
+                ON uehc.history_id = eh.history_id
+                WHERE uehc.restaurant_id=%s
+                AND uehc.component_id=%s
+                AND uehc.user_id=%s
+                AND eh.status=%s""", [restaurant_id, component,user[0].id, EditHistoryStatus.Pending.value])
+
+            if(recent_edits):
+                raise APIException("Recently edited by the user")
+
+
             hasRecentChangesByOtherUsers = False
             if(hasRecentChangesByThisUser):#check user has recent changes for the component
                 print("path 02 01")
