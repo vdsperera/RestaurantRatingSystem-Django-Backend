@@ -3,6 +3,7 @@ from .SystemService import SystemService
 from ..enums.RestaurantEnums import ClaimStatus, RestaurantComponents
 from ..enums.ContributionEnums import ContributionTypes
 from ..enums.UserEnums import UserRoles
+from ..enums.HistoryEnums import EditHistoryStatus
 from ..models import Restaurant
 from django.contrib.auth.models import User
 from ..models import CustomUser
@@ -566,14 +567,14 @@ class RestaurantService:
             print("path 01")
             if(restaurant.exists() == False):
                 print("path 01_01")
-                return "Restaurant not owned by this user"
+                return APIException("Restaurant not owned by this user")
             else:
                 print("path 01 02")
                 # return True
                 confirmation_points = edit_component[0].confirmation_point_level
                 try:
                     with transaction.atomic():
-                        self.set_history(user[0], restaurant[0], edit_component[0], current_value, new_value, 2, confirmation_points)
+                        history = self.set_history(user[0], restaurant[0], edit_component[0], current_value, new_value, 2, confirmation_points)
                         self.update_restaurant_component_value(component, restaurant[0], new_value)
                 except:
                     raise APIException("Fail")
@@ -695,7 +696,7 @@ class RestaurantService:
                     print("path 02 03 01")
                     try:
                         with transaction.atomic():
-                            self.set_history(user[0], restaurant[0], edit_component[0], current_value, new_value, 1, confirmation_points)
+                            history = self.set_history(user[0], restaurant[0], edit_component[0], current_value, new_value, 1, confirmation_points)
                     except:
                         raise APIException("Fail")
 
@@ -725,7 +726,7 @@ class RestaurantService:
                     confirmation_points = edit_component[0].confirmation_point_level
                     try:
                         with transaction.atomic():
-                            self.set_history(user[0], restaurant[0], edit_component[0], current_value, new_value, 2, confirmation_points)
+                            history = self.set_history(user[0], restaurant[0], edit_component[0], current_value, new_value, 2, confirmation_points)
                             self.update_restaurant_component_value(component, restaurant[0], new_value)
                     except:
                         raise APIException("Fail")
@@ -785,7 +786,9 @@ class RestaurantService:
         #     raise APIException(f"Username name '{username}' not exists")
         # print(custom_user)
         # return user
-        return 'success'
+
+        component_confirmation_level = edit_component[0].confirmation_point_level
+
         resp = {
             "success": True,
             "code": 200,
@@ -793,15 +796,17 @@ class RestaurantService:
             "data": {
               "requested_by": username,
               "restaurant_id": restaurant_id,
-              "component": 2,
+              "component": edit_component[0].component_name,
               "current_value": current_value,
               "requested_value": new_value,
-              "history_id": 2,
-              "status": "Pending",
-              "confirmation_point_level": 100,
-              "current_points": 50
+              "history_id": history['history_id'],
+              "status": EditHistoryStatus(history['status']).name,
+              "confirmation_point_level": component_confirmation_level,
+              "current_points": history['current_points']
             }
         }
+
+        return resp
         pass
 
     def set_history(self, user, restaurant, edit_component, current_value, new_value, status, confirmation_points):
@@ -832,6 +837,13 @@ class RestaurantService:
         # user_edit_history_component.save()
         user_edit_history_confirmation.save()   
         print('okkkkkkkk 1111')
+        message = {
+         "history_id": edit_history.history_id,
+         "status": status,
+         "current_points": confirmation_points
+        }
+
+        return message
 
     def update_restaurant_component_value(self, component, restaurant, new_value):
         print("update rest")
