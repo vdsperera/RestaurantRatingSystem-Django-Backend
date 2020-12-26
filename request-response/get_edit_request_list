@@ -1,0 +1,16 @@
+GET /restaurants/edits
+
+response
+
+{
+    "success": true,
+    "code": 200,
+    "message": "success GetRestaurantComponentEditList",
+    "data": {
+      "history_id": 2,
+      "restaurant_name": "Amingo",
+      "component_name": "Restaurant Name",
+      "current_value": "ab",
+      "requested_value": "ds"
+    }
+}
