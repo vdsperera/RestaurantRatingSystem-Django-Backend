@@ -1104,6 +1104,20 @@ class RestaurantService:
 
         return resp
 
+
+
+    def get_restaurants_edits_list(self, data):
+        pass
+        username = 'vidumini'
+        edits = EditHistory.objects.raw("""
+            SELECT history_id,current_value, requested_value
+            FROM edit_history
+            INNER JOIN user_edit_history_confirmation
+            ON edit_history.history_id = user_edit_history_confirmation.history_id
+            WHERE user_edit_history_confirmation.user_id != 2
+            """)
+
+
     def claim_restaurant():
         pass
 
