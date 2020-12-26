@@ -533,7 +533,7 @@ class RestaurantService:
 
     def request_edit(self, data):
 
-        username = data['username']
+        username = data['user']
         restaurant_id = data['restaurant_id']
         component = data['component']
         current_value = data['current_value']
