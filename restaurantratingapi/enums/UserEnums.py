@@ -1,6 +1,6 @@
 from enum import Enum
 
 class UserRoles(Enum):
-    Onwer = 1
+    Owner = 1
     Customer = 2
     Admin = 3
