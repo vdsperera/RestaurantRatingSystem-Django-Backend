@@ -7,6 +7,7 @@ from ..models import Restaurant
 from ..models import User
 from ..models import Token
 from ..models import AddedRating
+from ..models import Review
 from rest_framework.exceptions import NotFound
 from django.core.exceptions import ObjectDoesNotExist
 from .ValidationService import ValidationService
@@ -18,6 +19,7 @@ from .SystemService import SystemService
 from django.db.models import Count
 from django.db.models import Avg
 from django.db import connection
+from django.db import transaction
 
 class RatingService:
 
@@ -150,8 +152,18 @@ class RatingService:
           verified = verified,
           created_on = "2020-06-26")
 
+        review_model = Review(
+            rating = rating,
+            message = review,
+            attachment = None,
+            upvote_count = 0,
+            report_count = 0
+            )
+
         try: 
-            rating.save()
+            with transaction.atomic():               
+                rating.save()
+                review_model.save()
         except IntegrityError as e:
             raise APIException(e)   
 
