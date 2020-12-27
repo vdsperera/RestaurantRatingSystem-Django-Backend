@@ -1,0 +1,1189 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"His",
+				"EditHistoryStatus\tclass"
+			],
+			[
+				"Edit",
+				"EditHistoryStatus\tclass"
+			],
+			[
+				"sta",
+				"status"
+			],
+			[
+				"history",
+				"history_id"
+			],
+			[
+				"cla",
+				"claimed\tstatement"
+			],
+			[
+				"dish",
+				"dish_data\tstatement"
+			],
+			[
+				"dish_",
+				"dish_name"
+			],
+			[
+				"created",
+				"created_on"
+			],
+			[
+				"rest",
+				"restaurant_id\tstatement"
+			],
+			[
+				"user",
+				"username\tstatement"
+			],
+			[
+				"confirmatio",
+				"confirmation_point_level\tstatement"
+			],
+			[
+				"curren",
+				"current_value\tstatement"
+			],
+			[
+				"compo",
+				"component_name\tstatement"
+			],
+			[
+				"confirm",
+				"confirmation_point_level"
+			],
+			[
+				"ro",
+				"role_id\tstatement"
+			],
+			[
+				"User",
+				"UserRoles\tclass"
+			],
+			[
+				"histo",
+				"history_id\tstatement"
+			],
+			[
+				"edit",
+				"edit_history\tstatement"
+			],
+			[
+				"comp",
+				"component_id\tstatement"
+			],
+			[
+				"new",
+				"new_approval\tstatement"
+			],
+			[
+				"re",
+				"requested_value\tstatement"
+			],
+			[
+				"restaurant",
+				"restaurant_id"
+			],
+			[
+				"Resta",
+				"Restaurant\tclass"
+			],
+			[
+				"curre",
+				"current_confirmation_points\tstatement"
+			],
+			[
+				"his",
+				"history_id\tstatement"
+			],
+			[
+				"edi",
+				"edit_history\tstatement"
+			],
+			[
+				"EditHis",
+				"UserEditHistoryComponent\tclass"
+			],
+			[
+				"hiso",
+				"history_id"
+			],
+			[
+				"Rest",
+				"RestaurantService\tclass"
+			],
+			[
+				"rol",
+				"role_name\tstatement"
+			],
+			[
+				"con",
+				"allocated_comfirmation_points\tstatement"
+			],
+			[
+				"has",
+				"hasRecentChangesByOtherUsers\tstatement"
+			],
+			[
+				"Res",
+				"RestaurantWebsite\tinstance"
+			],
+			[
+				"restaur",
+				"restaurant\tstatement"
+			],
+			[
+				"user_edi",
+				"user_edit_history_confirmation\tstatement"
+			],
+			[
+				"reqeu",
+				"requested"
+			],
+			[
+				"cure",
+				"current_value\tstatement"
+			],
+			[
+				"Edi",
+				"EditHistory\tclass"
+			],
+			[
+				"is",
+				"is_owner\tstatement"
+			],
+			[
+				"claimed",
+				"claimed_by\tstatement"
+			],
+			[
+				"restau",
+				"restaurant\tstatement"
+			],
+			[
+				"resta",
+				"restaurant\tstatement"
+			],
+			[
+				"role",
+				"role_id\tstatement"
+			],
+			[
+				"custom",
+				"custom_user\tstatement"
+			],
+			[
+				"from",
+				"from_date\tstatement"
+			],
+			[
+				"get",
+				"get_top_contributors\tfunction"
+			],
+			[
+				"AddUn",
+				"AddUnverifiedRestaurantRating\tinstance"
+			],
+			[
+				"AddVeri",
+				"AddVerifiedRestaurantRating\tinstance"
+			],
+			[
+				"A",
+				"AddVerifiedDishRating\tinstance"
+			],
+			[
+				"Add",
+				"AddDishToRestaurant\tinstance"
+			],
+			[
+				"contri",
+				"contribution_type\tstatement"
+			],
+			[
+				"Contri",
+				"Contribution\tclass"
+			],
+			[
+				"COntri",
+				"ContributionType\tclass"
+			],
+			[
+				"system",
+				"system_service\tstatement"
+			],
+			[
+				"System",
+				"SystemService\tclass"
+			],
+			[
+				"d",
+				"AddVerifiedDishRating\tinstance"
+			],
+			[
+				"sys",
+				"sys_service\tstatement"
+			],
+			[
+				"Syste",
+				"SystemService\tclass"
+			],
+			[
+				"add",
+				"address"
+			],
+			[
+				"req",
+				"req_restaurant_id\tstatement"
+			],
+			[
+				"res",
+				"restaurantdish\tstatement"
+			],
+			[
+				"ex",
+				"exists\tfunction"
+			],
+			[
+				"added",
+				"added_dish\tstatement"
+			],
+			[
+				"req_",
+				"req_dish_name\tstatement"
+			],
+			[
+				"reverse",
+				"reverse=\tparam"
+			],
+			[
+				"avg",
+				"avg_service_rating\tstatement"
+			],
+			[
+				"resa",
+				"restaurant_model\tstatement"
+			],
+			[
+				"WI",
+				"WIDTH"
+			],
+			[
+				"overall",
+				"avg_overall_rating"
+			],
+			[
+				"RatingS",
+				"RatingService\tmodule"
+			],
+			[
+				"total",
+				"total_service_rating\tstatement"
+			],
+			[
+				"avg_se",
+				"avg_service_rating"
+			],
+			[
+				"tot",
+				"total_no_of_ratings\tstatement"
+			],
+			[
+				"tota",
+				"total_dish_rating\tstatement"
+			],
+			[
+				"avg_",
+				"avg_dish_rating"
+			],
+			[
+				"avg_d",
+				"avg_dish_rating\tstatement"
+			],
+			[
+				"rating",
+				"rating_id"
+			],
+			[
+				"adde",
+				"added_rating"
+			],
+			[
+				"ra",
+				"raw"
+			],
+			[
+				"di",
+				"dishid"
+			],
+			[
+				"Rating",
+				"RatingView"
+			],
+			[
+				"Ra",
+				"RatingViewSet\tclass"
+			],
+			[
+				"Ratin",
+				"RatingViewSet\tclass"
+			],
+			[
+				"coun",
+				"country_list\tstatement"
+			],
+			[
+				"a",
+				"append\tfunction"
+			],
+			[
+				"cou",
+				"country_list\tstatement"
+			],
+			[
+				"ratin",
+				"rating_id"
+			],
+			[
+				"pri",
+				"print\tfunction"
+			],
+			[
+				"toek",
+				"token_number"
+			],
+			[
+				"va",
+				"value"
+			],
+			[
+				"Added",
+				"AddedDishRating\tclass"
+			],
+			[
+				"rati",
+				"ratings\tstatement"
+			],
+			[
+				"adds",
+				"added_dish_ratings"
+			],
+			[
+				"proje",
+				"project_token"
+			],
+			[
+				"pro",
+				"project_token"
+			],
+			[
+				"api",
+				"api_key"
+			],
+			[
+				"to",
+				"total_no_of_ratings"
+			],
+			[
+				"rst",
+				"rest_id"
+			],
+			[
+				"rat",
+				"ratings"
+			],
+			[
+				"ras",
+				"raise"
+			],
+			[
+				"Veri",
+				"VerifiedStatus"
+			],
+			[
+				"token",
+				"token_number"
+			],
+			[
+				"us",
+				"user"
+			],
+			[
+				"Re",
+				"Response"
+			],
+			[
+				"ser",
+				"service_rating"
+			],
+			[
+				"price",
+				"price_rating"
+			],
+			[
+				"Event",
+				"EventEmitter\talias"
+			],
+			[
+				"file",
+				"fileToUpload\tproperty"
+			],
+			[
+				"ol",
+				"olControl\talias"
+			],
+			[
+				"pho",
+				"phone_number_pattern\tproperty"
+			],
+			[
+				"val",
+				"Validators"
+			],
+			[
+				"mar",
+				"margin-right\tproperty"
+			],
+			[
+				"Register",
+				"RegisterRestaurantComponent"
+			],
+			[
+				"cons",
+				"console"
+			],
+			[
+				"st",
+				"style\tTag"
+			],
+			[
+				"h",
+				"h1\tTag"
+			],
+			[
+				"rest_ad",
+				"rest_address"
+			],
+			[
+				"excep",
+				"except"
+			],
+			[
+				"rest_a",
+				"rest_added_by"
+			],
+			[
+				"cre",
+				"created_by"
+			],
+			[
+				"clai",
+				"claimed_by"
+			],
+			[
+				"create",
+				"created_by"
+			],
+			[
+				"phone",
+				"phone_number"
+			],
+			[
+				"se",
+				"serialized_obj"
+			],
+			[
+				"seri",
+				"serializer"
+			],
+			[
+				"sele",
+				"selected_role"
+			],
+			[
+				"auth",
+				"auth_user"
+			],
+			[
+				"rest_l",
+				"rest_longitude"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "restaurantratingapi/services/SystemService.py",
+			"settings":
+			{
+				"buffer_size": 6948,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "restaurantratingapi/urls.py",
+			"settings":
+			{
+				"buffer_size": 3339,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "restaurantratingapi/services/RestaurantService.py",
+			"settings":
+			{
+				"buffer_size": 50719,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "restaurantratingapi/enums/HistoryEnums.py",
+			"settings":
+			{
+				"buffer_size": 96,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "restaurantratingapi/enums/RestaurantEnums.py",
+			"settings":
+			{
+				"buffer_size": 353,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "restaurantratingapi/models.py",
+			"settings":
+			{
+				"buffer_size": 20605,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "restaurantratingapi/services/RatingService.py",
+			"settings":
+			{
+				"buffer_size": 34952,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"enable",
+				"Package Control: Enable Package"
+			],
+			[
+				"disa",
+				"Package Control: Disable Package"
+			],
+			[
+				"jedi",
+				"SublimeJedi: Show Docstring"
+			],
+			[
+				"diabl",
+				"Package Control: Disable Package"
+			],
+			[
+				"install packa",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: in",
+				"Package Control: Install Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 202.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/home/vidumini/Activities/Projects/rrs",
+		"/home/vidumini/Activities/Projects/rrs/request-response",
+		"/home/vidumini/Activities/Projects/rrs/restaurantratingapi",
+		"/home/vidumini/Activities/Projects/rrs/restaurantratingapi/enums",
+		"/home/vidumini/Activities/Projects/rrs/restaurantratingapi/services",
+		"/home/vidumini/Activities/Projects/rrs/restaurantratingsystem"
+	],
+	"file_history":
+	[
+		"/home/vidumini/Activities/Projects/rrs/restaurantratingapi/enums/UserEnums.py",
+		"/home/vidumini/Activities/Projects/rrs/request-response/get_edit_request_list",
+		"/home/vidumini/Activities/Projects/rrs/request-response/add_restaurant",
+		"/home/vidumini/Activities/Projects/rrs/request-response/approve_edit",
+		"/home/vidumini/Desktop/I never saw this imoji in this chat before this ti",
+		"/home/vidumini/Activities/Projects/rrs/restaurantratingapi/enums/RestaurantEnums.py",
+		"/home/vidumini/Activities/Projects/rrs/restaurantratingapi/services/RatingService.py",
+		"/home/vidumini/Activities/Projects/rrs/restaurantratingapi/services/RestaurantService.py",
+		"/home/vidumini/Videos/Vettaiyaadu/sn/Vettaiyaadu Vilaiyaadu-The Smart Hunt (2006) DVDRip x264 [DUal-Audio] [Tamil-Hindi].srt",
+		"/home/vidumini/Activities/Projects/rrs/request-response/edit_restaurant_component",
+		"/home/vidumini/Activities/Projects/rrs/restaurantratingapi/services/SystemService.py",
+		"/home/vidumini/Activities/Projects/rrs/restaurantratingapi/views.py",
+		"/home/vidumini/Activities/Projects/rrs/restaurantratingapi/urls.py",
+		"/home/vidumini/Activities/Projects/restaurantratingsystem/django/restaurantratingapi/migrations/0004_auto_20201213_1114.py",
+		"/home/vidumini/Activities/Projects/restaurantratingsystem/django/restaurantratingapi/migrations/0005_auto_20201213_1125.py",
+		"/home/vidumini/Activities/Projects/rrs/restaurantratingapi/models.py",
+		"/home/vidumini/Activities/Projects/rrs/restaurantratingapi/enums/HistoryEnums.py",
+		"/home/vidumini/Downloads/Compressed/FB/messages/archived_threads/asankapradeepanddilshansandaruwan_1c4g6rumbg/message_1.html",
+		"/home/vidumini/Downloads/Compressed/FB/comments/comments.html",
+		"/home/vidumini/Activities/Projects/rrs/restaurantratingapi/enums/ContributionEnums.py",
+		"/home/vidumini/Activities/Projects/portfolio-site/.git/config",
+		"/home/vidumini/Activities/Projects/rrs/restaurantratingapi/enums/RatingEnums.py",
+		"/home/vidumini/Activities/Projects/rrs/restaurantratingapi/services/DishService.py",
+		"/home/vidumini/Activities/Projects/rrs/request-response/add_contribution_points",
+		"/home/vidumini/Activities/Projects/rrs/request-response/get_contributor_list",
+		"/home/vidumini/Videos/Vettaiyaadu/Vettaiyaadu Vilaiyaadu.2006.DVDRip.x264.Subs.DRs.srt",
+		"/home/vidumini/Videos/Vettaiyaadu/sn/Vettaiyaadu Vilaiyaadu.2006.DVDRip.x264.Subs.DRs.srt",
+		"/home/vidumini/Activities/Projects/rrs/restaurantratingapi/services/ValidationService.py",
+		"/home/vidumini/Activities/Projects/rrs/request-response/get_tokens_for_restaurant",
+		"/home/vidumini/Activities/Projects/rrs/request-response/get_system_dish_list",
+		"/home/vidumini/Activities/Projects/rrs/request-response/get_rating_details_list_for_all_restaurants",
+		"/home/vidumini/Activities/Projects/rrs/request-response/get_dish_rating_list_for_all_restaurant_for_specific_dish",
+		"/home/vidumini/Activities/Projects/rrs/request-response/get_dish_rating_list_for_a_restaurant",
+		"/home/vidumini/Activities/Projects/rrs/request-response/add_dishes_for_restaurant",
+		"/home/vidumini/Activities/Projects/how_much.py",
+		"/home/vidumini/Activities/Projects/rrs/run.sh",
+		"/home/vidumini/Activities/Projects/rrs/request-response/add_rating",
+		"/home/vidumini/Activities/Projects/space-shooter-game/main.py",
+		"/home/vidumini/Downloads/Video/space-shooter-python-tutorial/Space Shooter Tutorial/main.py",
+		"/home/vidumini/.config/sublime-text-3/Packages/Jedi - Python autocompletion/sublime_jedi.sublime-settings",
+		"/lib/modules/4.19.0-9-amd64/modules.dep",
+		"/lib/modules/4.19.0-9-amd64/modules.softdep",
+		"/home/vidumini/Activities/Projects/rrs/request-response/get_rating_list_for_a_restaurant",
+		"/home/vidumini/Activities/Projects/rrs/request-response/get_rating_list_for_all_restaurants",
+		"/home/vidumini/Desktop/Request-Response/get_rating_list_for_all_restaurants",
+		"/media/vidumini/2D4B-65B1/bew/rating_202010272057.sql",
+		"/media/vidumini/2D4B-65B1/bew/dish_202010272056.sql",
+		"/media/vidumini/2D4B-65B1/bew/token_202010272058.sql",
+		"/media/vidumini/2D4B-65B1/bew/restaurant_202010272057.sql",
+		"/media/vidumini/2D4B-65B1/bew/added_rating_202010272055.sql",
+		"/media/vidumini/2D4B-65B1/bew/restaurant_dish_202010272058.sql",
+		"/home/vidumini/Activities/Projects/rrs/restaurantratingsystem/settings.py",
+		"/home/vidumini/Activities/Projects/rrs/DB/dump-rrs-202010272044.sql",
+		"/home/vidumini/Activities/Projects/rrs/DB/custom_user-rrs-202010272045.sql",
+		"/home/vidumini/Desktop/migration/__init__.py",
+		"/home/vidumini/Desktop/migration/0002_auto_20200707_1200.py",
+		"/home/vidumini/Desktop/migration/0001_initial.py",
+		"/home/vidumini/Desktop/Request-Response/add_rating",
+		"/home/vidumini/Desktop/add_rating",
+		"/home/vidumini/Activities/Projects/Angular-Test-01/my-app/src/app/api.service.ts",
+		"/media/vidumini/2D4B-65B1/bew/custom_user_202010272053.sql",
+		"/usr/bin/mysqldump",
+		"/home/vidumini/Activities/Projects/corona-data-retriever-with-voice-assistant/main.py",
+		"/usr/share/dbeaver/dbeaver.ini",
+		"/home/vidumini/.local/share/anaconda/run/rrs/anaconda.sock",
+		"/home/vidumini/Downloads/Setups/Zotero/Zotero_linux-x86_64/zotero",
+		"/home/vidumini/Downloads/Setups/Zotero/Zotero_linux-x86_64/set_launcher_icon",
+		"/home/vidumini/Activities/Projects/corona-virus-voice-recognition/main.py",
+		"/home/vidumini/Activities/Projects/corona-data-retriever-with-voice-assistant/requirements.txt",
+		"/media/vidumini/Activities/contacts/Contacts_002.vcf",
+		"/home/vidumini/Activities/Projects/corona-virus-voice-recognition/requirements.txt",
+		"/home/vidumini/Activities/Projects/corona-virus-voice-recognition/run.sh",
+		"/media/vidumini/Activities/contacts/conta.vcf",
+		"/media/vidumini/Activities/contacts/Contacts.vcf",
+		"/home/vidumini/Activities/Projects/restaurantratingsystem/README.md",
+		"/home/vidumini/Desktop/restaurant_rating_system",
+		"/home/vidumini/Activities/Projects/restaurantratingsystem/django/restaurantratingsystem/settings.py",
+		"/home/vidumini/Activities/Projects/restaurantratingsystem/angular/nginx/nginx.conf",
+		"/home/vidumini/Desktop/web.py",
+		"/home/vidumini/Activities/Projects/restaurantratingsystem/angular/restaurant-rating-system/src/app/api.service.ts",
+		"/home/vidumini/Activities/Projects/restaurantratingsystem/django/requirements.txt",
+		"/home/vidumini/Activities/Projects/Angular-Test-01/my-app/src/app/app.module.ts",
+		"/home/vidumini/Activities/Projects/Angular-Test-01/my-app/src/app/responsive-toolbar/responsive-toolbar.component.ts",
+		"/home/vidumini/Activities/Projects/Angular-Test-01/my-app/src/app/app.component.html",
+		"/home/vidumini/Desktop/New File",
+		"/home/vidumini/Activities/Projects/Angular-Test-01/my-app/src/app/app-routing.module.ts",
+		"/home/vidumini/Activities/Projects/rrs/restaurantratingapi/utils/ExceptionHandler.py",
+		"/home/vidumini/Activities/Projects/Angular-Test-01/my-app/src/app/app.component.ts",
+		"/home/vidumini/Activities/Projects/Angular-Test-01/my-app/src/app/restaurant-list/restaurant-list.component.ts",
+		"/home/vidumini/Downloads/Zotero/Zotero_linux-x86_64/zotero",
+		"/home/vidumini/Downloads/Zotero/Zotero_linux-x86_64/set_launcher_icon",
+		"/media/vidumini/Activities/Sourcetree/BIT/Semester02/Project/14.FinalReport/Presentation/guide",
+		"/home/vidumini/Desktop/RestaurantRatingSystem-Angular-Frontend",
+		"/home/vidumini/Activities/Projects/Angular-Test-01/my-app/src/app/register-restaurant/register-restaurant.component.ts",
+		"/home/vidumini/Activities/Projects/Angular-Test-01/my-app/src/app/register-restaurant/register-restaurant.component.html",
+		"/home/vidumini/Activities/Projects/Angular-Test-01/my-app/src/app/restaurant-list/restaurant-list.component.html",
+		"/home/vidumini/Activities/Projects/Angular-Test-01/my-app/src/app/star-rating/star-rating.component.ts",
+		"/home/vidumini/Activities/Projects/Angular-Test-01/my-app/src/app/star-rating/star-rating.component.html",
+		"/home/vidumini/Activities/Projects/Angular-Test-01/my-app/src/app/restaurant-details/restaurant-details.component.html",
+		"/home/vidumini/Activities/Projects/Angular-Test-01/my-app/src/app/restaurant-details/restaurant-details.component.ts",
+		"/home/vidumini/Activities/Projects/Angular-Test-01/my-app/src/app/responsive-toolbar/responsive-toolbar.component.html",
+		"/home/vidumini/Activities/Projects/restaurantratingsystem/docker-compose.yaml",
+		"/home/vidumini/Activities/Projects/rrs/restaurantratingapi/serializers.py",
+		"/home/vidumini/Desktop/get_rating",
+		"/home/vidumini/Desktop/add_rating (copy 1)",
+		"/home/vidumini/Downloads/Compressed/The Bandit (1996) [WEBRip] [720p] [YTS.AM]/The.Bandit.1996.720p.BluRay.x264.[YTS.MX]-English.srt",
+		"/home/vidumini/Downloads/Compressed/Prisoners (2013)/Prisoners.2013.1080p.720p.BluRay.x264.[YTS.MX]-English.srt",
+		"/home/vidumini/Downloads/Compressed/www.TamilRockers.hn - 96 (Movie) (2018)[Tamil HQ Real-DVDScr - x264 - 700MB - Org Audio].mkv/96.srt",
+		"/home/vidumini/Activities/Projects/restaurantratingsystem/django/restaurantratingapi/services/RatingService.py",
+		"/home/vidumini/Downloads/Compressed/AddressBook/Address-Book/Dockerfile",
+		"/home/vidumini/Downloads/Compressed/AddressBook/Address-Book/AddressBook.py",
+		"/home/vidumini/Downloads/Compressed/AddressBook/Address-Book/requirements.txt",
+		"/media/vidumini/Activities/Sourcetree/BIT/Semester02/AI/W1/empty week.txt",
+		"/home/vidumini/Activities/Projects/Angular-Test-01/my-app/src/app/restaurant-details/restaurant-details.component.css",
+		"/home/vidumini/Activities/Projects/Angular-Test-01/my-app/src/app/models/restaurant.ts",
+		"/home/vidumini/Activities/Projects/Angular-Test-01/my-app/angular.json",
+		"/home/vidumini/Activities/Projects/Angular-Test-01/my-app/src/proxy.conf.json",
+		"/home/vidumini/Activities/Projects/Angular-Test-01/my-app/src/app/register-restaurant/register-restaurant.component.css",
+		"/home/vidumini/Activities/Projects/Angular-Test-01/my-app/src/app/restaurant-list/restaurant-list.component.css",
+		"/home/vidumini/Activities/Projects/Angular-Test-01/my-app/src/app/restaurant.ts",
+		"/home/vidumini/Activities/Projects/Angular-Test-01/my-app/src/app/menu-item.ts",
+		"/home/vidumini/Activities/Projects/restaurantratingsystem/angular/Dockerfile",
+		"/etc/nginx/nginx.conf",
+		"/home/vidumini/Activities/Projects/restaurantratingsystem/angular/.dockerignore",
+		"/home/vidumini/Activities/Projects/restaurantratingsystem/angular/DockerFile",
+		"/etc/hosts",
+		"/home/vidumini/Activities/Projects/Angular-Test-01/my-app/src/app/restaurant-list/restaurant-list.component.spec.ts",
+		"/home/vidumini/Activities/Projects/restaurantratingsystem/django/restaurantratingapi/serializers.py"
+	],
+	"find":
+	{
+		"height": 39.0
+	},
+	"find_in_files":
+	{
+		"height": 301.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"raw",
+			"Status",
+			"History",
+			"edit",
+			"put",
+			"User",
+			"get_ratings_for_restaurant",
+			"PhoneNumberField",
+			"UserEditHistoryCom",
+			"UserRole",
+			"save()",
+			"                    )",
+			"Restaurant",
+			"User",
+			"filter",
+			"rest_id",
+			"ORDER",
+			"ClaimStatus",
+			"save",
+			"AddedDish",
+			"class User",
+			"User",
+			"ObjectDoesNotExist",
+			"get_ratings_for_restaurant_dish",
+			"detail",
+			"get_ratings_for_restaurant",
+			"get_ratings_for_restaurantget_ratings_for_restaurant",
+			"Point",
+			"zlib zlibmodule",
+			"AddedRating",
+			"Restaurant",
+			"AddedRating",
+			"verif"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"folders":
+	[
+		{
+			"path": "/home/vidumini/Activities/Projects/rrs"
+		},
+		{
+			"path": "/home/vidumini/Activities/Projects/Angular-Test-01"
+		}
+	],
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "restaurantratingapi/services/SystemService.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6948,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6098,
+								6098
+							]
+						],
+						"settings":
+						{
+							"show_definitions": false,
+							"syntax": "Packages/Djaneiro/Syntaxes/Python Django.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true,
+							"typescript_plugin_format_options":
+							{
+								"convertTabsToSpaces": true,
+								"indentSize": 4,
+								"tabSize": 4
+							}
+						},
+						"translation.x": 0.0,
+						"translation.y": 1178.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "restaurantratingapi/urls.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3339,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1566,
+								1566
+							]
+						],
+						"settings":
+						{
+							"show_definitions": false,
+							"syntax": "Packages/Djaneiro/Syntaxes/Python Django.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 91.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "restaurantratingapi/services/RestaurantService.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 50719,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								25160,
+								25160
+							]
+						],
+						"settings":
+						{
+							"show_definitions": false,
+							"syntax": "Packages/Djaneiro/Syntaxes/Python Django.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true,
+							"typescript_plugin_format_options":
+							{
+								"convertTabsToSpaces": true,
+								"indentSize": 4,
+								"tabSize": 4
+							}
+						},
+						"translation.x": 5.0,
+						"translation.y": 10072.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "restaurantratingapi/enums/HistoryEnums.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 96,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"show_definitions": false,
+							"syntax": "Packages/Djaneiro/Syntaxes/Python Django.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "restaurantratingapi/enums/RestaurantEnums.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 353,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"show_definitions": false,
+							"syntax": "Packages/Djaneiro/Syntaxes/Python Django.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "restaurantratingapi/models.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 20605,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								8434,
+								8434
+							]
+						],
+						"settings":
+						{
+							"show_definitions": false,
+							"syntax": "Packages/Djaneiro/Syntaxes/Python Django.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 3.0,
+						"translation.y": 1972.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "restaurantratingapi/services/RatingService.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 34952,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3532,
+								3532
+							]
+						],
+						"settings":
+						{
+							"show_definitions": false,
+							"syntax": "Packages/Djaneiro/Syntaxes/Python Django.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true,
+							"typescript_plugin_format_options":
+							{
+								"convertTabsToSpaces": true,
+								"indentSize": 4,
+								"tabSize": 4
+							}
+						},
+						"translation.x": 0.0,
+						"translation.y": 1114.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 22.0
+	},
+	"input":
+	{
+		"height": 103.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.doc":
+	{
+		"height": 0.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "",
+	"replace":
+	{
+		"height": 40.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 340.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

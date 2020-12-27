@@ -175,7 +175,6 @@ class RatingService:
             user = user,
             token_number = token)
             try: 
-                # pass
                 added_dish_rating.save()
                 if(verified == VerifiedStatus.Verified.value):
                     system_service.add_contribution_points(ContributionTypes.AddVerifiedDishRating.value, user)
@@ -466,6 +465,12 @@ class RatingService:
             else:
                 user = User.objects.get(id=item.dish_user_id)
 
+            review = Review.objects.filter(rating=item)
+            message = ''
+            if(review.exists()):
+                message = review[0].message
+            print('message is ', message)
+
 
 
             rating_model = {
@@ -475,6 +480,7 @@ class RatingService:
                 "dish_rating": item.dish_rating,
                 "price_rating": item.price_rating,
                 "service_rating": item.service_rating,
+                "review": message,
                 "added_by": user.username,
                 "verified": item.verified,
                 "created_on": item.created_on
