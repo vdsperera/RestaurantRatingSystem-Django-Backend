@@ -49,8 +49,8 @@ class RatingService:
         if(not ValidationService.isset(value=service_rating)):
             raise APIException("Service rating is empty")
 
-        if(not ValidationService.isset(value=review)):
-            raise APIException("Review is empty")
+        # if(not ValidationService.isset(value=review)):
+        #     raise APIException("Review is empty")
 
         # validate request data values for db existance
         if(not isinstance(username, str)):
