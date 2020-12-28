@@ -32,11 +32,14 @@ urlpatterns = [
     # POST /restaurants/dishes
     path('restaurants/dishes', views.RestaurantViewSet.as_view({'post':'add_dishes'}), name='RestaurantView'),
 
-    # PUT /restaurants/[restaurant_id]
+    # PATCH /restaurants/[restaurant_id]
     path('restaurants', views.RestaurantViewSet.as_view({'patch':'edit_restaurant'}), name='RestaurantView'),
 
-    # PUT /restaurants/approval
+    # PATCH /restaurants/approval
     path('restaurants/approval', views.RestaurantViewSet.as_view({'patch':'approve_restaurant_edit'}), name='RestaurantView'),
+
+    # PATCH /restaurants/claim
+    path('restaurants/claim', views.RestaurantViewSet.as_view({'patch':'claim_restaurant'}), name='RestaurantView'),
 
     ## Ratings ##
 
