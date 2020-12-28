@@ -1,0 +1,3 @@
+INSERT INTO rrs.django_session (session_key,session_data,expire_date) VALUES 
+('l1y2ndux7aw5hisznw1tmp2kskgqgkgn','NjE3ZThiN2VjNTEwZDczNzc5M2UyYTJmMmExZDQ2OTMzOGNjNDQ1Zjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIxZDVkMmZmYWZhNmY4ODk2NjUyOGEzNmQ1MWM5NjVlOTE3ZmJlODkxIn0=','2020-08-10 06:45:53.887257')
+;

@@ -1,0 +1,45 @@
+INSERT INTO rrs.django_content_type (id,app_label,model) VALUES 
+(1,'admin','logentry')
+,(3,'auth','group')
+,(2,'auth','permission')
+,(4,'auth','user')
+,(5,'contenttypes','contenttype')
+,(16,'restaurantratingapi','addeddishrating')
+,(17,'restaurantratingapi','addedrating')
+,(8,'restaurantratingapi','checkin')
+,(36,'restaurantratingapi','contribution')
+,(35,'restaurantratingapi','contributiontype')
+;
+INSERT INTO rrs.django_content_type (id,app_label,model) VALUES 
+(18,'restaurantratingapi','customercheckin')
+,(34,'restaurantratingapi','customuser')
+,(9,'restaurantratingapi','dish')
+,(10,'restaurantratingapi','editcomponent')
+,(11,'restaurantratingapi','edithistory')
+,(12,'restaurantratingapi','meal')
+,(13,'restaurantratingapi','rating')
+,(33,'restaurantratingapi','reply')
+,(14,'restaurantratingapi','reporting')
+,(32,'restaurantratingapi','reportingtype')
+;
+INSERT INTO rrs.django_content_type (id,app_label,model) VALUES 
+(15,'restaurantratingapi','restaurant')
+,(19,'restaurantratingapi','restaurantcomponentreporting')
+,(31,'restaurantratingapi','restaurantdish')
+,(30,'restaurantratingapi','restaurantmeal')
+,(20,'restaurantratingapi','restaurantreporting')
+,(21,'restaurantratingapi','review')
+,(22,'restaurantratingapi','reviewreplyreporting')
+,(23,'restaurantratingapi','reviewreporting')
+,(29,'restaurantratingapi','token')
+,(28,'restaurantratingapi','useredithistorycomponent')
+;
+INSERT INTO rrs.django_content_type (id,app_label,model) VALUES 
+(27,'restaurantratingapi','useredithistoryconfirmation')
+,(26,'restaurantratingapi','userlevel')
+,(37,'restaurantratingapi','userreporting')
+,(7,'restaurantratingapi','userrole')
+,(25,'restaurantratingapi','warning')
+,(24,'restaurantratingapi','warninglevel')
+,(6,'sessions','session')
+;
