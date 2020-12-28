@@ -91,6 +91,12 @@ class RestaurantViewSet(viewsets.ViewSet):
         qry = rs.approve_edit(data)
         return Response(qry)
 
+    def claim_restaurant(self, request):
+        rs = RestaurantService()
+        data = request.data['data']['mdata']
+        qry = rs.claim_restaurant(data)
+        return Response(qry)
+
 # class RestaurantViewSet(APIView):
 
 #     def post(self, request):
