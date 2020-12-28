@@ -1,0 +1,31 @@
+PATCH /restaurant/claim
+
+request
+
+{
+"data":{
+  "event": "500",
+  "action": "claim_restaurant",
+  "token":"opentoken",
+  "mdata": {
+    "user": "user7",
+    "restaurant_id": 23,
+	  "restaurant_code": "8Qb49dLiDgp8O8ju6lsN"
+  }
+}
+}
+
+
+
+response
+
+{
+    "success": true,
+    "code": 200,
+    "message": "success ClaimRestaurant",
+    "data": {
+      "restaurant_id": 23,
+      "owner": "user7"
+      "status": "Claimed"
+    }
+}
