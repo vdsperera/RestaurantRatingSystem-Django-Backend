@@ -206,7 +206,90 @@ class RestaurantService:
 
 
 
-        return resp     
+        return resp   
+
+    def claim_restaurant(self, data):
+        # return 'claim restaurant'
+        # retrieve request data
+        try:
+            username = data['user']
+            # rest_name = data['name'] #restaurant name #required
+            rest_id = data['restaurant_id']
+            rest_code = data['restaurant_code']
+        except KeyError as e:
+            print(f"Key {e} not exists in the request")
+            raise APIException(f"Key {e} not exists in the request")
+
+        # validate request data for null or empty values
+        if(not ValidationService.isset(value=username)):
+            raise APIException("User is empty")
+
+        if(not ValidationService.isset(value=rest_id)):
+            raise APIException("Restaurant ID is empty")
+
+        # if(not ValidationService.isset(value=rest_code)):
+        #     raise APIException("Restaurant code is empty")
+
+        user = User.objects.get(username=username)   
+
+        if(not user):
+            raise APIException(f"User not exists")
+
+        restaurant = Restaurant.objects.filter(restaurant_id=rest_id)
+
+        if(not restaurant.exists()):
+            raise APIException(f"Restaurant not exists")
+
+        custom_user = CustomUser.objects.get(user=user)
+
+        if(UserRoles.Owner.value != custom_user.role_id.role_id):
+            raise APIException(f"User is not an owner")
+
+        if(restaurant[0].claimed == ClaimStatus.Claimed.value):
+            raise APIException(f"Already claimed restaurant")
+
+
+        if(not ValidationService.isset(value=rest_code)):
+            # request = 0
+            if(restaurant[0].claimed == ClaimStatus.Pending.value):
+                raise APIException(f"Already pending restaurant")
+            restaurant_model = restaurant[0];
+            restaurant_model.claimed = ClaimStatus.Pending.value
+            pass
+        else:
+            # request = 1
+            if(restaurant[0].code != rest_code):
+                raise APIException(f"Invalid code")
+
+            restaurant_model = restaurant[0];
+            restaurant_model.claimed = ClaimStatus.Claimed.value
+            restaurant_model.claimed_by = user
+
+        try:
+            # restaurant_model = restaurant[0];
+            restaurant_model.save()
+        except ObjectDoesNotExist as e:
+            raise APIException(f"Process failed")
+
+        # if(request == 0):
+        #     pass
+        # if(request == 1):
+            # if(restaurant[0].code != rest_code):
+            #     raise APIException(f"Invalid code")
+
+        resp = {
+                "success": True,
+                "code": 200,
+                "message": "success ClaimRestaurant",
+                "data": {
+                  "restaurant_id": restaurant[0].restaurant_id,
+                  "owner": user.username,
+                  "status": ClaimStatus(restaurant[0].claimed).name
+                }
+                }
+
+        return resp
+
         
     def de_register_restaurant():
         pass    
@@ -1143,9 +1226,6 @@ class RestaurantService:
             WHERE user_edit_history_confirmation.user_id != 2
             """)
 
-
-    def claim_restaurant():
-        pass
 
 
 
