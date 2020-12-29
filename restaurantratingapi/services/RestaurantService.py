@@ -255,9 +255,13 @@ class RestaurantService:
                 raise APIException(f"Already pending restaurant")
             restaurant_model = restaurant[0];
             restaurant_model.claimed = ClaimStatus.Pending.value
+            restaurant_model.claimed_by = user
             pass
         else:
             # request = 1
+            if(restaurant[0].claimed == ClaimStatus.Pending.value):
+                if(restaurant[0].claimed_by !=  user):
+                    raise APIException(f"Already requested by other user")
             if(restaurant[0].code != rest_code):
                 raise APIException(f"Invalid code")
 
