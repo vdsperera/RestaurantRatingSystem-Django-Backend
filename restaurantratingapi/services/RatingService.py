@@ -469,13 +469,18 @@ class RatingService:
             message = ''
             if(review.exists()):
                 message = review[0].message
-            print('message is ', message)
+            print('dish id ', item.dish_id)
 
-
-
+            if(item.dish_id != None):
+                dish_model = Dish.objects.get(dish_id=item.dish_id)
+                dish_name = dish_model.dish_name
+            else:
+                dish_name = None
+            
             rating_model = {
                 "rating_id": item.rating_id,
                 "dish_id": item.dish_id,
+                "dish_name": dish_name,
                 "overall_rating": round(((item.dish_rating + item.price_rating + item.service_rating)/3), 1),
                 "dish_rating": item.dish_rating,
                 "price_rating": item.price_rating,
