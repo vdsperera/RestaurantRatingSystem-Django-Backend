@@ -4,6 +4,8 @@ from ..enums.RestaurantEnums import ClaimStatus, RestaurantComponents
 from ..enums.ContributionEnums import ContributionTypes
 from ..enums.UserEnums import UserRoles
 from ..enums.HistoryEnums import EditHistoryStatus
+from ..enums.DishEnums import RestaurantDishStatus
+from ..enums.DishEnums import SystemDishStatus
 from ..models import Restaurant
 from django.contrib.auth.models import User
 from ..models import CustomUser
@@ -318,7 +320,7 @@ class RestaurantService:
             dish = {
             "dish_id":item.dish_id,
             "dish_name":item.dish_name,
-            "added_status": item.status
+            "added_status": RestaurantDishStatus(item.status).name
             }
             dish_list.append(dish)
 
@@ -501,7 +503,7 @@ class RestaurantService:
 
         ## check whether user is other restaurant owner, this restaurant owner or customer
         custom_user = CustomUser.objects.get(user_id=user)
-        if(custom_user.role_id.role_id == 1):
+        if(custom_user.role_id.role_id == UserRoles.Owner.value):
             owner = True
             claimed_rest = Restaurant.objects.filter(restaurant_id=restaurant.restaurant_id, claimed_by=user)
             if(claimed_rest.exists() == False):
@@ -521,13 +523,17 @@ class RestaurantService:
             #     raise APIException("Dish is not available in the system")
             #     # pass
             dish = Dish.objects.filter(dish_id=req_dish_id)
+            if(not dish.exists()):
+                raise APIException("Requested dish is invalid")
+
+
             print(dish[0].status)
             if(dish.exists() == True):
-                if(dish[0].status == 1):
+                if(dish[0].status == SystemDishStatus.Approved.value):
                     dish = dish
-                elif(dish[0].status == 0):
+                elif(dish[0].status == SystemDishStatus.Pending.value):
                     raise APIException("Dish is in pending status for the system")
-                elif(dish[0].status == 2):
+                elif(dish[0].status == SystemDishStatus.Rejected.value):
                     raise APIException("Dish is in rejected status for the system")
             else:
                 raise APIException("Dish is not available in the system")
@@ -546,11 +552,11 @@ class RestaurantService:
 
             if(restaurantdish.exists() == True):
                 print(restaurantdish)
-                if(restaurantdish[0].status == 1):
+                if(restaurantdish[0].status == RestaurantDishStatus.Approved.value):
                     raise APIException("Dish is already in the restaurant")
-                elif(restaurantdish[0].status == 0):
+                elif(restaurantdish[0].status == RestaurantDishStatus.Pending.value):
                     raise APIException("Dish is in pending status for this restaurant")
-                elif(restaurantdish[0].status == 2):
+                elif(restaurantdish[0].status == RestaurantDishStatus.Rejected.value):
                     raise APIException("Dish is in rejected status for this restaurant")
                 # if(restaurantdish[0].status == 1):
                 #     raise APIException("Dish is already in the restaurant")
@@ -570,18 +576,18 @@ class RestaurantService:
         else:
             req_dish = Dish.objects.filter(dish_name=req_dish_name)
             if(req_dish.exists() == True):
-                if(req_dish[0].status == 1):
+                if(req_dish[0].status == SystemDishStatus.Approved.value):
                     dish = req_dish
                     raise APIException("Dish is in already in the system")
-                elif(req_dish[0].status == 0):
+                elif(req_dish[0].status == SystemDishStatus.Pending.value):
                     raise APIException("Dish is in pending status for the system")
-                elif(req_dish[0].status == 2):
+                elif(req_dish[0].status == SystemDishStatus.Rejected.value):
                     raise APIException("Dish is in rejected status for the system")
                 
             else:
                 dish = Dish(
                 dish_name = req_dish_name,
-                status = 1 if owner == True else 0,
+                status = SystemDishStatus.Approved.value if owner == True else SystemDishStatus.Pending.value,
                 created_by = user,
                 created_on = "2020-11-14"
                 )
@@ -594,10 +600,13 @@ class RestaurantService:
             dish = dish[0],
             restaurant = restaurant,
             added_by = user,
-            status = 1 if (owner == True or restaurant.claimed == 0) else 0,
+            status = RestaurantDishStatus.Approved.value if (owner == True or restaurant.claimed == ClaimStatus.Unclaimed.value) else RestaurantDishStatus.Pending.value,
             created_on = "2020-11-14"
             )
         # return 1
+        # print('owner true', owner == True)
+        # print('restaurant id', restaurant.restaurant_id)
+        # print('restaurant claimed', restaurant.claimed)
         try: 
             added_dish.save()
             system_service.add_contribution_points(ContributionTypes.AddDishToRestaurant.value, user)
@@ -609,11 +618,11 @@ class RestaurantService:
             "code": 200,
             "message": "success AddDIshesForRestaurant",
             "data": {
-                "restaurant_id": added_dish.dish_id,
+                "restaurant_id": restaurant.restaurant_id,
                 "dish_id": dish[0].dish_id,
                 "dish_name": dish[0].dish_name,
                 "added_by": added_dish.added_by.username,
-                "added_status": added_dish.status
+                "added_status": RestaurantDishStatus(added_dish.status).name
             }
         }
         return resp
