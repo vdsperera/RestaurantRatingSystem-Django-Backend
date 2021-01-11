@@ -597,7 +597,7 @@ class RestaurantService:
                     raise APIException(e)
 
         added_dish = RestaurantDish(
-            dish = dish[0],
+            dish = dish[0] if new_dish == False else dish,
             restaurant = restaurant,
             added_by = user,
             status = RestaurantDishStatus.Approved.value if (owner == True or restaurant.claimed == ClaimStatus.Unclaimed.value) else RestaurantDishStatus.Pending.value,
@@ -619,8 +619,8 @@ class RestaurantService:
             "message": "success AddDIshesForRestaurant",
             "data": {
                 "restaurant_id": restaurant.restaurant_id,
-                "dish_id": dish[0].dish_id,
-                "dish_name": dish[0].dish_name,
+                "dish_id": dish[0].dish_id if new_dish == False else dish.dish_id,
+                "dish_name": dish[0].dish_name if new_dish == False else dish.dish_name,
                 "added_by": added_dish.added_by.username,
                 "added_status": RestaurantDishStatus(added_dish.status).name
             }
