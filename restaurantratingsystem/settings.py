@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import datetime
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -157,7 +158,17 @@ LOGGING = {
 }
 
 REST_FRAMEWORK = {
-    'EXCEPTION_HANDLER': 'restaurantratingapi.utils.ExceptionHandler.custom_exception_hander'
+    'EXCEPTION_HANDLER': 'restaurantratingapi.utils.ExceptionHandler.custom_exception_hander',
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
 }
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+JWT_AUTH = {
+    'JWT_ALLOW_REFRESH': True,
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=3600),
+}
