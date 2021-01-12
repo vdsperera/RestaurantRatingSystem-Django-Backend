@@ -442,10 +442,10 @@ class RatingService:
                 "data": {
                     "restaurant_id": rest_id,
                     "total_no_of_ratings": total_no_of_ratings,
-                    "overall_rating": overall_rating,
-                    "dish_rating": avg_dish_rating,
-                    "price_rating": avg_price_rating,
-                    "service_rating": avg_service_rating,
+                    "overall_rating": round(overall_rating, 1),
+                    "dish_rating": round(avg_dish_rating, 1),
+                    "price_rating": round(avg_price_rating, 1),
+                    "service_rating": round(avg_service_rating, 1),
                     "ratings": list
                 }
             }
@@ -504,10 +504,10 @@ class RatingService:
             "data": {
                 "restaurant_id": rest_id,
                 "total_no_of_ratings": total_no_of_ratings,
-                "overall_rating": overall_rating,
-                "dish_rating": avg_dish_rating,
-                "price_rating": avg_price_rating,
-                "service_rating": avg_service_rating,
+                "overall_rating": round(overall_rating, 1),
+                "dish_rating": round(avg_dish_rating, 1),
+                "price_rating": round(avg_price_rating, 1),
+                "service_rating": round(avg_service_rating, 1),
                 "ratings": list
             }
         }
@@ -888,7 +888,7 @@ class RatingService:
             price_rating = price_rating / total_no_of_ratings
             service_rating = service_rating / total_no_of_ratings
             overall_rating = (dish_rating + price_rating + service_rating) / 3
-
+        
         resp = {
             "success": True,
             "code": 200,
@@ -897,10 +897,10 @@ class RatingService:
                 "restaurant_id": rest_id,
                 "dish_id": dish_id,
                 "total_no_of_ratings": total_no_of_ratings,
-                "dish_rating": dish_rating,
-                "price_rating": price_rating,
-                "service_rating": service_rating,
-                "overall_rating": overall_rating
+                "dish_rating": round(dish_rating, 1),
+                "price_rating": round(price_rating, 1),
+                "service_rating": round(service_rating, 1),
+                "overall_rating": round(overall_rating, 1)
             }
         }
 
