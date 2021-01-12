@@ -716,10 +716,10 @@ class RatingService:
                 "dish_id": item.dish_id,
                 "dish_name": dish.dish_name,
                 "no_of_ratings": item.count,
-                "overall_rating": item.avg_dish_rating,
-                "overall_dish_rating": item.avg_price_rating,
-                "overall_price_rating": item.avg_service_rating,
-                "overall_service_rating": item.avg_overall_rating
+                "overall_rating": round(item.avg_overall_rating, 1),
+                "overall_dish_rating": item.avg_dish_rating,
+                "overall_price_rating": item.avg_price_rating,
+                "overall_service_rating": item.avg_service_rating
             }
             list.append(dish_rating)
 
