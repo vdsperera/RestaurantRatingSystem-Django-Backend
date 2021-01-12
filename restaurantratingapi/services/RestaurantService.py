@@ -587,7 +587,7 @@ class RestaurantService:
             else:
                 dish = Dish(
                 dish_name = req_dish_name,
-                status = SystemDishStatus.Approved.value if owner == True else SystemDishStatus.Pending.value,
+                status = SystemDishStatus.Approved.value if (owner == True or restaurant.claimed == ClaimStatus.Unclaimed.value) else SystemDishStatus.Pending.value,
                 created_by = user,
                 created_on = "2020-11-14"
                 )
