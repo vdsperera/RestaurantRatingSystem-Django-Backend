@@ -353,6 +353,8 @@ class RestaurantService:
         return resp;
 
     ## should check with activity diagram
+    # GET /restaurants/list
+    # GET /restaurants/list?dishid=[dish_id]
     def get_restaurant_list(self, data):
         # return 'get restaurant list'
         # rest = Restaurant.objects.get()
