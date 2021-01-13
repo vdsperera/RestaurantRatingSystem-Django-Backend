@@ -49,6 +49,8 @@ class RestaurantViewSet(viewsets.ViewSet):
         # return Response({'status':'successful'})
         return Response(qry)
 
+    # GET /restaurants/list
+    # GET /restaurants/list?dishid=[dish_id]
     def list(self, request):
         myDict = dict(self.request.query_params)
         # queryset = Restaurant.objects.all()

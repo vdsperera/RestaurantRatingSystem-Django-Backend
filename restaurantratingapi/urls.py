@@ -13,6 +13,9 @@ router.register(r'roles', views.UserRoleViewSet)
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     path('', include(router.urls)),
+
+    #============================================================================================================================
+
     ## Restaurants ##
 
     # POST /restaurants/
@@ -22,10 +25,12 @@ urlpatterns = [
     path('restaurants/<int:rest_id>/', views.RestaurantViewSet.as_view({'get':'retrieve'}), name='RestaurantView'),
 
     # GET /restaurants/list
+    # GET /restaurants/list?dishid=[dish_id]
     path('restaurants/list', views.RestaurantViewSet.as_view({'get':'list'}), name='RestaurantView'),
 
     # not pre planned
     # GET /restaurants/list
+    # GET /restaurants/list?dishid=[dish_id]
     path('restaurants/list', views.RestaurantViewSet.as_view({'get':'list'}), name='RestaurantView'),
     # 
 
@@ -33,7 +38,7 @@ urlpatterns = [
     # POST /restaurants/dishes
     path('restaurants/dishes', views.RestaurantViewSet.as_view({'post':'add_dishes'}), name='RestaurantView'),
 
-    # PATCH /restaurants/[restaurant_id]
+    # PATCH /restaurants
     path('restaurants', views.RestaurantViewSet.as_view({'patch':'edit_restaurant'}), name='RestaurantView'),
 
     # PATCH /restaurants/approval
@@ -41,6 +46,8 @@ urlpatterns = [
 
     # PATCH /restaurants/claim
     path('restaurants/claim', views.RestaurantViewSet.as_view({'patch':'claim_restaurant'}), name='RestaurantView'),
+
+    #============================================================================================================================
 
     ## Ratings ##
 
@@ -58,12 +65,15 @@ urlpatterns = [
     # GET /ratings/dishes/list?restid=[rest_id] - get dish rating list for a restaurant
     path('ratings/dishes/list', views.RatingViewSet.as_view({'get':'dish_list'}), name='RatingView'),
 
+
+    #============================================================================================================================
     
     ## Dishes ##
 
     # GET /dishes/
     path('dishes/', views.DishViewSet.as_view({'get':'list'}), name='DishView'),
 
+    #============================================================================================================================
 
     ## System ##
 
@@ -73,12 +83,16 @@ urlpatterns = [
     # GET /system/tokens/list?restid=[restid]
     path('system/tokens/list', views.SystemViewSet.as_view({'get':'list'}), name='SystemView'),
 
+    #============================================================================================================================
 
     ## Contributions ##
 
     # GET /contributions/list?fromdate=[from_date]&todate=[to_date]
     path('contributions/list', views.ContributionViewSet.as_view({'get':'list'}), name='ContributionView'),
 
+    #============================================================================================================================
+
+    ## Auth ##
 
     # 
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
