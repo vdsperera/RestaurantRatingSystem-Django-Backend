@@ -1001,6 +1001,9 @@ class RestaurantService:
         # print(UserRoles.Customer.value)
         edit_history = EditHistory.objects.filter(history_id = history_id)
 
+        if(not edit_history.exists()):
+            raise APIException("Edit not found")
+
         user_edit_history_component = UserEditHistoryComponent.objects.filter(history_id=edit_history[0])
         # print(user_edit_history_component[0].__dict__)
         # print(user_edit_history_component[0].restaurant_id)
