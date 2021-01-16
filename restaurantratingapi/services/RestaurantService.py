@@ -1223,7 +1223,7 @@ class RestaurantService:
               "current_value": edit_history[0].current_value,
               "requested_value": edit_history[0].requested_value,
               "history_id": edit_history[0].history_id,
-              "status": ed.status,
+              "status": EditHistoryStatus(ed.status).name,
               "confirmation_point_level": user_edit_history_component[0].component.confirmation_point_level,
               "current_points": current_confirmation_points
             }
