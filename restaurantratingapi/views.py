@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from rest_framework import viewsets
+from rest_framework import viewsets, permissions
 from rest_framework.views import APIView
 from .serializers import UserRoleSerializer
 from .serializers import RestaurantSerializer
@@ -111,6 +111,7 @@ class RatingViewSet(viewsets.ViewSet):
 
     # serializer_class = RestaurantSerializer
 
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
     # POST /ratings
     def create(self, request):
         # return Response('add rating')
