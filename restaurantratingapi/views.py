@@ -111,7 +111,7 @@ class RatingViewSet(viewsets.ViewSet):
 
     # serializer_class = RestaurantSerializer
 
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
+    # permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
     # POST /ratings
     def create(self, request):
         # return Response('add rating')
